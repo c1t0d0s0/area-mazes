@@ -130,3 +130,17 @@
   font-size: 11px !important;
   fill: #94a3b8 !important;
 }
+
+.hint-focus-bg {
+  fill: rgba(6, 182, 212, 0.95);
+  stroke: #0891b2;
+  stroke-width: 1;
+}
+
+.hint-focus-label {
+  font-family: var(--font-family);
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  fill: #ffffff !important;
+  pointer-events: none;
+}

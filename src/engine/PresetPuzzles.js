@@ -4468,7 +4468,7 @@ export const PRESET_PUZZLES = [
   },
   {
     "id": "level_81",
-    "title": "達人 1: 面積迷路の極み",
+    "title": "達人 1:  8連鎖の迷宮 #1",
     "difficulty": "Grandmaster",
     "rects": [
       {
@@ -4476,76 +4476,87 @@ export const PRESET_PUZZLES = [
         "x": 0,
         "y": 0,
         "w": 3,
-        "h": 3,
-        "area": 9
+        "h": 4,
+        "area": 12
       },
       {
         "id": "B",
         "x": 3,
         "y": 0,
-        "w": 4,
-        "h": 3,
-        "area": 12
+        "w": 5,
+        "h": 4,
+        "area": 20
       },
       {
         "id": "C",
-        "x": 7,
+        "x": 8,
         "y": 0,
+        "w": 4,
+        "h": 4,
+        "area": 16
+      },
+      {
+        "id": "D",
+        "x": 0,
+        "y": 4,
+        "w": 4,
+        "h": 5,
+        "area": 20
+      },
+      {
+        "id": "E",
+        "x": 4,
+        "y": 4,
+        "w": 4,
+        "h": 5,
+        "area": 20
+      },
+      {
+        "id": "F",
+        "x": 8,
+        "y": 4,
+        "w": 4,
+        "h": 5,
+        "area": 20
+      },
+      {
+        "id": "G",
+        "x": 0,
+        "y": 9,
         "w": 6,
         "h": 3,
         "area": 18
       },
       {
-        "id": "D",
-        "x": 0,
-        "y": 3,
-        "w": 7,
-        "h": 4,
-        "area": 28
-      },
-      {
-        "id": "E",
-        "x": 7,
-        "y": 3,
+        "id": "H",
+        "x": 6,
+        "y": 9,
         "w": 6,
-        "h": 4,
-        "area": 24
-      },
-      {
-        "id": "F",
-        "x": 0,
-        "y": 7,
-        "w": 3,
-        "h": 5,
-        "area": 15
-      },
-      {
-        "id": "G",
-        "x": 3,
-        "y": 7,
-        "w": 10,
-        "h": 5,
-        "area": 50
+        "h": 3,
+        "area": 18
       }
     ],
     "clues": {
-      "A_area": 9,
-      "A_w": 3,
-      "B_area": 12,
-      "C_area": 18,
-      "D_area": 28,
-      "E_area": 24,
-      "F_area": 15
+      "A_area": 12,
+      "A_h": 4,
+      "B_area": 20,
+      "C_area": 16,
+      "D_area": 20,
+      "D_w": 4,
+      "E_area": 20,
+      "F_area": 20,
+      "G_h": 3,
+      "G_w": 6
     },
     "question": {
-      "targetId": "G",
+      "targetId": "H",
       "type": "area"
     },
-    "solution": 50
+    "solution": 18
   },
   {
     "id": "level_82",
-    "title": "達人 2: 面積迷路の極み",
+    "title": "達人 2:  黄金連鎖の要塞 #1",
     "difficulty": "Grandmaster",
     "rects": [
       {
@@ -4560,13 +4571,13 @@ export const PRESET_PUZZLES = [
         "id": "B",
         "x": 4,
         "y": 0,
-        "w": 5,
+        "w": 6,
         "h": 3,
-        "area": 15
+        "area": 18
       },
       {
         "id": "C",
-        "x": 9,
+        "x": 10,
         "y": 0,
         "w": 5,
         "h": 3,
@@ -4576,13 +4587,13 @@ export const PRESET_PUZZLES = [
         "id": "D",
         "x": 0,
         "y": 3,
-        "w": 9,
+        "w": 5,
         "h": 4,
-        "area": 36
+        "area": 20
       },
       {
         "id": "E",
-        "x": 9,
+        "x": 5,
         "y": 3,
         "w": 5,
         "h": 4,
@@ -4590,283 +4601,338 @@ export const PRESET_PUZZLES = [
       },
       {
         "id": "F",
-        "x": 0,
-        "y": 7,
-        "w": 4,
-        "h": 5,
+        "x": 10,
+        "y": 3,
+        "w": 5,
+        "h": 4,
         "area": 20
       },
       {
         "id": "G",
-        "x": 4,
+        "x": 0,
         "y": 7,
-        "w": 10,
+        "w": 7,
         "h": 5,
-        "area": 50
+        "area": 35
+      },
+      {
+        "id": "H",
+        "x": 7,
+        "y": 7,
+        "w": 8,
+        "h": 5,
+        "area": 40
       }
     ],
     "clues": {
       "A_area": 12,
       "A_w": 4,
-      "B_area": 15,
+      "B_area": 18,
       "C_area": 15,
-      "D_area": 36,
+      "D_area": 20,
       "E_area": 20,
-      "F_area": 20
+      "F_area": 20,
+      "G_area": 35,
+      "G_w": 7
     },
     "question": {
-      "targetId": "G",
+      "targetId": "H",
       "type": "area"
     },
-    "solution": 50
+    "solution": 40
   },
   {
     "id": "level_83",
-    "title": "達人 3: 面積迷路の極み",
+    "title": "達人 3:  9の領域と比率 #1",
     "difficulty": "Grandmaster",
     "rects": [
       {
         "id": "A",
         "x": 0,
         "y": 0,
+        "w": 3,
+        "h": 3,
+        "area": 9
+      },
+      {
+        "id": "B",
+        "x": 3,
+        "y": 0,
+        "w": 4,
+        "h": 3,
+        "area": 12
+      },
+      {
+        "id": "C",
+        "x": 7,
+        "y": 0,
         "w": 5,
         "h": 3,
         "area": 15
       },
       {
-        "id": "B",
-        "x": 5,
-        "y": 0,
-        "w": 6,
-        "h": 3,
-        "area": 18
-      },
-      {
-        "id": "C",
-        "x": 11,
-        "y": 0,
-        "w": 6,
-        "h": 3,
-        "area": 18
-      },
-      {
         "id": "D",
         "x": 0,
         "y": 3,
-        "w": 11,
+        "w": 4,
         "h": 4,
-        "area": 44
+        "area": 16
       },
       {
         "id": "E",
-        "x": 11,
+        "x": 4,
         "y": 3,
-        "w": 6,
+        "w": 4,
         "h": 4,
-        "area": 24
+        "area": 16
       },
       {
         "id": "F",
-        "x": 0,
-        "y": 7,
-        "w": 5,
-        "h": 5,
-        "area": 25
+        "x": 8,
+        "y": 3,
+        "w": 4,
+        "h": 4,
+        "area": 16
       },
       {
         "id": "G",
-        "x": 5,
+        "x": 0,
         "y": 7,
-        "w": 12,
+        "w": 6,
         "h": 5,
-        "area": 60
+        "area": 30
+      },
+      {
+        "id": "H",
+        "x": 6,
+        "y": 7,
+        "w": 3,
+        "h": 5,
+        "area": 15
+      },
+      {
+        "id": "I",
+        "x": 9,
+        "y": 7,
+        "w": 3,
+        "h": 5,
+        "area": 15
       }
     ],
     "clues": {
-      "A_area": 15,
-      "A_w": 5,
-      "B_area": 18,
-      "C_area": 18,
-      "D_area": 44,
-      "E_area": 24,
-      "F_area": 25
+      "A_area": 9,
+      "A_h": 3,
+      "B_area": 12,
+      "C_area": 15,
+      "D_area": 16,
+      "E_area": 16,
+      "G_area": 30,
+      "H_area": 15
     },
     "question": {
-      "targetId": "G",
+      "targetId": "I",
       "type": "area"
     },
-    "solution": 60
+    "solution": 15
   },
   {
     "id": "level_84",
-    "title": "達人 4: 面積迷路の極み",
+    "title": "達人 4:  幾何学の終着点 #1",
     "difficulty": "Grandmaster",
     "rects": [
       {
         "id": "A",
         "x": 0,
         "y": 0,
-        "w": 3,
-        "h": 3,
-        "area": 9
+        "w": 4,
+        "h": 4,
+        "area": 16
       },
       {
         "id": "B",
-        "x": 3,
+        "x": 4,
         "y": 0,
-        "w": 4,
-        "h": 3,
-        "area": 12
-      },
-      {
-        "id": "C",
-        "x": 7,
-        "y": 0,
-        "w": 5,
-        "h": 3,
-        "area": 15
-      },
-      {
-        "id": "D",
-        "x": 0,
-        "y": 3,
-        "w": 7,
-        "h": 4,
-        "area": 28
-      },
-      {
-        "id": "E",
-        "x": 7,
-        "y": 3,
         "w": 5,
         "h": 4,
         "area": 20
       },
       {
-        "id": "F",
+        "id": "C",
+        "x": 9,
+        "y": 0,
+        "w": 6,
+        "h": 4,
+        "area": 24
+      },
+      {
+        "id": "D",
         "x": 0,
-        "y": 7,
-        "w": 3,
+        "y": 4,
+        "w": 5,
         "h": 5,
-        "area": 15
+        "area": 25
+      },
+      {
+        "id": "E",
+        "x": 5,
+        "y": 4,
+        "w": 5,
+        "h": 5,
+        "area": 25
+      },
+      {
+        "id": "F",
+        "x": 10,
+        "y": 4,
+        "w": 5,
+        "h": 5,
+        "area": 25
       },
       {
         "id": "G",
-        "x": 3,
-        "y": 7,
-        "w": 9,
-        "h": 5,
-        "area": 45
+        "x": 0,
+        "y": 9,
+        "w": 7,
+        "h": 4,
+        "area": 28
+      },
+      {
+        "id": "H",
+        "x": 7,
+        "y": 9,
+        "w": 4,
+        "h": 4,
+        "area": 16
+      },
+      {
+        "id": "I",
+        "x": 11,
+        "y": 9,
+        "w": 4,
+        "h": 4,
+        "area": 16
       }
     ],
     "clues": {
-      "A_area": 9,
-      "A_w": 3,
-      "B_area": 12,
-      "C_area": 15,
-      "D_area": 28,
-      "E_area": 20,
-      "F_area": 15
+      "A_area": 16,
+      "A_w": 4,
+      "B_area": 20,
+      "C_area": 24,
+      "D_area": 25,
+      "E_area": 25,
+      "G_area": 28,
+      "H_area": 16
     },
     "question": {
-      "targetId": "G",
+      "targetId": "I",
       "type": "area"
     },
-    "solution": 45
+    "solution": 16
   },
   {
     "id": "level_85",
-    "title": "達人 5: 面積迷路の極み",
+    "title": "達人 5:  8連鎖の迷宮 #2",
     "difficulty": "Grandmaster",
     "rects": [
       {
         "id": "A",
         "x": 0,
         "y": 0,
-        "w": 4,
-        "h": 3,
+        "w": 3,
+        "h": 4,
         "area": 12
       },
       {
         "id": "B",
-        "x": 4,
+        "x": 3,
         "y": 0,
         "w": 5,
-        "h": 3,
-        "area": 15
+        "h": 4,
+        "area": 20
       },
       {
         "id": "C",
-        "x": 9,
+        "x": 8,
         "y": 0,
-        "w": 6,
-        "h": 3,
-        "area": 18
+        "w": 4,
+        "h": 4,
+        "area": 16
       },
       {
         "id": "D",
         "x": 0,
-        "y": 3,
-        "w": 9,
-        "h": 4,
-        "area": 36
+        "y": 4,
+        "w": 4,
+        "h": 5,
+        "area": 20
       },
       {
         "id": "E",
-        "x": 9,
-        "y": 3,
-        "w": 6,
-        "h": 4,
-        "area": 24
+        "x": 4,
+        "y": 4,
+        "w": 4,
+        "h": 5,
+        "area": 20
       },
       {
         "id": "F",
-        "x": 0,
-        "y": 7,
+        "x": 8,
+        "y": 4,
         "w": 4,
         "h": 5,
         "area": 20
       },
       {
         "id": "G",
-        "x": 4,
-        "y": 7,
-        "w": 11,
-        "h": 5,
-        "area": 55
+        "x": 0,
+        "y": 9,
+        "w": 6,
+        "h": 3,
+        "area": 18
+      },
+      {
+        "id": "H",
+        "x": 6,
+        "y": 9,
+        "w": 6,
+        "h": 3,
+        "area": 18
       }
     ],
     "clues": {
       "A_area": 12,
-      "A_w": 4,
-      "B_area": 15,
-      "C_area": 18,
-      "D_area": 36,
-      "E_area": 24,
-      "F_area": 20
+      "A_h": 4,
+      "B_area": 20,
+      "C_area": 16,
+      "D_area": 20,
+      "D_w": 4,
+      "E_area": 20,
+      "F_area": 20,
+      "G_h": 3,
+      "G_w": 6
     },
     "question": {
-      "targetId": "G",
+      "targetId": "H",
       "type": "area"
     },
-    "solution": 55
+    "solution": 18
   },
   {
     "id": "level_86",
-    "title": "達人 6: 面積迷路の極み",
+    "title": "達人 6:  黄金連鎖の要塞 #2",
     "difficulty": "Grandmaster",
     "rects": [
       {
         "id": "A",
         "x": 0,
         "y": 0,
-        "w": 5,
+        "w": 4,
         "h": 3,
-        "area": 15
+        "area": 12
       },
       {
         "id": "B",
-        "x": 5,
+        "x": 4,
         "y": 0,
         "w": 6,
         "h": 3,
@@ -4874,7 +4940,7 @@ export const PRESET_PUZZLES = [
       },
       {
         "id": "C",
-        "x": 11,
+        "x": 10,
         "y": 0,
         "w": 5,
         "h": 3,
@@ -4884,13 +4950,13 @@ export const PRESET_PUZZLES = [
         "id": "D",
         "x": 0,
         "y": 3,
-        "w": 11,
+        "w": 5,
         "h": 4,
-        "area": 44
+        "area": 20
       },
       {
         "id": "E",
-        "x": 11,
+        "x": 5,
         "y": 3,
         "w": 5,
         "h": 4,
@@ -4898,39 +4964,49 @@ export const PRESET_PUZZLES = [
       },
       {
         "id": "F",
-        "x": 0,
-        "y": 7,
+        "x": 10,
+        "y": 3,
         "w": 5,
-        "h": 5,
-        "area": 25
+        "h": 4,
+        "area": 20
       },
       {
         "id": "G",
-        "x": 5,
+        "x": 0,
         "y": 7,
-        "w": 11,
+        "w": 7,
         "h": 5,
-        "area": 55
+        "area": 35
+      },
+      {
+        "id": "H",
+        "x": 7,
+        "y": 7,
+        "w": 8,
+        "h": 5,
+        "area": 40
       }
     ],
     "clues": {
-      "A_area": 15,
-      "A_w": 5,
+      "A_area": 12,
+      "A_w": 4,
       "B_area": 18,
       "C_area": 15,
-      "D_area": 44,
+      "D_area": 20,
       "E_area": 20,
-      "F_area": 25
+      "F_area": 20,
+      "G_area": 35,
+      "G_w": 7
     },
     "question": {
-      "targetId": "G",
+      "targetId": "H",
       "type": "area"
     },
-    "solution": 55
+    "solution": 40
   },
   {
     "id": "level_87",
-    "title": "達人 7: 面積迷路の極み",
+    "title": "達人 7:  9の領域と比率 #2",
     "difficulty": "Grandmaster",
     "rects": [
       {
@@ -4953,61 +5029,78 @@ export const PRESET_PUZZLES = [
         "id": "C",
         "x": 7,
         "y": 0,
-        "w": 6,
+        "w": 5,
         "h": 3,
-        "area": 18
+        "area": 15
       },
       {
         "id": "D",
         "x": 0,
         "y": 3,
-        "w": 7,
+        "w": 4,
         "h": 4,
-        "area": 28
+        "area": 16
       },
       {
         "id": "E",
-        "x": 7,
+        "x": 4,
         "y": 3,
-        "w": 6,
+        "w": 4,
         "h": 4,
-        "area": 24
+        "area": 16
       },
       {
         "id": "F",
+        "x": 8,
+        "y": 3,
+        "w": 4,
+        "h": 4,
+        "area": 16
+      },
+      {
+        "id": "G",
         "x": 0,
+        "y": 7,
+        "w": 6,
+        "h": 5,
+        "area": 30
+      },
+      {
+        "id": "H",
+        "x": 6,
         "y": 7,
         "w": 3,
         "h": 5,
         "area": 15
       },
       {
-        "id": "G",
-        "x": 3,
+        "id": "I",
+        "x": 9,
         "y": 7,
-        "w": 10,
+        "w": 3,
         "h": 5,
-        "area": 50
+        "area": 15
       }
     ],
     "clues": {
       "A_area": 9,
-      "A_w": 3,
+      "A_h": 3,
       "B_area": 12,
-      "C_area": 18,
-      "D_area": 28,
-      "E_area": 24,
-      "F_area": 15
+      "C_area": 15,
+      "D_area": 16,
+      "E_area": 16,
+      "G_area": 30,
+      "H_area": 15
     },
     "question": {
-      "targetId": "G",
+      "targetId": "I",
       "type": "area"
     },
-    "solution": 50
+    "solution": 15
   },
   {
     "id": "level_88",
-    "title": "達人 8: 面積迷路の極み",
+    "title": "達人 8:  幾何学の終着点 #2",
     "difficulty": "Grandmaster",
     "rects": [
       {
@@ -5015,174 +5108,202 @@ export const PRESET_PUZZLES = [
         "x": 0,
         "y": 0,
         "w": 4,
-        "h": 3,
-        "area": 12
+        "h": 4,
+        "area": 16
       },
       {
         "id": "B",
         "x": 4,
         "y": 0,
         "w": 5,
-        "h": 3,
-        "area": 15
+        "h": 4,
+        "area": 20
       },
       {
         "id": "C",
         "x": 9,
         "y": 0,
-        "w": 5,
-        "h": 3,
-        "area": 15
+        "w": 6,
+        "h": 4,
+        "area": 24
       },
       {
         "id": "D",
         "x": 0,
-        "y": 3,
-        "w": 9,
-        "h": 4,
-        "area": 36
+        "y": 4,
+        "w": 5,
+        "h": 5,
+        "area": 25
       },
       {
         "id": "E",
-        "x": 9,
-        "y": 3,
+        "x": 5,
+        "y": 4,
         "w": 5,
-        "h": 4,
-        "area": 20
+        "h": 5,
+        "area": 25
       },
       {
         "id": "F",
-        "x": 0,
-        "y": 7,
-        "w": 4,
+        "x": 10,
+        "y": 4,
+        "w": 5,
         "h": 5,
-        "area": 20
+        "area": 25
       },
       {
         "id": "G",
-        "x": 4,
-        "y": 7,
-        "w": 10,
-        "h": 5,
-        "area": 50
+        "x": 0,
+        "y": 9,
+        "w": 7,
+        "h": 4,
+        "area": 28
+      },
+      {
+        "id": "H",
+        "x": 7,
+        "y": 9,
+        "w": 4,
+        "h": 4,
+        "area": 16
+      },
+      {
+        "id": "I",
+        "x": 11,
+        "y": 9,
+        "w": 4,
+        "h": 4,
+        "area": 16
       }
     ],
     "clues": {
-      "A_area": 12,
+      "A_area": 16,
       "A_w": 4,
-      "B_area": 15,
-      "C_area": 15,
-      "D_area": 36,
-      "E_area": 20,
-      "F_area": 20
+      "B_area": 20,
+      "C_area": 24,
+      "D_area": 25,
+      "E_area": 25,
+      "G_area": 28,
+      "H_area": 16
     },
     "question": {
-      "targetId": "G",
+      "targetId": "I",
       "type": "area"
     },
-    "solution": 50
+    "solution": 16
   },
   {
     "id": "level_89",
-    "title": "達人 9: 面積迷路の極み",
+    "title": "達人 9:  8連鎖の迷宮 #3",
     "difficulty": "Grandmaster",
     "rects": [
       {
         "id": "A",
         "x": 0,
         "y": 0,
-        "w": 5,
-        "h": 3,
-        "area": 15
+        "w": 3,
+        "h": 4,
+        "area": 12
       },
       {
         "id": "B",
-        "x": 5,
+        "x": 3,
         "y": 0,
-        "w": 6,
-        "h": 3,
-        "area": 18
+        "w": 5,
+        "h": 4,
+        "area": 20
       },
       {
         "id": "C",
-        "x": 11,
+        "x": 8,
         "y": 0,
-        "w": 6,
-        "h": 3,
-        "area": 18
+        "w": 4,
+        "h": 4,
+        "area": 16
       },
       {
         "id": "D",
         "x": 0,
-        "y": 3,
-        "w": 11,
-        "h": 4,
-        "area": 44
+        "y": 4,
+        "w": 4,
+        "h": 5,
+        "area": 20
       },
       {
         "id": "E",
-        "x": 11,
-        "y": 3,
-        "w": 6,
-        "h": 4,
-        "area": 24
+        "x": 4,
+        "y": 4,
+        "w": 4,
+        "h": 5,
+        "area": 20
       },
       {
         "id": "F",
-        "x": 0,
-        "y": 7,
-        "w": 5,
+        "x": 8,
+        "y": 4,
+        "w": 4,
         "h": 5,
-        "area": 25
+        "area": 20
       },
       {
         "id": "G",
-        "x": 5,
-        "y": 7,
-        "w": 12,
-        "h": 5,
-        "area": 60
+        "x": 0,
+        "y": 9,
+        "w": 6,
+        "h": 3,
+        "area": 18
+      },
+      {
+        "id": "H",
+        "x": 6,
+        "y": 9,
+        "w": 6,
+        "h": 3,
+        "area": 18
       }
     ],
     "clues": {
-      "A_area": 15,
-      "A_w": 5,
-      "B_area": 18,
-      "C_area": 18,
-      "D_area": 44,
-      "E_area": 24,
-      "F_area": 25
+      "A_area": 12,
+      "A_h": 4,
+      "B_area": 20,
+      "C_area": 16,
+      "D_area": 20,
+      "D_w": 4,
+      "E_area": 20,
+      "F_area": 20,
+      "G_h": 3,
+      "G_w": 6
     },
     "question": {
-      "targetId": "G",
+      "targetId": "H",
       "type": "area"
     },
-    "solution": 60
+    "solution": 18
   },
   {
     "id": "level_90",
-    "title": "達人 10: 面積迷路の極み",
+    "title": "達人 10:  黄金連鎖の要塞 #3",
     "difficulty": "Grandmaster",
     "rects": [
       {
         "id": "A",
         "x": 0,
         "y": 0,
-        "w": 3,
-        "h": 3,
-        "area": 9
-      },
-      {
-        "id": "B",
-        "x": 3,
-        "y": 0,
         "w": 4,
         "h": 3,
         "area": 12
       },
       {
+        "id": "B",
+        "x": 4,
+        "y": 0,
+        "w": 6,
+        "h": 3,
+        "area": 18
+      },
+      {
         "id": "C",
-        "x": 7,
+        "x": 10,
         "y": 0,
         "w": 5,
         "h": 3,
@@ -5192,13 +5313,13 @@ export const PRESET_PUZZLES = [
         "id": "D",
         "x": 0,
         "y": 3,
-        "w": 7,
+        "w": 5,
         "h": 4,
-        "area": 28
+        "area": 20
       },
       {
         "id": "E",
-        "x": 7,
+        "x": 5,
         "y": 3,
         "w": 5,
         "h": 4,
@@ -5206,193 +5327,237 @@ export const PRESET_PUZZLES = [
       },
       {
         "id": "F",
-        "x": 0,
-        "y": 7,
-        "w": 3,
-        "h": 5,
-        "area": 15
+        "x": 10,
+        "y": 3,
+        "w": 5,
+        "h": 4,
+        "area": 20
       },
       {
         "id": "G",
-        "x": 3,
+        "x": 0,
         "y": 7,
-        "w": 9,
+        "w": 7,
         "h": 5,
-        "area": 45
+        "area": 35
+      },
+      {
+        "id": "H",
+        "x": 7,
+        "y": 7,
+        "w": 8,
+        "h": 5,
+        "area": 40
       }
     ],
     "clues": {
-      "A_area": 9,
-      "A_w": 3,
-      "B_area": 12,
+      "A_area": 12,
+      "A_w": 4,
+      "B_area": 18,
       "C_area": 15,
-      "D_area": 28,
+      "D_area": 20,
       "E_area": 20,
-      "F_area": 15
+      "F_area": 20,
+      "G_area": 35,
+      "G_w": 7
     },
     "question": {
-      "targetId": "G",
+      "targetId": "H",
       "type": "area"
     },
-    "solution": 45
+    "solution": 40
   },
   {
     "id": "level_91",
-    "title": "達人 11: 面積迷路の極み",
+    "title": "達人 11:  9の領域と比率 #3",
     "difficulty": "Grandmaster",
     "rects": [
       {
         "id": "A",
         "x": 0,
         "y": 0,
+        "w": 3,
+        "h": 3,
+        "area": 9
+      },
+      {
+        "id": "B",
+        "x": 3,
+        "y": 0,
         "w": 4,
         "h": 3,
         "area": 12
       },
       {
-        "id": "B",
-        "x": 4,
+        "id": "C",
+        "x": 7,
         "y": 0,
         "w": 5,
         "h": 3,
         "area": 15
       },
       {
-        "id": "C",
-        "x": 9,
-        "y": 0,
-        "w": 6,
-        "h": 3,
-        "area": 18
-      },
-      {
         "id": "D",
         "x": 0,
         "y": 3,
-        "w": 9,
+        "w": 4,
         "h": 4,
-        "area": 36
+        "area": 16
       },
       {
         "id": "E",
-        "x": 9,
+        "x": 4,
         "y": 3,
-        "w": 6,
+        "w": 4,
         "h": 4,
-        "area": 24
+        "area": 16
       },
       {
         "id": "F",
-        "x": 0,
-        "y": 7,
+        "x": 8,
+        "y": 3,
         "w": 4,
-        "h": 5,
-        "area": 20
+        "h": 4,
+        "area": 16
       },
       {
         "id": "G",
-        "x": 4,
+        "x": 0,
         "y": 7,
-        "w": 11,
+        "w": 6,
         "h": 5,
-        "area": 55
+        "area": 30
+      },
+      {
+        "id": "H",
+        "x": 6,
+        "y": 7,
+        "w": 3,
+        "h": 5,
+        "area": 15
+      },
+      {
+        "id": "I",
+        "x": 9,
+        "y": 7,
+        "w": 3,
+        "h": 5,
+        "area": 15
       }
     ],
     "clues": {
-      "A_area": 12,
-      "A_w": 4,
-      "B_area": 15,
-      "C_area": 18,
-      "D_area": 36,
-      "E_area": 24,
-      "F_area": 20
+      "A_area": 9,
+      "A_h": 3,
+      "B_area": 12,
+      "C_area": 15,
+      "D_area": 16,
+      "E_area": 16,
+      "G_area": 30,
+      "H_area": 15
     },
     "question": {
-      "targetId": "G",
+      "targetId": "I",
       "type": "area"
     },
-    "solution": 55
+    "solution": 15
   },
   {
     "id": "level_92",
-    "title": "達人 12: 面積迷路の極み",
+    "title": "達人 12:  幾何学の終着点 #3",
     "difficulty": "Grandmaster",
     "rects": [
       {
         "id": "A",
         "x": 0,
         "y": 0,
-        "w": 5,
-        "h": 3,
-        "area": 15
+        "w": 4,
+        "h": 4,
+        "area": 16
       },
       {
         "id": "B",
-        "x": 5,
+        "x": 4,
         "y": 0,
-        "w": 6,
-        "h": 3,
-        "area": 18
-      },
-      {
-        "id": "C",
-        "x": 11,
-        "y": 0,
-        "w": 5,
-        "h": 3,
-        "area": 15
-      },
-      {
-        "id": "D",
-        "x": 0,
-        "y": 3,
-        "w": 11,
-        "h": 4,
-        "area": 44
-      },
-      {
-        "id": "E",
-        "x": 11,
-        "y": 3,
         "w": 5,
         "h": 4,
         "area": 20
       },
       {
-        "id": "F",
+        "id": "C",
+        "x": 9,
+        "y": 0,
+        "w": 6,
+        "h": 4,
+        "area": 24
+      },
+      {
+        "id": "D",
         "x": 0,
-        "y": 7,
+        "y": 4,
+        "w": 5,
+        "h": 5,
+        "area": 25
+      },
+      {
+        "id": "E",
+        "x": 5,
+        "y": 4,
+        "w": 5,
+        "h": 5,
+        "area": 25
+      },
+      {
+        "id": "F",
+        "x": 10,
+        "y": 4,
         "w": 5,
         "h": 5,
         "area": 25
       },
       {
         "id": "G",
-        "x": 5,
-        "y": 7,
-        "w": 11,
-        "h": 5,
-        "area": 55
+        "x": 0,
+        "y": 9,
+        "w": 7,
+        "h": 4,
+        "area": 28
+      },
+      {
+        "id": "H",
+        "x": 7,
+        "y": 9,
+        "w": 4,
+        "h": 4,
+        "area": 16
+      },
+      {
+        "id": "I",
+        "x": 11,
+        "y": 9,
+        "w": 4,
+        "h": 4,
+        "area": 16
       }
     ],
     "clues": {
-      "A_area": 15,
-      "A_w": 5,
-      "B_area": 18,
-      "C_area": 15,
-      "D_area": 44,
-      "E_area": 20,
-      "F_area": 25
+      "A_area": 16,
+      "A_w": 4,
+      "B_area": 20,
+      "C_area": 24,
+      "D_area": 25,
+      "E_area": 25,
+      "G_area": 28,
+      "H_area": 16
     },
     "question": {
-      "targetId": "G",
+      "targetId": "I",
       "type": "area"
     },
-    "solution": 55
+    "solution": 16
   },
   {
     "id": "level_93",
-    "title": "達人 13: 面積迷路の極み",
+    "title": "達人 13:  8連鎖の迷宮 #4",
     "difficulty": "Grandmaster",
     "rects": [
       {
@@ -5400,76 +5565,87 @@ export const PRESET_PUZZLES = [
         "x": 0,
         "y": 0,
         "w": 3,
-        "h": 3,
-        "area": 9
+        "h": 4,
+        "area": 12
       },
       {
         "id": "B",
         "x": 3,
         "y": 0,
-        "w": 4,
-        "h": 3,
-        "area": 12
+        "w": 5,
+        "h": 4,
+        "area": 20
       },
       {
         "id": "C",
-        "x": 7,
+        "x": 8,
         "y": 0,
+        "w": 4,
+        "h": 4,
+        "area": 16
+      },
+      {
+        "id": "D",
+        "x": 0,
+        "y": 4,
+        "w": 4,
+        "h": 5,
+        "area": 20
+      },
+      {
+        "id": "E",
+        "x": 4,
+        "y": 4,
+        "w": 4,
+        "h": 5,
+        "area": 20
+      },
+      {
+        "id": "F",
+        "x": 8,
+        "y": 4,
+        "w": 4,
+        "h": 5,
+        "area": 20
+      },
+      {
+        "id": "G",
+        "x": 0,
+        "y": 9,
         "w": 6,
         "h": 3,
         "area": 18
       },
       {
-        "id": "D",
-        "x": 0,
-        "y": 3,
-        "w": 7,
-        "h": 4,
-        "area": 28
-      },
-      {
-        "id": "E",
-        "x": 7,
-        "y": 3,
+        "id": "H",
+        "x": 6,
+        "y": 9,
         "w": 6,
-        "h": 4,
-        "area": 24
-      },
-      {
-        "id": "F",
-        "x": 0,
-        "y": 7,
-        "w": 3,
-        "h": 5,
-        "area": 15
-      },
-      {
-        "id": "G",
-        "x": 3,
-        "y": 7,
-        "w": 10,
-        "h": 5,
-        "area": 50
+        "h": 3,
+        "area": 18
       }
     ],
     "clues": {
-      "A_area": 9,
-      "A_w": 3,
-      "B_area": 12,
-      "C_area": 18,
-      "D_area": 28,
-      "E_area": 24,
-      "F_area": 15
+      "A_area": 12,
+      "A_h": 4,
+      "B_area": 20,
+      "C_area": 16,
+      "D_area": 20,
+      "D_w": 4,
+      "E_area": 20,
+      "F_area": 20,
+      "G_h": 3,
+      "G_w": 6
     },
     "question": {
-      "targetId": "G",
+      "targetId": "H",
       "type": "area"
     },
-    "solution": 50
+    "solution": 18
   },
   {
     "id": "level_94",
-    "title": "達人 14: 面積迷路の極み",
+    "title": "達人 14:  黄金連鎖の要塞 #4",
     "difficulty": "Grandmaster",
     "rects": [
       {
@@ -5484,13 +5660,13 @@ export const PRESET_PUZZLES = [
         "id": "B",
         "x": 4,
         "y": 0,
-        "w": 5,
+        "w": 6,
         "h": 3,
-        "area": 15
+        "area": 18
       },
       {
         "id": "C",
-        "x": 9,
+        "x": 10,
         "y": 0,
         "w": 5,
         "h": 3,
@@ -5500,13 +5676,13 @@ export const PRESET_PUZZLES = [
         "id": "D",
         "x": 0,
         "y": 3,
-        "w": 9,
+        "w": 5,
         "h": 4,
-        "area": 36
+        "area": 20
       },
       {
         "id": "E",
-        "x": 9,
+        "x": 5,
         "y": 3,
         "w": 5,
         "h": 4,
@@ -5514,193 +5690,143 @@ export const PRESET_PUZZLES = [
       },
       {
         "id": "F",
-        "x": 0,
-        "y": 7,
-        "w": 4,
-        "h": 5,
+        "x": 10,
+        "y": 3,
+        "w": 5,
+        "h": 4,
         "area": 20
       },
       {
         "id": "G",
-        "x": 4,
+        "x": 0,
         "y": 7,
-        "w": 10,
+        "w": 7,
         "h": 5,
-        "area": 50
+        "area": 35
+      },
+      {
+        "id": "H",
+        "x": 7,
+        "y": 7,
+        "w": 8,
+        "h": 5,
+        "area": 40
       }
     ],
     "clues": {
       "A_area": 12,
       "A_w": 4,
-      "B_area": 15,
+      "B_area": 18,
       "C_area": 15,
-      "D_area": 36,
+      "D_area": 20,
       "E_area": 20,
-      "F_area": 20
+      "F_area": 20,
+      "G_area": 35,
+      "G_w": 7
     },
     "question": {
-      "targetId": "G",
+      "targetId": "H",
       "type": "area"
     },
-    "solution": 50
+    "solution": 40
   },
   {
     "id": "level_95",
-    "title": "達人 15: 面積迷路の極み",
+    "title": "達人 15:  9の領域と比率 #4",
     "difficulty": "Grandmaster",
     "rects": [
       {
         "id": "A",
         "x": 0,
         "y": 0,
+        "w": 3,
+        "h": 3,
+        "area": 9
+      },
+      {
+        "id": "B",
+        "x": 3,
+        "y": 0,
+        "w": 4,
+        "h": 3,
+        "area": 12
+      },
+      {
+        "id": "C",
+        "x": 7,
+        "y": 0,
         "w": 5,
         "h": 3,
         "area": 15
       },
       {
-        "id": "B",
-        "x": 5,
-        "y": 0,
-        "w": 6,
-        "h": 3,
-        "area": 18
-      },
-      {
-        "id": "C",
-        "x": 11,
-        "y": 0,
-        "w": 6,
-        "h": 3,
-        "area": 18
-      },
-      {
         "id": "D",
         "x": 0,
         "y": 3,
-        "w": 11,
+        "w": 4,
         "h": 4,
-        "area": 44
+        "area": 16
       },
       {
         "id": "E",
-        "x": 11,
+        "x": 4,
         "y": 3,
-        "w": 6,
+        "w": 4,
         "h": 4,
-        "area": 24
+        "area": 16
       },
       {
         "id": "F",
-        "x": 0,
-        "y": 7,
-        "w": 5,
-        "h": 5,
-        "area": 25
+        "x": 8,
+        "y": 3,
+        "w": 4,
+        "h": 4,
+        "area": 16
       },
       {
         "id": "G",
-        "x": 5,
+        "x": 0,
         "y": 7,
-        "w": 12,
+        "w": 6,
         "h": 5,
-        "area": 60
+        "area": 30
+      },
+      {
+        "id": "H",
+        "x": 6,
+        "y": 7,
+        "w": 3,
+        "h": 5,
+        "area": 15
+      },
+      {
+        "id": "I",
+        "x": 9,
+        "y": 7,
+        "w": 3,
+        "h": 5,
+        "area": 15
       }
     ],
     "clues": {
-      "A_area": 15,
-      "A_w": 5,
-      "B_area": 18,
-      "C_area": 18,
-      "D_area": 44,
-      "E_area": 24,
-      "F_area": 25
+      "A_area": 9,
+      "A_h": 3,
+      "B_area": 12,
+      "C_area": 15,
+      "D_area": 16,
+      "E_area": 16,
+      "G_area": 30,
+      "H_area": 15
     },
     "question": {
-      "targetId": "G",
+      "targetId": "I",
       "type": "area"
     },
-    "solution": 60
+    "solution": 15
   },
   {
     "id": "level_96",
-    "title": "達人 16: 面積迷路の極み",
-    "difficulty": "Grandmaster",
-    "rects": [
-      {
-        "id": "A",
-        "x": 0,
-        "y": 0,
-        "w": 3,
-        "h": 3,
-        "area": 9
-      },
-      {
-        "id": "B",
-        "x": 3,
-        "y": 0,
-        "w": 4,
-        "h": 3,
-        "area": 12
-      },
-      {
-        "id": "C",
-        "x": 7,
-        "y": 0,
-        "w": 5,
-        "h": 3,
-        "area": 15
-      },
-      {
-        "id": "D",
-        "x": 0,
-        "y": 3,
-        "w": 7,
-        "h": 4,
-        "area": 28
-      },
-      {
-        "id": "E",
-        "x": 7,
-        "y": 3,
-        "w": 5,
-        "h": 4,
-        "area": 20
-      },
-      {
-        "id": "F",
-        "x": 0,
-        "y": 7,
-        "w": 3,
-        "h": 5,
-        "area": 15
-      },
-      {
-        "id": "G",
-        "x": 3,
-        "y": 7,
-        "w": 9,
-        "h": 5,
-        "area": 45
-      }
-    ],
-    "clues": {
-      "A_area": 9,
-      "A_w": 3,
-      "B_area": 12,
-      "C_area": 15,
-      "D_area": 28,
-      "E_area": 20,
-      "F_area": 15
-    },
-    "question": {
-      "targetId": "G",
-      "type": "area"
-    },
-    "solution": 45
-  },
-  {
-    "id": "level_97",
-    "title": "達人 17: 面積迷路の極み",
+    "title": "達人 16:  幾何学の終着点 #4",
     "difficulty": "Grandmaster",
     "rects": [
       {
@@ -5708,153 +5834,268 @@ export const PRESET_PUZZLES = [
         "x": 0,
         "y": 0,
         "w": 4,
-        "h": 3,
-        "area": 12
+        "h": 4,
+        "area": 16
       },
       {
         "id": "B",
         "x": 4,
         "y": 0,
         "w": 5,
-        "h": 3,
-        "area": 15
+        "h": 4,
+        "area": 20
       },
       {
         "id": "C",
         "x": 9,
         "y": 0,
-        "w": 6,
-        "h": 3,
-        "area": 18
-      },
-      {
-        "id": "D",
-        "x": 0,
-        "y": 3,
-        "w": 9,
-        "h": 4,
-        "area": 36
-      },
-      {
-        "id": "E",
-        "x": 9,
-        "y": 3,
         "w": 6,
         "h": 4,
         "area": 24
       },
       {
-        "id": "F",
-        "x": 0,
-        "y": 7,
-        "w": 4,
-        "h": 5,
-        "area": 20
-      },
-      {
-        "id": "G",
-        "x": 4,
-        "y": 7,
-        "w": 11,
-        "h": 5,
-        "area": 55
-      }
-    ],
-    "clues": {
-      "A_area": 12,
-      "A_w": 4,
-      "B_area": 15,
-      "C_area": 18,
-      "D_area": 36,
-      "E_area": 24,
-      "F_area": 20
-    },
-    "question": {
-      "targetId": "G",
-      "type": "area"
-    },
-    "solution": 55
-  },
-  {
-    "id": "level_98",
-    "title": "達人 18: 面積迷路の極み",
-    "difficulty": "Grandmaster",
-    "rects": [
-      {
-        "id": "A",
-        "x": 0,
-        "y": 0,
-        "w": 5,
-        "h": 3,
-        "area": 15
-      },
-      {
-        "id": "B",
-        "x": 5,
-        "y": 0,
-        "w": 6,
-        "h": 3,
-        "area": 18
-      },
-      {
-        "id": "C",
-        "x": 11,
-        "y": 0,
-        "w": 5,
-        "h": 3,
-        "area": 15
-      },
-      {
         "id": "D",
         "x": 0,
-        "y": 3,
-        "w": 11,
-        "h": 4,
-        "area": 44
+        "y": 4,
+        "w": 5,
+        "h": 5,
+        "area": 25
       },
       {
         "id": "E",
-        "x": 11,
-        "y": 3,
+        "x": 5,
+        "y": 4,
         "w": 5,
-        "h": 4,
-        "area": 20
+        "h": 5,
+        "area": 25
       },
       {
         "id": "F",
-        "x": 0,
-        "y": 7,
+        "x": 10,
+        "y": 4,
         "w": 5,
         "h": 5,
         "area": 25
       },
       {
         "id": "G",
-        "x": 5,
-        "y": 7,
-        "w": 11,
-        "h": 5,
-        "area": 55
+        "x": 0,
+        "y": 9,
+        "w": 7,
+        "h": 4,
+        "area": 28
+      },
+      {
+        "id": "H",
+        "x": 7,
+        "y": 9,
+        "w": 4,
+        "h": 4,
+        "area": 16
+      },
+      {
+        "id": "I",
+        "x": 11,
+        "y": 9,
+        "w": 4,
+        "h": 4,
+        "area": 16
       }
     ],
     "clues": {
-      "A_area": 15,
-      "A_w": 5,
-      "B_area": 18,
-      "C_area": 15,
-      "D_area": 44,
-      "E_area": 20,
-      "F_area": 25
+      "A_area": 16,
+      "A_w": 4,
+      "B_area": 20,
+      "C_area": 24,
+      "D_area": 25,
+      "E_area": 25,
+      "G_area": 28,
+      "H_area": 16
     },
     "question": {
-      "targetId": "G",
+      "targetId": "I",
       "type": "area"
     },
-    "solution": 55
+    "solution": 16
+  },
+  {
+    "id": "level_97",
+    "title": "達人 17:  8連鎖の迷宮 #5",
+    "difficulty": "Grandmaster",
+    "rects": [
+      {
+        "id": "A",
+        "x": 0,
+        "y": 0,
+        "w": 3,
+        "h": 4,
+        "area": 12
+      },
+      {
+        "id": "B",
+        "x": 3,
+        "y": 0,
+        "w": 5,
+        "h": 4,
+        "area": 20
+      },
+      {
+        "id": "C",
+        "x": 8,
+        "y": 0,
+        "w": 4,
+        "h": 4,
+        "area": 16
+      },
+      {
+        "id": "D",
+        "x": 0,
+        "y": 4,
+        "w": 4,
+        "h": 5,
+        "area": 20
+      },
+      {
+        "id": "E",
+        "x": 4,
+        "y": 4,
+        "w": 4,
+        "h": 5,
+        "area": 20
+      },
+      {
+        "id": "F",
+        "x": 8,
+        "y": 4,
+        "w": 4,
+        "h": 5,
+        "area": 20
+      },
+      {
+        "id": "G",
+        "x": 0,
+        "y": 9,
+        "w": 6,
+        "h": 3,
+        "area": 18
+      },
+      {
+        "id": "H",
+        "x": 6,
+        "y": 9,
+        "w": 6,
+        "h": 3,
+        "area": 18
+      }
+    ],
+    "clues": {
+      "A_area": 12,
+      "A_h": 4,
+      "B_area": 20,
+      "C_area": 16,
+      "D_area": 20,
+      "D_w": 4,
+      "E_area": 20,
+      "F_area": 20,
+      "G_h": 3,
+      "G_w": 6
+    },
+    "question": {
+      "targetId": "H",
+      "type": "area"
+    },
+    "solution": 18
+  },
+  {
+    "id": "level_98",
+    "title": "達人 18:  黄金連鎖の要塞 #5",
+    "difficulty": "Grandmaster",
+    "rects": [
+      {
+        "id": "A",
+        "x": 0,
+        "y": 0,
+        "w": 4,
+        "h": 3,
+        "area": 12
+      },
+      {
+        "id": "B",
+        "x": 4,
+        "y": 0,
+        "w": 6,
+        "h": 3,
+        "area": 18
+      },
+      {
+        "id": "C",
+        "x": 10,
+        "y": 0,
+        "w": 5,
+        "h": 3,
+        "area": 15
+      },
+      {
+        "id": "D",
+        "x": 0,
+        "y": 3,
+        "w": 5,
+        "h": 4,
+        "area": 20
+      },
+      {
+        "id": "E",
+        "x": 5,
+        "y": 3,
+        "w": 5,
+        "h": 4,
+        "area": 20
+      },
+      {
+        "id": "F",
+        "x": 10,
+        "y": 3,
+        "w": 5,
+        "h": 4,
+        "area": 20
+      },
+      {
+        "id": "G",
+        "x": 0,
+        "y": 7,
+        "w": 7,
+        "h": 5,
+        "area": 35
+      },
+      {
+        "id": "H",
+        "x": 7,
+        "y": 7,
+        "w": 8,
+        "h": 5,
+        "area": 40
+      }
+    ],
+    "clues": {
+      "A_area": 12,
+      "A_w": 4,
+      "B_area": 18,
+      "C_area": 15,
+      "D_area": 20,
+      "E_area": 20,
+      "F_area": 20,
+      "G_area": 35,
+      "G_w": 7
+    },
+    "question": {
+      "targetId": "H",
+      "type": "area"
+    },
+    "solution": 40
   },
   {
     "id": "level_99",
-    "title": "達人 19: 面積迷路の極み",
+    "title": "達人 19:  9の領域と比率 #5",
     "difficulty": "Grandmaster",
     "rects": [
       {
@@ -5877,61 +6118,78 @@ export const PRESET_PUZZLES = [
         "id": "C",
         "x": 7,
         "y": 0,
-        "w": 6,
+        "w": 5,
         "h": 3,
-        "area": 18
+        "area": 15
       },
       {
         "id": "D",
         "x": 0,
         "y": 3,
-        "w": 7,
+        "w": 4,
         "h": 4,
-        "area": 28
+        "area": 16
       },
       {
         "id": "E",
-        "x": 7,
+        "x": 4,
         "y": 3,
-        "w": 6,
+        "w": 4,
         "h": 4,
-        "area": 24
+        "area": 16
       },
       {
         "id": "F",
+        "x": 8,
+        "y": 3,
+        "w": 4,
+        "h": 4,
+        "area": 16
+      },
+      {
+        "id": "G",
         "x": 0,
+        "y": 7,
+        "w": 6,
+        "h": 5,
+        "area": 30
+      },
+      {
+        "id": "H",
+        "x": 6,
         "y": 7,
         "w": 3,
         "h": 5,
         "area": 15
       },
       {
-        "id": "G",
-        "x": 3,
+        "id": "I",
+        "x": 9,
         "y": 7,
-        "w": 10,
+        "w": 3,
         "h": 5,
-        "area": 50
+        "area": 15
       }
     ],
     "clues": {
       "A_area": 9,
-      "A_w": 3,
+      "A_h": 3,
       "B_area": 12,
-      "C_area": 18,
-      "D_area": 28,
-      "E_area": 24,
-      "F_area": 15
+      "C_area": 15,
+      "D_area": 16,
+      "E_area": 16,
+      "G_area": 30,
+      "H_area": 15
     },
     "question": {
-      "targetId": "G",
+      "targetId": "I",
       "type": "area"
     },
-    "solution": 50
+    "solution": 15
   },
   {
     "id": "level_100",
-    "title": "達人 20: 面積迷路の極み",
+    "title": "達人 20:  幾何学の終着点 #5",
     "difficulty": "Grandmaster",
     "rects": [
       {
@@ -5939,72 +6197,89 @@ export const PRESET_PUZZLES = [
         "x": 0,
         "y": 0,
         "w": 4,
-        "h": 3,
-        "area": 12
+        "h": 4,
+        "area": 16
       },
       {
         "id": "B",
         "x": 4,
         "y": 0,
         "w": 5,
-        "h": 3,
-        "area": 15
+        "h": 4,
+        "area": 20
       },
       {
         "id": "C",
         "x": 9,
         "y": 0,
-        "w": 5,
-        "h": 3,
-        "area": 15
+        "w": 6,
+        "h": 4,
+        "area": 24
       },
       {
         "id": "D",
         "x": 0,
-        "y": 3,
-        "w": 9,
-        "h": 4,
-        "area": 36
+        "y": 4,
+        "w": 5,
+        "h": 5,
+        "area": 25
       },
       {
         "id": "E",
-        "x": 9,
-        "y": 3,
+        "x": 5,
+        "y": 4,
         "w": 5,
-        "h": 4,
-        "area": 20
+        "h": 5,
+        "area": 25
       },
       {
         "id": "F",
-        "x": 0,
-        "y": 7,
-        "w": 4,
+        "x": 10,
+        "y": 4,
+        "w": 5,
         "h": 5,
-        "area": 20
+        "area": 25
       },
       {
         "id": "G",
-        "x": 4,
-        "y": 7,
-        "w": 10,
-        "h": 5,
-        "area": 50
+        "x": 0,
+        "y": 9,
+        "w": 7,
+        "h": 4,
+        "area": 28
+      },
+      {
+        "id": "H",
+        "x": 7,
+        "y": 9,
+        "w": 4,
+        "h": 4,
+        "area": 16
+      },
+      {
+        "id": "I",
+        "x": 11,
+        "y": 9,
+        "w": 4,
+        "h": 4,
+        "area": 16
       }
     ],
     "clues": {
-      "A_area": 12,
+      "A_area": 16,
       "A_w": 4,
-      "B_area": 15,
-      "C_area": 15,
-      "D_area": 36,
-      "E_area": 20,
-      "F_area": 20
+      "B_area": 20,
+      "C_area": 24,
+      "D_area": 25,
+      "E_area": 25,
+      "G_area": 28,
+      "H_area": 16
     },
     "question": {
-      "targetId": "G",
+      "targetId": "I",
       "type": "area"
     },
-    "solution": 50
+    "solution": 16
   }
 ];
 

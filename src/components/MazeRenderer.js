@@ -1,7 +1,7 @@
 /**
  * MazeRenderer
  * SVG-based interactive renderer for Area Maze diagrams.
- * Renders rects and interactive edge hotspots for top width edges and left height edges.
+ * Uses uniform 1:1 aspect ratio scaling so rectangles render in their true geometric proportions.
  */
 
 export class MazeRenderer {
@@ -62,13 +62,15 @@ export class MazeRenderer {
     const drawW = svgWidth - margin * 2;
     const drawH = svgHeight - margin * 2;
 
-    const scaleX = drawW / totalWidth;
-    const scaleY = drawH / totalHeight;
+    // Use uniform scale to preserve true geometric aspect ratio (no artificial square stretching)
+    const scale = Math.min(drawW / (totalWidth || 1), drawH / (totalHeight || 1));
+    const offsetX = margin + (drawW - totalWidth * scale) / 2;
+    const offsetY = margin + (drawH - totalHeight * scale) / 2;
 
-    const toSvgX = (x) => margin + (x - minX) * scaleX;
-    const toSvgY = (y) => margin + (y - minY) * scaleY;
-    const toSvgW = (w) => w * scaleX;
-    const toSvgH = (h) => h * scaleY;
+    const toSvgX = (x) => offsetX + (x - minX) * scale;
+    const toSvgY = (y) => offsetY + (y - minY) * scale;
+    const toSvgW = (w) => w * scale;
+    const toSvgH = (h) => h * scale;
 
     let svgHtml = `
       <svg id="area-maze-svg" viewBox="0 0 ${svgWidth} ${svgHeight}" xmlns="http://www.w3.org/2000/svg" class="maze-svg">
@@ -152,6 +154,14 @@ export class MazeRenderer {
         `;
       }
 
+      // Render hint focus badge if highlighted
+      if (isHighlighted) {
+        svgHtml += `
+          <rect x="${sx + sw/2 - 36}" y="${sy + 6}" width="72" height="18" class="hint-focus-bg" rx="9"/>
+          <text x="${sx + sw/2}" y="${sy + 14}" class="hint-focus-label" text-anchor="middle" dominant-baseline="central">💡 ここに着目</text>
+        `;
+      }
+
       // Render Edge Clues & Edge Notes
       const wClue = clues[`${r.id}_w`];
       const hClue = clues[`${r.id}_h`];
@@ -180,7 +190,6 @@ export class MazeRenderer {
         isWNote = true;
       }
 
-      // Display +幅 placeholder ONLY when isNoteMode is TRUE
       const displayWVal = wVal || (isWActive ? '?' : (this.isNoteMode ? '+幅' : null));
       const isPlaceholderW = !wVal && !isWActive;
 
@@ -216,7 +225,6 @@ export class MazeRenderer {
         isHNote = true;
       }
 
-      // Display +高 placeholder ONLY when isNoteMode is TRUE
       const displayHVal = hVal || (isHActive ? '?' : (this.isNoteMode ? '+高' : null));
       const isPlaceholderH = !hVal && !isHActive;
 

@@ -113,15 +113,16 @@ export class EditorView {
     const totalW = currentModel.totalWidth || 10;
     const totalH = currentModel.totalHeight || 10;
 
-    const scaleX = (drawW - margin * 2) / totalW;
-    const scaleY = (drawH - margin * 2) / totalH;
+    const scale = Math.min((drawW - margin * 2) / totalW, (drawH - margin * 2) / totalH);
+    const offsetX = margin + ((drawW - margin * 2) - totalW * scale) / 2;
+    const offsetY = margin + ((drawH - margin * 2) - totalH * scale) / 2;
 
     let svgHtml = `<svg viewBox="0 0 ${drawW} ${drawH}" class="editor-svg" xmlns="http://www.w3.org/2000/svg">`;
     this.rects.forEach(r => {
-      const sx = margin + r.x * scaleX;
-      const sy = margin + r.y * scaleY;
-      const sw = r.w * scaleX;
-      const sh = r.h * scaleY;
+      const sx = offsetX + r.x * scale;
+      const sy = offsetY + r.y * scale;
+      const sw = r.w * scale;
+      const sh = r.h * scale;
 
       const isTarget = this.question.targetId === r.id;
 
