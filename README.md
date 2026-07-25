@@ -41,7 +41,7 @@ This web application offers a complete digital experience featuring a built-in c
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/area-mazes.git
+git clone https://github.com/c1t0d0s0/area-mazes.git
 
 # Navigate into project directory
 cd area-mazes

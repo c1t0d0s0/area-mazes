@@ -37,7 +37,7 @@
 
 ```bash
 # リポジトリをクローン
-git clone https://github.com/your-username/area-mazes.git
+git clone https://github.com/c1t0d0s0/area-mazes.git
 
 # ディレクトリに移動
 cd area-mazes
