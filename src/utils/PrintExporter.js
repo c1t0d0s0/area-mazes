@@ -6,13 +6,11 @@ export class PrintExporter {
       return;
     }
 
-    // Clone the SVG element so we can sanitize or adjust attributes for print if needed
     let svgHtml = '';
     if (svgElement) {
       const clone = svgElement.cloneNode(true);
-      // Ensure SVG has explicit dimensions
-      clone.setAttribute('width', '550');
-      clone.setAttribute('height', '450');
+      clone.setAttribute('width', '580');
+      clone.setAttribute('height', '480');
       svgHtml = clone.outerHTML;
     }
 
@@ -80,6 +78,8 @@ export class PrintExporter {
               font-size: 22px !important;
               font-weight: 700 !important;
               fill: #111827 !important;
+              dominant-baseline: central !important;
+              text-anchor: middle !important;
             }
             .question-label {
               font-size: 32px !important;
@@ -93,12 +93,14 @@ export class PrintExporter {
             }
             .edge-label {
               font-family: 'JetBrains Mono', monospace !important;
-              font-size: 14px !important;
+              font-size: 13px !important;
               font-weight: 700 !important;
               fill: #111827 !important;
+              dominant-baseline: central !important;
+              text-anchor: middle !important;
             }
             .note-label {
-              display: none !important; /* Hide scratch notes when printing clean puzzle sheet */
+              display: none !important;
             }
 
             .answer-section {

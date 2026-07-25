@@ -44,9 +44,9 @@ export class MazeRenderer {
 
     const { rects, clues, question, minX, minY, maxX, maxY, totalWidth, totalHeight } = this.model;
 
-    const margin = 45;
-    const svgWidth = 600;
-    const svgHeight = 500;
+    const margin = 50;
+    const svgWidth = 620;
+    const svgHeight = 520;
 
     const drawW = svgWidth - margin * 2;
     const drawH = svgHeight - margin * 2;
@@ -79,7 +79,7 @@ export class MazeRenderer {
     `;
 
     // Render Rectangles
-    rects.forEach((r, idx) => {
+    rects.forEach((r) => {
       const sx = toSvgX(r.x);
       const sy = toSvgY(r.y);
       const sw = toSvgW(r.w);
@@ -156,9 +156,12 @@ export class MazeRenderer {
       if (wClue !== undefined || isWQuestion) {
         const wVal = isWQuestion ? (this.userInputs[`${r.id}_w`] || '?') : `${wClue} cm`;
         const wClass = isWQuestion ? 'edge-label question-label' : 'edge-label';
+        const strLen = String(wVal).length;
+        const badgeW = Math.max(52, strLen * 10 + 16);
+
         svgHtml += `
-          <rect x="${sx + sw/2 - 24}" y="${sy - 24}" width="48" height="20" class="edge-bg" rx="10"/>
-          <text x="${sx + sw/2}" y="${sy - 14}" class="${wClass}" text-anchor="middle" dominant-baseline="central">${wVal}</text>
+          <rect x="${sx + sw/2 - badgeW/2}" y="${sy - 24}" width="${badgeW}" height="22" class="edge-bg" rx="11"/>
+          <text x="${sx + sw/2}" y="${sy - 13}" class="${wClass}" text-anchor="middle" dominant-baseline="central">${wVal}</text>
         `;
       }
 
@@ -166,9 +169,13 @@ export class MazeRenderer {
       if (hClue !== undefined || isHQuestion) {
         const hVal = isHQuestion ? (this.userInputs[`${r.id}_h`] || '?') : `${hClue} cm`;
         const hClass = isHQuestion ? 'edge-label question-label' : 'edge-label';
+        const strLen = String(hVal).length;
+        const badgeW = Math.max(52, strLen * 10 + 16);
+        const centerX = sx - 32;
+
         svgHtml += `
-          <rect x="${sx - 36}" y="${sy + sh/2 - 10}" width="32" height="20" class="edge-bg" rx="10"/>
-          <text x="${sx - 20}" y="${sy + sh/2}" class="${hClass}" text-anchor="middle" dominant-baseline="central">${hVal}</text>
+          <rect x="${centerX - badgeW/2}" y="${sy + sh/2 - 11}" width="${badgeW}" height="22" class="edge-bg" rx="11"/>
+          <text x="${centerX}" y="${sy + sh/2}" class="${hClass}" text-anchor="middle" dominant-baseline="central">${hVal}</text>
         `;
       }
 
@@ -182,7 +189,7 @@ export class MazeRenderer {
     // Attach click listeners
     const rectGroups = this.container.querySelectorAll('.rect-group');
     rectGroups.forEach(el => {
-      el.addEventListener('click', (e) => {
+      el.addEventListener('click', () => {
         const cellId = el.getAttribute('data-id');
         this.activeCellId = cellId;
         this.updateHighlights();
