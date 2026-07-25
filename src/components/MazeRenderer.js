@@ -131,13 +131,17 @@ export class MazeRenderer {
             text-anchor="middle" dominant-baseline="central"
           >${areaText}</text>
         `;
-      } else if (noteArea) {
+      }
+      
+      // Render pencil note if present
+      if (noteArea) {
+        const noteY = areaText !== '' ? (sy + sh / 2 + 18) : (sy + sh / 2);
         svgHtml += `
           <text 
-            x="${sx + sw / 2}" y="${sy + sh / 2}" 
+            x="${sx + sw / 2}" y="${noteY}" 
             class="note-label"
             text-anchor="middle" dominant-baseline="central"
-          >${noteArea}</text>
+          >✎ ${noteArea}</text>
         `;
       }
 

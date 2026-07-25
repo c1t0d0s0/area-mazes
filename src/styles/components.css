@@ -282,6 +282,25 @@
   flex-direction: column;
   justify-content: center;
 }
+.numpad-status-banner {
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  line-height: 1.4;
+  margin-bottom: 14px;
+  transition: all 0.3s ease;
+}
+.numpad-status-banner.answer-active {
+  background: rgba(99, 102, 241, 0.15);
+  border: 1px solid rgba(99, 102, 241, 0.4);
+  color: #a5b4fc;
+}
+.numpad-status-banner.memo-active {
+  background: rgba(245, 158, 11, 0.18);
+  border: 1px solid rgba(245, 158, 11, 0.5);
+  color: #fbbf24;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.2);
+}
 .numpad-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -344,6 +363,33 @@
 }
 
 /* Modals */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.btn-close-icon {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #f87171;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.btn-close-icon:hover {
+  background: rgba(239, 68, 68, 0.35);
+  color: #ffffff;
+  border-color: #ef4444;
+  transform: scale(1.05);
+}
+
 #hint-modal-container, #victory-modal-container {
   display: none;
 }

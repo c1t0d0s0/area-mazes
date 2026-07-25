@@ -81,8 +81,8 @@
 .note-label {
   font-family: var(--font-mono);
   font-size: 14px;
-  fill: #94a3b8;
-  font-style: italic;
+  font-weight: 700;
+  fill: var(--accent-gold);
   pointer-events: none;
 }
 

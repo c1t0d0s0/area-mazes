@@ -16,14 +16,32 @@ export class Numpad {
   setNoteMode(isNote) {
     this.isNoteMode = isNote;
     const btn = this.container.querySelector('.btn-note');
+    const banner = this.container.querySelector('.numpad-status-banner');
+    
     if (btn) {
       if (this.isNoteMode) btn.classList.add('active');
       else btn.classList.remove('active');
+    }
+
+    if (banner) {
+      if (this.isNoteMode) {
+        banner.className = 'numpad-status-banner memo-active';
+        banner.innerHTML = `✏️ <strong>メモモードON</strong>: 長方形を選んで計算用の仮数字（メモ）を書き込めます`;
+      } else {
+        banner.className = 'numpad-status-banner answer-active';
+        banner.innerHTML = `🎯 <strong>回答モード</strong>: 「 ? 」に入る本番の数値を入力してください`;
+      }
     }
   }
 
   render() {
     this.container.innerHTML = `
+      <div class="numpad-status-banner ${this.isNoteMode ? 'memo-active' : 'answer-active'}">
+        ${this.isNoteMode 
+          ? `✏️ <strong>メモモードON</strong>: 長方形を選んで計算用の仮数字（メモ）を書き込めます`
+          : `🎯 <strong>回答モード</strong>: 「 ? 」に入る本番の数値を入力してください`}
+      </div>
+
       <div class="numpad-grid">
         <button class="numpad-btn btn-num" data-val="1">1</button>
         <button class="numpad-btn btn-num" data-val="2">2</button>
@@ -36,16 +54,17 @@ export class Numpad {
         <button class="numpad-btn btn-num" data-val="9">9</button>
         <button class="numpad-btn btn-action btn-del" data-action="delete" title="1文字消去">⌫</button>
         <button class="numpad-btn btn-num" data-val="0">0</button>
-        <button class="numpad-btn btn-action btn-submit" data-action="submit" title="回答判定">✓</button>
+        <button class="numpad-btn btn-action btn-submit" data-action="submit" title="回答判定">✓ 判定</button>
       </div>
+
       <div class="numpad-toolbar">
-        <button class="tool-btn btn-note ${this.isNoteMode ? 'active' : ''}" data-action="note">
+        <button class="tool-btn btn-note ${this.isNoteMode ? 'active' : ''}" data-action="note" title="メモ機能のオン/オフ切替">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
-          メモモード
+          メモモード ${this.isNoteMode ? '(ON)' : '(OFF)'}
         </button>
-        <button class="tool-btn btn-hint" data-action="hint">
+        <button class="tool-btn btn-hint" data-action="hint" title="ヒントを見る">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
-          ヒントを見る
+          ヒント
         </button>
       </div>
     `;
