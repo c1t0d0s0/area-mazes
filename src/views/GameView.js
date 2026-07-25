@@ -23,18 +23,21 @@ export class GameView {
     this.numpad = null;
     this.hintModal = null;
     this.victoryModal = null;
+
+    this.boundKeyHandler = this.handlePhysicalKeyboard.bind(this);
   }
 
   loadLevel(model) {
     this.model = model;
     this.userInputs = {};
     this.notes = {};
-    this.activeCellId = this.model.question ? this.model.question.targetId : null;
+    this.activeCellId = this.model.question ? this.model.question.targetId : (this.model.rects[0] ? this.model.rects[0].id : null);
     this.hintsUsed = 0;
     this.secondsElapsed = 0;
 
     this.startTimer();
     this.render();
+    window.addEventListener('keydown', this.boundKeyHandler);
   }
 
   startTimer() {
@@ -59,6 +62,63 @@ export class GameView {
     const m = Math.floor(secs / 60).toString().padStart(2, '0');
     const s = (secs % 60).toString().padStart(2, '0');
     return `${m}:${s}`;
+  }
+
+  handlePhysicalKeyboard(e) {
+    // Ignore keydown if a modal is open or user is typing in an input element
+    if (document.querySelector('.modal-card') || e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+    if (e.key >= '0' && e.key <= '9') {
+      sounds.playClick();
+      this.handleInputDigit(parseInt(e.key, 10));
+    } else if (e.key === 'Backspace' || e.key === 'Delete') {
+      sounds.playPencil();
+      this.handleDeleteDigit();
+    } else if (e.key === 'Enter') {
+      this.checkSolution();
+    }
+  }
+
+  handleInputDigit(val) {
+    if (!this.activeCellId) return;
+
+    const isNote = this.numpad ? this.numpad.isNoteMode : false;
+    const q = this.model.question;
+    const isTarget = q && q.targetId === this.activeCellId;
+    const key = isTarget ? `${this.activeCellId}_${q.type}` : `${this.activeCellId}_area`;
+
+    if (isNote) {
+      const current = (this.notes[this.activeCellId] || '').toString();
+      this.notes[this.activeCellId] = current.length < 3 ? current + val : val.toString();
+      this.renderer.setNotes(this.notes);
+    } else {
+      const current = (this.userInputs[key] || '').toString();
+      const newVal = parseInt(current + val, 10);
+      this.userInputs[key] = newVal;
+      this.renderer.setUserInputs(this.userInputs);
+    }
+  }
+
+  handleDeleteDigit() {
+    if (!this.activeCellId) return;
+
+    const isNote = this.numpad ? this.numpad.isNoteMode : false;
+    const q = this.model.question;
+    const isTarget = q && q.targetId === this.activeCellId;
+    const key = isTarget ? `${this.activeCellId}_${q.type}` : `${this.activeCellId}_area`;
+
+    if (isNote) {
+      delete this.notes[this.activeCellId];
+      this.renderer.setNotes(this.notes);
+    } else {
+      const current = (this.userInputs[key] || '').toString();
+      if (current.length > 1) {
+        this.userInputs[key] = parseInt(current.slice(0, -1), 10);
+      } else {
+        delete this.userInputs[key];
+      }
+      this.renderer.setUserInputs(this.userInputs);
+    }
   }
 
   render() {
@@ -110,40 +170,8 @@ export class GameView {
     // Setup Numpad
     const numpadBox = this.container.querySelector('#numpad-container');
     this.numpad = new Numpad(numpadBox, {
-      onKeyPress: (val, isNote) => {
-        if (!this.activeCellId) return;
-        const q = this.model.question;
-        const key = `${this.activeCellId}_${q && q.targetId === this.activeCellId ? q.type : 'area'}`;
-
-        if (isNote) {
-          const current = (this.notes[key] || '').toString();
-          this.notes[key] = current.length < 3 ? current + val : val.toString();
-          this.renderer.setNotes(this.notes);
-        } else {
-          const current = (this.userInputs[key] || '').toString();
-          const newVal = parseInt(current + val, 10);
-          this.userInputs[key] = newVal;
-          this.renderer.setUserInputs(this.userInputs);
-        }
-      },
-      onDelete: (isNote) => {
-        if (!this.activeCellId) return;
-        const q = this.model.question;
-        const key = `${this.activeCellId}_${q && q.targetId === this.activeCellId ? q.type : 'area'}`;
-
-        if (isNote) {
-          delete this.notes[key];
-          this.renderer.setNotes(this.notes);
-        } else {
-          const current = (this.userInputs[key] || '').toString();
-          if (current.length > 1) {
-            this.userInputs[key] = parseInt(current.slice(0, -1), 10);
-          } else {
-            delete this.userInputs[key];
-          }
-          this.renderer.setUserInputs(this.userInputs);
-        }
-      },
+      onKeyPress: (val, isNote) => this.handleInputDigit(val),
+      onDelete: (isNote) => this.handleDeleteDigit(),
       onSubmit: () => this.checkSolution(),
       onGetHint: () => this.showHint()
     });
@@ -159,10 +187,12 @@ export class GameView {
     const victoryBox = this.container.querySelector('#victory-modal-container');
     this.victoryModal = new VictoryModal(victoryBox, {
       onNextLevel: () => {
+        window.removeEventListener('keydown', this.boundKeyHandler);
         if (this.onNavigate) this.onNavigate('next_level', this.model.id);
       },
       onLevelSelect: () => {
         this.stopTimer();
+        window.removeEventListener('keydown', this.boundKeyHandler);
         if (this.onNavigate) this.onNavigate('level_select');
       }
     });
@@ -171,6 +201,7 @@ export class GameView {
     this.container.querySelector('.btn-back').addEventListener('click', () => {
       sounds.playClick();
       this.stopTimer();
+      window.removeEventListener('keydown', this.boundKeyHandler);
       if (this.onNavigate) this.onNavigate('level_select');
     });
 
@@ -198,7 +229,6 @@ export class GameView {
     if (parseInt(userVal, 10) === this.model.solution) {
       this.stopTimer();
 
-      // Calculate Stars (3 stars for <= 1 hint, 2 stars for <= 3 hints, 1 star otherwise)
       let stars = 3;
       if (this.hintsUsed > 3) stars = 1;
       else if (this.hintsUsed > 1) stars = 2;

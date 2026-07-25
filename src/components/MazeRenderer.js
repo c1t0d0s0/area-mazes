@@ -97,7 +97,7 @@ export class MazeRenderer {
       // Area Clue or User Input
       const areaClue = clues[`${r.id}_area`];
       const userInputArea = this.userInputs[`${r.id}_area`];
-      const noteArea = this.notes[`${r.id}_area`];
+      const noteArea = this.notes[r.id] || this.notes[`${r.id}_area`] || this.notes[`${r.id}_w`] || this.notes[`${r.id}_h`];
 
       let areaText = '';
       let isQuestion = false;
