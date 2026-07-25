@@ -68,6 +68,21 @@ The optimized bundle will be compiled inside the `dist/` directory.
 
 ---
 
+## 🌐 Automatic Deployment (GitHub Pages)
+
+Pushing any release tag matching `v*` (e.g., `v1.0.0`) triggers a GitHub Actions workflow ([`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)) that automatically builds and deploys the `dist/` directory to GitHub Pages.
+
+```bash
+# Create and push a release tag
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+> **Repository Setup**:
+> Ensure that your GitHub repository settings under **Settings** > **Pages** > **Build and deployment** have `Source` set to **"GitHub Actions"**.
+
+---
+
 ## 🛠️ Architecture & Project Structure
 
 ```

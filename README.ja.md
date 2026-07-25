@@ -64,6 +64,21 @@ npm run build
 
 ---
 
+## 🌐 GitHub Pages への自動デプロイ
+
+`v*` 形式のリリースタグ（例: `v1.0.0`）を GitHub に Push すると、GitHub Actions ワークフロー (`.github/workflows/deploy.yml`) が自動起動し、`dist/` 配下のコンテンツを GitHub Pages にデプロイします。
+
+```bash
+# タグの作成と Push
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+> **事前に必要なリポジトリ設定**:
+> GitHub リポジトリの **Settings** > **Pages** > **Build and deployment** にて、`Source` を **「GitHub Actions」** に選択してください。
+
+---
+
 ## 🛠️ モジュール構成
 
 ```
