@@ -9,12 +9,15 @@ export class Numpad {
     this.onToggleNoteMode = onToggleNoteMode;
     this.onGetHint = onGetHint;
     this.isNoteMode = false;
+    this.activeTarget = null;
 
     this.render();
   }
 
-  setNoteMode(isNote) {
+  setNoteMode(isNote, activeTarget = null) {
     this.isNoteMode = isNote;
+    if (activeTarget) this.activeTarget = activeTarget;
+
     const btn = this.container.querySelector('.btn-note');
     const banner = this.container.querySelector('.numpad-status-banner');
     
@@ -37,7 +40,12 @@ export class Numpad {
     if (banner) {
       if (this.isNoteMode) {
         banner.className = 'numpad-status-banner memo-active';
-        banner.innerHTML = `✏️ <strong>メモモードON</strong>: 長方形を選んで計算用の仮数字（メモ）を書き込めます`;
+        let targetText = '図面の長方形や辺';
+        if (this.activeTarget && this.activeTarget.rectId) {
+          const typeLabel = this.activeTarget.type === 'w' ? '幅メモ (上辺)' : (this.activeTarget.type === 'h' ? '高さメモ (左辺)' : '面積メモ');
+          targetText = `長方形 ${this.activeTarget.rectId} の${typeLabel}`;
+        }
+        banner.innerHTML = `✏️ <strong>メモモードON</strong>: ${targetText} を入力中`;
       } else {
         banner.className = 'numpad-status-banner answer-active';
         banner.innerHTML = `🎯 <strong>回答モード</strong>: 「 ? 」に入る本番の数値を入力してください`;
@@ -49,7 +57,7 @@ export class Numpad {
     this.container.innerHTML = `
       <div class="numpad-status-banner ${this.isNoteMode ? 'memo-active' : 'answer-active'}">
         ${this.isNoteMode 
-          ? `✏️ <strong>メモモードON</strong>: 長方形を選んで計算用の仮数字（メモ）を書き込めます`
+          ? `✏️ <strong>メモモードON</strong>: 図面の長方形や辺を選んで仮数字（メモ）を書き込めます`
           : `🎯 <strong>回答モード</strong>: 「 ? 」に入る本番の数値を入力してください`}
       </div>
 
@@ -108,7 +116,7 @@ export class Numpad {
       noteBtn.addEventListener('click', () => {
         sounds.playClick();
         this.isNoteMode = !this.isNoteMode;
-        this.setNoteMode(this.isNoteMode);
+        this.setNoteMode(this.isNoteMode, this.activeTarget);
         if (this.onToggleNoteMode) this.onToggleNoteMode(this.isNoteMode);
       });
     }

@@ -90,4 +90,28 @@
   fill: #0f172a;
   stroke: #334155;
   stroke-width: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.edge-group:hover .edge-bg {
+  stroke: var(--accent-cyan);
+}
+
+.edge-bg.active-edge-bg {
+  fill: rgba(99, 102, 241, 0.3) !important;
+  stroke: var(--accent-primary) !important;
+  stroke-width: 2px !important;
+  filter: url(#glow);
+}
+
+.edge-bg.note-edge-bg {
+  fill: rgba(245, 158, 11, 0.25) !important;
+  stroke: var(--accent-gold) !important;
+  stroke-width: 1.5px !important;
+}
+
+.note-edge-label {
+  fill: var(--accent-gold) !important;
+  font-weight: 700 !important;
 }
