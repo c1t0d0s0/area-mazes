@@ -1,0 +1,93 @@
+/* SVG Diagram Specific Styles */
+
+.maze-svg {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+}
+
+.rect-group {
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.maze-rect {
+  fill: #1e293b;
+  stroke: #475569;
+  stroke-width: 2.5;
+  transition: all 0.2s ease;
+}
+
+.rect-group:hover .maze-rect {
+  fill: #2d3748;
+  stroke: #64748b;
+}
+
+.maze-rect.active-rect {
+  fill: rgba(99, 102, 241, 0.25) !important;
+  stroke: var(--accent-primary) !important;
+  stroke-width: 3.5 !important;
+  filter: url(#glow);
+}
+
+.maze-rect.highlighted-rect {
+  fill: rgba(6, 182, 212, 0.25) !important;
+  stroke: var(--accent-cyan) !important;
+  stroke-width: 3.5 !important;
+  animation: pulseHighlight 1.5s infinite alternate;
+}
+
+.maze-rect.question-rect {
+  fill: url(#questionGrad) !important;
+  stroke: var(--accent-gold) !important;
+  stroke-width: 3.5 !important;
+  stroke-dasharray: 6 3;
+  animation: strokeDash 20s linear infinite;
+}
+
+@keyframes strokeDash {
+  to { stroke-dashoffset: -100; }
+}
+
+@keyframes pulseHighlight {
+  0% { stroke-opacity: 0.6; }
+  100% { stroke-opacity: 1; }
+}
+
+/* Labels inside SVG */
+.area-label {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 700;
+  fill: #f8fafc;
+  pointer-events: none;
+}
+
+.edge-label {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  fill: #cbd5e1;
+  pointer-events: none;
+}
+
+.question-label {
+  font-size: 28px !important;
+  font-weight: 800 !important;
+  fill: var(--accent-gold) !important;
+  text-shadow: 0 0 10px var(--accent-gold-glow);
+}
+
+.note-label {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  fill: #94a3b8;
+  font-style: italic;
+  pointer-events: none;
+}
+
+.edge-bg {
+  fill: #0f172a;
+  stroke: #334155;
+  stroke-width: 1;
+}
