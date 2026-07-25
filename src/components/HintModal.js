@@ -43,13 +43,13 @@ export class HintModal {
   render() {
     if (this.steps.length === 0) {
       this.container.innerHTML = `
-        <div class="modal-backdrop">
-          <div class="modal-card">
+        <div class="hint-modal-backdrop">
+          <div class="modal-card hint-card">
             <div class="modal-header">
               <h3>💡 ヒント</h3>
-              <button class="btn-close-icon" title="閉じる" aria-label="閉じる">✕</button>
+              <button class="btn-close-icon" title="閉じる" aria-label="閉じる">✕ 閉じる</button>
             </div>
-            <p style="margin: 20px 0; color: var(--text-muted);">このパズルは既に入力されているか、ヒントが見つかりません。</p>
+            <p style="margin: 16px 0; color: var(--text-muted);">このパズルは既に入力されているか、ヒントが見つかりません。</p>
             <div class="modal-footer">
               <button class="btn-modal-close btn-primary" style="width: 100%;">閉じる</button>
             </div>
@@ -59,7 +59,7 @@ export class HintModal {
     } else {
       const step = this.steps[this.currentStepIdx];
       this.container.innerHTML = `
-        <div class="modal-backdrop">
+        <div class="hint-modal-backdrop">
           <div class="modal-card hint-card">
             <div class="modal-header">
               <h3>💡 解法ヒント (${this.currentStepIdx + 1} / ${this.steps.length})</h3>
@@ -79,8 +79,8 @@ export class HintModal {
       `;
     }
 
-    // Attach Backdrop click listener (close when clicking outside card)
-    const backdrop = this.container.querySelector('.modal-backdrop');
+    // Attach Backdrop click listener
+    const backdrop = this.container.querySelector('.hint-modal-backdrop');
     if (backdrop) {
       backdrop.addEventListener('click', (e) => {
         if (e.target === backdrop) {
@@ -99,6 +99,7 @@ export class HintModal {
       });
     });
 
+    // Attach Prev / Next buttons
     const prevBtn = this.container.querySelector('.btn-prev');
     if (prevBtn) {
       prevBtn.addEventListener('click', () => {
