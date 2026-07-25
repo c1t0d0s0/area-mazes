@@ -1,15 +1,16 @@
 /**
  * MazeRenderer
  * SVG-based interactive renderer for Area Maze diagrams.
- * Renders rects and interactive edge hotspots for top width edges and left height edges on EVERY rectangle.
+ * Renders rects and interactive edge hotspots for top width edges and left height edges.
  */
 
 export class MazeRenderer {
-  constructor(containerEl, { onSelectTarget, userInputs = {}, notes = {} } = {}) {
+  constructor(containerEl, { onSelectTarget, userInputs = {}, notes = {}, isNoteMode = false } = {}) {
     this.container = containerEl;
     this.onSelectTarget = onSelectTarget;
     this.userInputs = userInputs;
     this.notes = notes;
+    this.isNoteMode = isNoteMode;
     this.model = null;
     this.activeTarget = { rectId: null, type: 'area' };
     this.highlightedRects = new Set();
@@ -27,6 +28,11 @@ export class MazeRenderer {
 
   setNotes(notes) {
     this.notes = notes;
+    this.render();
+  }
+
+  setNoteMode(isNoteMode) {
+    this.isNoteMode = isNoteMode;
     this.render();
   }
 
@@ -146,7 +152,7 @@ export class MazeRenderer {
         `;
       }
 
-      // Render Edge Clues & Edge Notes for EVERY RECTANGLE
+      // Render Edge Clues & Edge Notes
       const wClue = clues[`${r.id}_w`];
       const hClue = clues[`${r.id}_h`];
 
@@ -174,22 +180,25 @@ export class MazeRenderer {
         isWNote = true;
       }
 
-      const displayWVal = wVal || (isWActive ? '?' : '+幅');
+      // Display +幅 placeholder ONLY when isNoteMode is TRUE
+      const displayWVal = wVal || (isWActive ? '?' : (this.isNoteMode ? '+幅' : null));
       const isPlaceholderW = !wVal && !isWActive;
 
-      const strLenW = String(displayWVal).length;
-      const badgeW = Math.max(48, strLenW * 9 + 14);
-      let bgClassW = 'edge-bg';
-      if (isWActive) bgClassW += ' active-edge-bg';
-      if (isWNote) bgClassW += ' note-edge-bg';
-      if (isPlaceholderW) bgClassW += ' placeholder-edge-bg';
+      if (displayWVal !== null) {
+        const strLenW = String(displayWVal).length;
+        const badgeW = Math.max(48, strLenW * 9 + 14);
+        let bgClassW = 'edge-bg';
+        if (isWActive) bgClassW += ' active-edge-bg';
+        if (isWNote) bgClassW += ' note-edge-bg';
+        if (isPlaceholderW) bgClassW += ' placeholder-edge-bg';
 
-      svgHtml += `
-        <g class="edge-group" data-id="${r.id}" data-type="w">
-          <rect x="${sx + sw/2 - badgeW/2}" y="${sy - 24}" width="${badgeW}" height="22" class="${bgClassW}" rx="11"/>
-          <text x="${sx + sw/2}" y="${sy - 13}" class="${wClass} ${isPlaceholderW ? 'placeholder-label' : ''}" text-anchor="middle" dominant-baseline="central">${displayWVal}</text>
-        </g>
-      `;
+        svgHtml += `
+          <g class="edge-group" data-id="${r.id}" data-type="w">
+            <rect x="${sx + sw/2 - badgeW/2}" y="${sy - 24}" width="${badgeW}" height="22" class="${bgClassW}" rx="11"/>
+            <text x="${sx + sw/2}" y="${sy - 13}" class="${wClass} ${isPlaceholderW ? 'placeholder-label' : ''}" text-anchor="middle" dominant-baseline="central">${displayWVal}</text>
+          </g>
+        `;
+      }
 
       // Height Clue / Note (Left Edge)
       let hVal = null;
@@ -207,23 +216,26 @@ export class MazeRenderer {
         isHNote = true;
       }
 
-      const displayHVal = hVal || (isHActive ? '?' : '+高');
+      // Display +高 placeholder ONLY when isNoteMode is TRUE
+      const displayHVal = hVal || (isHActive ? '?' : (this.isNoteMode ? '+高' : null));
       const isPlaceholderH = !hVal && !isHActive;
 
-      const strLenH = String(displayHVal).length;
-      const badgeH = Math.max(48, strLenH * 9 + 14);
-      const centerX = sx - 32;
-      let bgClassH = 'edge-bg';
-      if (isHActive) bgClassH += ' active-edge-bg';
-      if (isHNote) bgClassH += ' note-edge-bg';
-      if (isPlaceholderH) bgClassH += ' placeholder-edge-bg';
+      if (displayHVal !== null) {
+        const strLenH = String(displayHVal).length;
+        const badgeH = Math.max(48, strLenH * 9 + 14);
+        const centerX = sx - 32;
+        let bgClassH = 'edge-bg';
+        if (isHActive) bgClassH += ' active-edge-bg';
+        if (isHNote) bgClassH += ' note-edge-bg';
+        if (isPlaceholderH) bgClassH += ' placeholder-edge-bg';
 
-      svgHtml += `
-        <g class="edge-group" data-id="${r.id}" data-type="h">
-          <rect x="${centerX - badgeH/2}" y="${sy + sh/2 - 11}" width="${badgeH}" height="22" class="${bgClassH}" rx="11"/>
-          <text x="${centerX}" y="${sy + sh/2}" class="${hClass} ${isPlaceholderH ? 'placeholder-label' : ''}" text-anchor="middle" dominant-baseline="central">${displayHVal}</text>
-        </g>
-      `;
+        svgHtml += `
+          <g class="edge-group" data-id="${r.id}" data-type="h">
+            <rect x="${centerX - badgeH/2}" y="${sy + sh/2 - 11}" width="${badgeH}" height="22" class="${bgClassH}" rx="11"/>
+            <text x="${centerX}" y="${sy + sh/2}" class="${hClass} ${isPlaceholderH ? 'placeholder-label' : ''}" text-anchor="middle" dominant-baseline="central">${displayHVal}</text>
+          </g>
+        `;
+      }
 
       svgHtml += `</g>`;
     });

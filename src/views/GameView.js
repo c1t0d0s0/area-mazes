@@ -143,7 +143,11 @@ export class GameView {
 
   updateNumpadBanner() {
     if (this.numpad) {
-      this.numpad.setNoteMode(this.numpad.isNoteMode, this.activeTarget);
+      const isNote = this.numpad.isNoteMode;
+      this.numpad.setNoteMode(isNote, this.activeTarget);
+      if (this.renderer) {
+        this.renderer.setNoteMode(isNote);
+      }
     }
   }
 
