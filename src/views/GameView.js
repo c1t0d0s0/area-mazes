@@ -201,7 +201,14 @@ export class GameView {
       onDelete: (isNote) => this.handleDeleteDigit(),
       onSubmit: () => this.checkSolution(),
       onGetHint: () => this.showHint(),
-      onToggleNoteMode: () => this.updateNumpadBanner()
+      onToggleNoteMode: () => this.updateNumpadBanner(),
+      onSelectTargetType: (targetType) => {
+        if (this.activeTarget && this.activeTarget.rectId) {
+          this.activeTarget = { rectId: this.activeTarget.rectId, type: targetType };
+          if (this.renderer) this.renderer.setActiveTarget(this.activeTarget);
+          this.updateNumpadBanner();
+        }
+      }
     });
     this.updateNumpadBanner();
 

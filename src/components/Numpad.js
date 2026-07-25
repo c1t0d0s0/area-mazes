@@ -1,13 +1,14 @@
 import { sounds } from '../utils/SoundManager.js';
 
 export class Numpad {
-  constructor(containerEl, { onKeyPress, onDelete, onSubmit, onToggleNoteMode, onGetHint } = {}) {
+  constructor(containerEl, { onKeyPress, onDelete, onSubmit, onToggleNoteMode, onGetHint, onSelectTargetType } = {}) {
     this.container = containerEl;
     this.onKeyPress = onKeyPress;
     this.onDelete = onDelete;
     this.onSubmit = onSubmit;
     this.onToggleNoteMode = onToggleNoteMode;
     this.onGetHint = onGetHint;
+    this.onSelectTargetType = onSelectTargetType;
     this.isNoteMode = false;
     this.activeTarget = null;
 
@@ -37,13 +38,23 @@ export class Numpad {
       }
     }
 
+    // Update target selector tab buttons
+    this.container.querySelectorAll('.target-tab-btn').forEach(tab => {
+      const type = tab.getAttribute('data-type');
+      if (this.activeTarget && this.activeTarget.type === type) {
+        tab.classList.add('active');
+      } else {
+        tab.classList.remove('active');
+      }
+    });
+
     if (banner) {
       if (this.isNoteMode) {
         banner.className = 'numpad-status-banner memo-active';
         let targetText = '図面の長方形や辺';
         if (this.activeTarget && this.activeTarget.rectId) {
           const typeLabel = this.activeTarget.type === 'w' ? '幅メモ (上辺)' : (this.activeTarget.type === 'h' ? '高さメモ (左辺)' : '面積メモ');
-          targetText = `長方形 ${this.activeTarget.rectId} の${typeLabel}`;
+          targetText = `長方形 ${this.activeTarget.rectId} の【${typeLabel}】`;
         }
         banner.innerHTML = `✏️ <strong>メモモードON</strong>: ${targetText} を入力中`;
       } else {
@@ -54,11 +65,26 @@ export class Numpad {
   }
 
   render() {
+    const currentType = this.activeTarget ? this.activeTarget.type : 'area';
+
     this.container.innerHTML = `
       <div class="numpad-status-banner ${this.isNoteMode ? 'memo-active' : 'answer-active'}">
         ${this.isNoteMode 
           ? `✏️ <strong>メモモードON</strong>: 図面の長方形や辺を選んで仮数字（メモ）を書き込めます`
           : `🎯 <strong>回答モード</strong>: 「 ? 」に入る本番の数値を入力してください`}
+      </div>
+
+      <div class="target-type-selector">
+        <span class="target-selector-label">対象箇所:</span>
+        <button class="target-tab-btn ${currentType === 'area' ? 'active' : ''}" data-type="area">
+          ⬛ 面積
+        </button>
+        <button class="target-tab-btn ${currentType === 'w' ? 'active' : ''}" data-type="w">
+          ⬆️ 幅 (上辺)
+        </button>
+        <button class="target-tab-btn ${currentType === 'h' ? 'active' : ''}" data-type="h">
+          ⬅️ 高さ (左辺)
+        </button>
       </div>
 
       <div class="numpad-grid">
@@ -87,6 +113,14 @@ export class Numpad {
         </button>
       </div>
     `;
+
+    this.container.querySelectorAll('.target-tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        sounds.playClick();
+        const type = btn.getAttribute('data-type');
+        if (this.onSelectTargetType) this.onSelectTargetType(type);
+      });
+    });
 
     this.container.querySelectorAll('.btn-num').forEach(btn => {
       btn.addEventListener('click', () => {

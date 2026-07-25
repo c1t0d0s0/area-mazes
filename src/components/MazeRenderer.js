@@ -1,7 +1,7 @@
 /**
  * MazeRenderer
  * SVG-based interactive renderer for Area Maze diagrams.
- * Supports selecting & writing notes for areas, top width edges, and left height edges.
+ * Renders rects and interactive edge hotspots for top width edges and left height edges on EVERY rectangle.
  */
 
 export class MazeRenderer {
@@ -11,7 +11,7 @@ export class MazeRenderer {
     this.userInputs = userInputs;
     this.notes = notes;
     this.model = null;
-    this.activeTarget = { rectId: null, type: 'area' }; // { rectId, type: 'area'|'w'|'h' }
+    this.activeTarget = { rectId: null, type: 'area' };
     this.highlightedRects = new Set();
   }
 
@@ -146,7 +146,7 @@ export class MazeRenderer {
         `;
       }
 
-      // Render Edge Clues & Edge Notes
+      // Render Edge Clues & Edge Notes for EVERY RECTANGLE
       const wClue = clues[`${r.id}_w`];
       const hClue = clues[`${r.id}_h`];
 
@@ -174,22 +174,22 @@ export class MazeRenderer {
         isWNote = true;
       }
 
-      // Render Top Edge Zone if clue/question/note exists OR if rect is on top
-      if (wVal || isWActive || r.y === minX) {
-        const displayVal = wVal || (isWActive ? '?' : '');
-        if (displayVal !== '') {
-          const strLen = String(displayVal).length;
-          const badgeW = Math.max(54, strLen * 10 + 16);
-          const bgClass = isWActive ? 'edge-bg active-edge-bg' : (isWNote ? 'edge-bg note-edge-bg' : 'edge-bg');
+      const displayWVal = wVal || (isWActive ? '?' : '+幅');
+      const isPlaceholderW = !wVal && !isWActive;
 
-          svgHtml += `
-            <g class="edge-group" data-id="${r.id}" data-type="w">
-              <rect x="${sx + sw/2 - badgeW/2}" y="${sy - 26}" width="${badgeW}" height="24" class="${bgClass}" rx="12"/>
-              <text x="${sx + sw/2}" y="${sy - 14}" class="${wClass}" text-anchor="middle" dominant-baseline="central">${displayVal}</text>
-            </g>
-          `;
-        }
-      }
+      const strLenW = String(displayWVal).length;
+      const badgeW = Math.max(48, strLenW * 9 + 14);
+      let bgClassW = 'edge-bg';
+      if (isWActive) bgClassW += ' active-edge-bg';
+      if (isWNote) bgClassW += ' note-edge-bg';
+      if (isPlaceholderW) bgClassW += ' placeholder-edge-bg';
+
+      svgHtml += `
+        <g class="edge-group" data-id="${r.id}" data-type="w">
+          <rect x="${sx + sw/2 - badgeW/2}" y="${sy - 24}" width="${badgeW}" height="22" class="${bgClassW}" rx="11"/>
+          <text x="${sx + sw/2}" y="${sy - 13}" class="${wClass} ${isPlaceholderW ? 'placeholder-label' : ''}" text-anchor="middle" dominant-baseline="central">${displayWVal}</text>
+        </g>
+      `;
 
       // Height Clue / Note (Left Edge)
       let hVal = null;
@@ -207,23 +207,23 @@ export class MazeRenderer {
         isHNote = true;
       }
 
-      // Render Left Edge Zone if clue/question/note exists OR if rect is on left
-      if (hVal || isHActive || r.x === minX) {
-        const displayVal = hVal || (isHActive ? '?' : '');
-        if (displayVal !== '') {
-          const strLen = String(displayVal).length;
-          const badgeW = Math.max(54, strLen * 10 + 16);
-          const centerX = sx - 34;
-          const bgClass = isHActive ? 'edge-bg active-edge-bg' : (isHNote ? 'edge-bg note-edge-bg' : 'edge-bg');
+      const displayHVal = hVal || (isHActive ? '?' : '+高');
+      const isPlaceholderH = !hVal && !isHActive;
 
-          svgHtml += `
-            <g class="edge-group" data-id="${r.id}" data-type="h">
-              <rect x="${centerX - badgeW/2}" y="${sy + sh/2 - 12}" width="${badgeW}" height="24" class="${bgClass}" rx="12"/>
-              <text x="${centerX}" y="${sy + sh/2}" class="${hClass}" text-anchor="middle" dominant-baseline="central">${displayVal}</text>
-            </g>
-          `;
-        }
-      }
+      const strLenH = String(displayHVal).length;
+      const badgeH = Math.max(48, strLenH * 9 + 14);
+      const centerX = sx - 32;
+      let bgClassH = 'edge-bg';
+      if (isHActive) bgClassH += ' active-edge-bg';
+      if (isHNote) bgClassH += ' note-edge-bg';
+      if (isPlaceholderH) bgClassH += ' placeholder-edge-bg';
+
+      svgHtml += `
+        <g class="edge-group" data-id="${r.id}" data-type="h">
+          <rect x="${centerX - badgeH/2}" y="${sy + sh/2 - 11}" width="${badgeH}" height="22" class="${bgClassH}" rx="11"/>
+          <text x="${centerX}" y="${sy + sh/2}" class="${hClass} ${isPlaceholderH ? 'placeholder-label' : ''}" text-anchor="middle" dominant-baseline="central">${displayHVal}</text>
+        </g>
+      `;
 
       svgHtml += `</g>`;
     });
@@ -247,6 +247,8 @@ export class MazeRenderer {
 
   updateHighlights() {
     if (!this.container) return;
+
+    // Update main rect body highlight
     const rects = this.container.querySelectorAll('.maze-rect');
     rects.forEach(r => {
       const id = r.getAttribute('data-id');
@@ -262,12 +264,14 @@ export class MazeRenderer {
       }
     });
 
-    const edgeBgs = this.container.querySelectorAll('.edge-bg');
-    edgeBgs.forEach(bg => {
-      const parent = bg.closest('[data-id][data-type]');
-      if (parent) {
-        const id = parent.getAttribute('data-id');
-        const type = parent.getAttribute('data-type');
+    // Update edge group highlights
+    const edgeGroups = this.container.querySelectorAll('.edge-group');
+    edgeGroups.forEach(grp => {
+      const id = grp.getAttribute('data-id');
+      const type = grp.getAttribute('data-type');
+      const bg = grp.querySelector('.edge-bg');
+
+      if (bg) {
         if (id === this.activeTarget.rectId && type === this.activeTarget.type) {
           bg.classList.add('active-edge-bg');
         } else {
