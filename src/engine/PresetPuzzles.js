@@ -45,45 +45,36 @@ export const PRESET_PUZZLES = [
   },
   {
     "id": "level_2",
-    "title": "入門 2: 基本トレーニング",
+    "title": "入門 2: 上下の連鎖",
     "difficulty": "Easy",
     "rects": [
       {
         "id": "A",
         "x": 0,
         "y": 0,
-        "w": 5,
-        "h": 4,
-        "area": 20
+        "w": 4,
+        "h": 3,
+        "area": 12
       },
       {
         "id": "B",
-        "x": 5,
-        "y": 0,
-        "w": 5,
-        "h": 4,
-        "area": 20
-      },
-      {
-        "id": "C",
         "x": 0,
-        "y": 4,
-        "w": 10,
-        "h": 6,
-        "area": 60
+        "y": 3,
+        "w": 4,
+        "h": 5,
+        "area": 20
       }
     ],
     "clues": {
-      "A_area": 20,
-      "A_h": 4,
-      "B_area": 20,
-      "C_h": 6
+      "A_area": 12,
+      "A_h": 3,
+      "B_area": 20
     },
     "question": {
-      "targetId": "C",
+      "targetId": "B",
       "type": "h"
     },
-    "solution": 6
+    "solution": 5
   },
   {
     "id": "level_3",
