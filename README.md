@@ -20,7 +20,7 @@ This web application offers a complete digital experience featuring a built-in c
 
 ## ✨ Features
 
-- 🎮 **30 Hand-Crafted Preset Puzzles**: Ranging from **Easy (入門)** to **Grandmaster (達人)** with 1-3 star ratings and time tracking.
+- 🎮 **100 Hand-Crafted Preset Puzzles**: Ranging from **Easy (入門)** to **Grandmaster (達人)** with 1-3 star ratings, best time tracking, and completion badges. Heavy focus on advanced tiers (Medium, Hard, Expert, Grandmaster).
 - 🎲 **Procedural Level Generator**: Generate infinite, 100% mathematically solvable puzzles on demand with custom difficulty settings.
 - 💡 **Step-by-Step Hint Engine**: Powered by a custom graph constraint-satisfaction solver (`AreaMazeSolver`) that provides visual diagram highlights and logical deduction traces.
 - ✏️ **Custom Level Builder / Editor**: Create custom grid partitions, set known values, verify solvability in real-time, and save puzzles to your local library.
