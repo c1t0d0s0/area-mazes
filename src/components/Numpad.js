@@ -1,4 +1,5 @@
 import { sounds } from '../utils/SoundManager.js';
+import { t } from '../utils/i18n.js';
 
 export class Numpad {
   constructor(containerEl, { onKeyPress, onDelete, onSubmit, onToggleNoteMode, onGetHint, onSelectTargetType } = {}) {
@@ -27,13 +28,13 @@ export class Numpad {
         btn.classList.add('active');
         btn.innerHTML = `
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
-          メモモード (ON)
+          ${t('btnNote')} (ON)
         `;
       } else {
         btn.classList.remove('active');
         btn.innerHTML = `
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
-          メモモード (OFF)
+          ${t('btnNote')} (OFF)
         `;
       }
     }
@@ -51,15 +52,15 @@ export class Numpad {
     if (banner) {
       if (this.isNoteMode) {
         banner.className = 'numpad-status-banner memo-active';
-        let targetText = '図面の長方形や辺';
+        let targetText = t('memoDefaultTarget');
         if (this.activeTarget && this.activeTarget.rectId) {
-          const typeLabel = this.activeTarget.type === 'w' ? '幅メモ (上辺)' : (this.activeTarget.type === 'h' ? '高さメモ (左辺)' : '面積メモ');
-          targetText = `長方形 ${this.activeTarget.rectId} の【${typeLabel}】`;
+          const typeLabel = this.activeTarget.type === 'w' ? t('memoWidthLabel') : (this.activeTarget.type === 'h' ? t('memoHeightLabel') : t('memoAreaLabel'));
+          targetText = t('memoRectTarget', { id: this.activeTarget.rectId, label: typeLabel });
         }
-        banner.innerHTML = `✏️ <strong>メモモードON</strong>: ${targetText} を入力中`;
+        banner.innerHTML = t('modeMemoTarget', { target: targetText });
       } else {
         banner.className = 'numpad-status-banner answer-active';
-        banner.innerHTML = `🎯 <strong>回答モード</strong>: 「 ? 」に入る本番の数値を入力してください`;
+        banner.innerHTML = t('modeAnswerActive');
       }
     }
   }
@@ -70,20 +71,20 @@ export class Numpad {
     this.container.innerHTML = `
       <div class="numpad-status-banner ${this.isNoteMode ? 'memo-active' : 'answer-active'}">
         ${this.isNoteMode 
-          ? `✏️ <strong>メモモードON</strong>: 図面の長方形や辺を選んで仮数字（メモ）を書き込めます`
-          : `🎯 <strong>回答モード</strong>: 「 ? 」に入る本番の数値を入力してください`}
+          ? t('modeMemoDefault')
+          : t('modeAnswerActive')}
       </div>
 
       <div class="target-type-selector">
-        <span class="target-selector-label">対象箇所:</span>
+        <span class="target-selector-label">${t('targetLabel')}</span>
         <button class="target-tab-btn ${currentType === 'area' ? 'active' : ''}" data-type="area">
-          ⬛ 面積
+          ${t('targetArea')}
         </button>
         <button class="target-tab-btn ${currentType === 'w' ? 'active' : ''}" data-type="w">
-          ⬆️ 幅 (上辺)
+          ${t('targetWidth')}
         </button>
         <button class="target-tab-btn ${currentType === 'h' ? 'active' : ''}" data-type="h">
-          ⬅️ 高さ (左辺)
+          ${t('targetHeight')}
         </button>
       </div>
 
@@ -97,19 +98,19 @@ export class Numpad {
         <button class="numpad-btn btn-num" data-val="7">7</button>
         <button class="numpad-btn btn-num" data-val="8">8</button>
         <button class="numpad-btn btn-num" data-val="9">9</button>
-        <button class="numpad-btn btn-action btn-del" data-action="delete" title="1文字消去">⌫</button>
+        <button class="numpad-btn btn-action btn-del" data-action="delete" title="${t('btnDelTitle')}">⌫</button>
         <button class="numpad-btn btn-num" data-val="0">0</button>
-        <button class="numpad-btn btn-action btn-submit" data-action="submit" title="回答判定">✓ 判定</button>
+        <button class="numpad-btn btn-action btn-submit" data-action="submit" title="${t('btnSubmitTitle')}">${t('btnSubmit')}</button>
       </div>
 
       <div class="numpad-toolbar">
-        <button class="tool-btn btn-note ${this.isNoteMode ? 'active' : ''}" data-action="note" title="メモ機能のオン/オフ切替">
+        <button class="tool-btn btn-note ${this.isNoteMode ? 'active' : ''}" data-action="note" title="${t('btnNoteTitle')}">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
-          メモモード ${this.isNoteMode ? '(ON)' : '(OFF)'}
+          ${t('btnNote')} ${this.isNoteMode ? '(ON)' : '(OFF)'}
         </button>
-        <button class="tool-btn btn-hint" data-action="hint" title="ヒントを見る">
+        <button class="tool-btn btn-hint" data-action="hint" title="${t('btnHintTitle')}">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
-          ヒント
+          ${t('btnHint')}
         </button>
       </div>
     `;

@@ -2,6 +2,7 @@ import { AreaMazeModel } from '../engine/AreaMazeModel.js';
 import { AreaMazeSolver } from '../engine/AreaMazeSolver.js';
 import { Storage } from '../utils/Storage.js';
 import { sounds } from '../utils/SoundManager.js';
+import { t, toggleLanguage } from '../utils/i18n.js';
 
 export class EditorView {
   constructor(containerEl, { onNavigate }) {
@@ -20,7 +21,7 @@ export class EditorView {
       'A2_area': 18
     };
     this.question = { targetId: 'A3', type: 'h' };
-    this.title = 'マイカスタムパズル';
+    this.title = t('editorTitle');
     this.difficulty = 'Medium';
   }
 
@@ -52,53 +53,56 @@ export class EditorView {
     this.container.innerHTML = `
       <div class="editor-view">
         <header class="editor-header">
-          <button class="btn-back">← 一覧に戻る</button>
-          <h2>✏️ パズル自作エディター</h2>
+          <button class="btn-back">${t('btnEditorBack')}</button>
+          <h2>${t('editorHeader')}</h2>
           <div class="header-status">
+            <button class="btn-action-hero btn-lang-toggle" title="${t('btnLangTitle')}" style="padding: 6px 12px; font-size: 12px; margin-right: 8px;">
+              🌐 ${t('langToggle')}
+            </button>
             ${result.isSolved 
-              ? `<span class="badge badge-success">✓ 解答可能 (解: ${result.solution})</span>` 
-              : `<span class="badge badge-warning">⚠️ 解答不可 (情報不足)</span>`}
+              ? `<span class="badge badge-success">${t('solvable', { solution: result.solution })}</span>` 
+              : `<span class="badge badge-warning">${t('unsolvable')}</span>`}
           </div>
         </header>
 
         <div class="editor-layout">
           <div class="editor-sidebar">
             <div class="form-group">
-              <label>パズルタイトル</label>
+              <label>${t('labelTitle')}</label>
               <input type="text" class="input-title" value="${this.title}">
             </div>
             <div class="form-group">
-              <label>難易度</label>
+              <label>${t('labelDiff')}</label>
               <select class="select-diff">
-                <option value="Easy" ${this.difficulty === 'Easy' ? 'selected' : ''}>Easy (入門)</option>
-                <option value="Medium" ${this.difficulty === 'Medium' ? 'selected' : ''}>Medium (初級)</option>
-                <option value="Hard" ${this.difficulty === 'Hard' ? 'selected' : ''}>Hard (中級)</option>
-                <option value="Expert" ${this.difficulty === 'Expert' ? 'selected' : ''}>Expert (上級)</option>
+                <option value="Easy" ${this.difficulty === 'Easy' ? 'selected' : ''}>${t('diffEasy')}</option>
+                <option value="Medium" ${this.difficulty === 'Medium' ? 'selected' : ''}>${t('diffMedium')}</option>
+                <option value="Hard" ${this.difficulty === 'Hard' ? 'selected' : ''}>${t('diffHard')}</option>
+                <option value="Expert" ${this.difficulty === 'Expert' ? 'selected' : ''}>${t('diffExpert')}</option>
               </select>
             </div>
 
             <div class="editor-section">
-              <h3>長方形リスト</h3>
+              <h3>${t('rectsList')}</h3>
               <div class="rect-list">
                 ${this.rects.map((r, i) => `
                   <div class="rect-editor-item" data-id="${r.id}">
                     <strong>${r.id}</strong> (w:${r.w}, h:${r.h}, area:${r.w * r.h})
-                    <button class="btn-sm btn-del-rect" data-idx="${i}">削除</button>
+                    <button class="btn-sm btn-del-rect" data-idx="${i}">${t('btnDelete')}</button>
                   </div>
                 `).join('')}
               </div>
-              <button class="btn-secondary btn-add-rect">+ 長方形を追加</button>
+              <button class="btn-secondary btn-add-rect">${t('btnAddRect')}</button>
             </div>
 
             <div class="editor-actions">
               <button class="btn-primary btn-save-custom" ${result.isSolved ? '' : 'disabled'}>
-                💾 保存して保存済みに追加
+                ${t('btnSaveCustom')}
               </button>
             </div>
           </div>
 
           <div class="editor-preview">
-            <h3>図面プレビュー</h3>
+            <h3>${t('previewTitle')}</h3>
             <div id="editor-svg-box"></div>
           </div>
         </div>
@@ -142,6 +146,15 @@ export class EditorView {
       if (this.onNavigate) this.onNavigate('level_select');
     });
 
+    const langBtn = this.container.querySelector('.btn-lang-toggle');
+    if (langBtn) {
+      langBtn.addEventListener('click', () => {
+        sounds.playClick();
+        toggleLanguage();
+        this.render();
+      });
+    }
+
     this.container.querySelector('.input-title').addEventListener('change', (e) => {
       this.title = e.target.value;
     });
@@ -168,7 +181,7 @@ export class EditorView {
           this.rects.splice(idx, 1);
           this.render();
         } else {
-          alert('長方形は最低2つ必要です。');
+          alert(t('alertMinRects'));
         }
       });
     });
@@ -179,7 +192,7 @@ export class EditorView {
         sounds.playSuccess();
         const model = this.getModel();
         Storage.saveCustomLevel(model);
-        alert('カスタムパズルを保存しました！ステージ一覧からプレイできます。');
+        alert(t('alertSavedCustom'));
         if (this.onNavigate) this.onNavigate('level_select');
       });
     }

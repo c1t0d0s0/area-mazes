@@ -1,3 +1,5 @@
+import { t } from '../utils/i18n.js';
+
 /**
  * MazeRenderer
  * SVG-based interactive renderer for Area Maze diagrams.
@@ -158,7 +160,7 @@ export class MazeRenderer {
       if (isHighlighted) {
         svgHtml += `
           <rect x="${sx + sw/2 - 36}" y="${sy + 6}" width="72" height="18" class="hint-focus-bg" rx="9"/>
-          <text x="${sx + sw/2}" y="${sy + 14}" class="hint-focus-label" text-anchor="middle" dominant-baseline="central">💡 ここに着目</text>
+          <text x="${sx + sw/2}" y="${sy + 14}" class="hint-focus-label" text-anchor="middle" dominant-baseline="central">${t('focusHere')}</text>
         `;
       }
 
@@ -190,7 +192,7 @@ export class MazeRenderer {
         isWNote = true;
       }
 
-      const displayWVal = wVal || (isWActive ? '?' : (this.isNoteMode ? '+幅' : null));
+      const displayWVal = wVal || (isWActive ? '?' : (this.isNoteMode ? t('placeholderWidth') : null));
       const isPlaceholderW = !wVal && !isWActive;
 
       if (displayWVal !== null) {
@@ -225,7 +227,7 @@ export class MazeRenderer {
         isHNote = true;
       }
 
-      const displayHVal = hVal || (isHActive ? '?' : (this.isNoteMode ? '+高' : null));
+      const displayHVal = hVal || (isHActive ? '?' : (this.isNoteMode ? t('placeholderHeight') : null));
       const isPlaceholderH = !hVal && !isHActive;
 
       if (displayHVal !== null) {

@@ -1,5 +1,6 @@
 import confetti from 'canvas-confetti';
 import { sounds } from '../utils/SoundManager.js';
+import { t, translateTitle } from '../utils/i18n.js';
 
 export class VictoryModal {
   constructor(containerEl, { onNextLevel, onLevelSelect } = {}) {
@@ -16,8 +17,8 @@ export class VictoryModal {
       <div class="modal-backdrop">
         <div class="modal-card victory-card">
           <div class="victory-header">
-            <h2>🎉 STAGE CLEAR!</h2>
-            <p class="level-subtitle">${levelTitle}</p>
+            <h2>${t('stageClear')}</h2>
+            <p class="level-subtitle">${translateTitle(levelTitle)}</p>
           </div>
           <div class="stars-display">
             <span class="star ${stars >= 1 ? 'gold' : ''}">★</span>
@@ -26,17 +27,17 @@ export class VictoryModal {
           </div>
           <div class="victory-stats">
             <div class="stat-item">
-              <span class="stat-label">クリアタイム</span>
+              <span class="stat-label">${t('statClearTime')}</span>
               <span class="stat-value">${timeFormatted}</span>
             </div>
             <div class="stat-item">
-              <span class="stat-label">ヒント使用</span>
-              <span class="stat-value">${hintsUsed} 回</span>
+              <span class="stat-label">${t('statHintsUsed')}</span>
+              <span class="stat-value">${t('hintsCount', { count: hintsUsed })}</span>
             </div>
           </div>
           <div class="modal-footer">
-            <button class="btn-secondary btn-select">ステージ一覧</button>
-            <button class="btn-primary btn-next-stage">次のステージ →</button>
+            <button class="btn-secondary btn-select">${t('btnLevelSelect')}</button>
+            <button class="btn-primary btn-next-stage">${t('btnNextStage')}</button>
           </div>
         </div>
       </div>

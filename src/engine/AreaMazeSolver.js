@@ -1,8 +1,4 @@
-/**
- * AreaMazeSolver
- * Step-by-step constraint solver for Area Maze diagrams.
- * Generates user-friendly explanations with visual indicators.
- */
+import { t } from '../utils/i18n.js';
 
 export class AreaMazeSolver {
   constructor(model) {
@@ -27,25 +23,25 @@ export class AreaMazeSolver {
 
     const getRectDesc = (r) => {
       if (question && question.targetId === r.id) {
-        return '【「 ? 」のある長方形】';
+        return t('rectWithQuestion');
       }
       const area = getVal(`${r.id}_area`);
       const w = getVal(`${r.id}_w`);
       const h = getVal(`${r.id}_h`);
 
       if (area !== undefined) {
-        return `【面積 ${area} cm² の長方形】`;
+        return t('rectWithArea', { area });
       }
       if (w !== undefined && h !== undefined) {
-        return `【幅 ${w} cm・高さ ${h} cm の長方形】`;
+        return t('rectWithDim', { w, h });
       }
       if (w !== undefined) {
-        return `【幅 ${w} cm の長方形】`;
+        return t('rectWithWidth', { w });
       }
       if (h !== undefined) {
-        return `【高さ ${h} cm の長方形】`;
+        return t('rectWithHeight', { h });
       }
-      return '【ハイライト中の長方形】';
+      return t('rectHighlighted');
     };
 
     // Group rects by y-level and x-level
@@ -72,25 +68,25 @@ export class AreaMazeSolver {
 
         if (w !== undefined && h !== undefined && area === undefined) {
           if (setVal(areaKey, w * h, {
-            rule: '面積の計算',
+            rule: t('ruleAreaCalc'),
             rectId: r.id,
-            explanation: `光っている${getRectDesc(r)} の 幅 (${w} cm) × 高さ (${h} cm) から、面積 = ${w * h} cm²`
+            explanation: t('expAreaCalc', { desc: getRectDesc(r), w, h, area: w * h })
           })) changed = true;
         }
 
         if (area !== undefined && h !== undefined && w === undefined && area % h === 0) {
           if (setVal(wKey, area / h, {
-            rule: '幅の計算',
+            rule: t('ruleWidthCalc'),
             rectId: r.id,
-            explanation: `光っている${getRectDesc(r)} の 面積 (${area} cm²) ÷ 高さ (${h} cm) から、幅 = ${area / h} cm`
+            explanation: t('expWidthCalc', { desc: getRectDesc(r), area, h, w: area / h })
           })) changed = true;
         }
 
         if (area !== undefined && w !== undefined && h === undefined && area % w === 0) {
           if (setVal(hKey, area / w, {
-            rule: '高さの計算',
+            rule: t('ruleHeightCalc'),
             rectId: r.id,
-            explanation: `光っている${getRectDesc(r)} の 面積 (${area} cm²) ÷ 幅 (${w} cm) から、高さ = ${area / w} cm`
+            explanation: t('expHeightCalc', { desc: getRectDesc(r), area, w, h: area / w })
           })) changed = true;
         }
       }
@@ -107,15 +103,15 @@ export class AreaMazeSolver {
             const h2 = getVal(`${r2.id}_h`);
             if (h1 !== undefined && h2 === undefined) {
               if (setVal(`${r2.id}_h`, h1, {
-                rule: '高さを揃える',
+                rule: t('ruleSameHeight'),
                 rectId: r2.id,
-                explanation: `${getRectDesc(r1)} と高さが共通しているため、光っている${getRectDesc(r2)} の高さ = ${h1} cm`
+                explanation: t('expSameHeight', { desc1: getRectDesc(r1), desc2: getRectDesc(r2), h: h1 })
               })) changed = true;
             } else if (h2 !== undefined && h1 === undefined) {
               if (setVal(`${r1.id}_h`, h2, {
-                rule: '高さを揃える',
+                rule: t('ruleSameHeight'),
                 rectId: r1.id,
-                explanation: `${getRectDesc(r2)} と高さが共通しているため、光っている${getRectDesc(r1)} の高さ = ${h2} cm`
+                explanation: t('expSameHeight', { desc1: getRectDesc(r2), desc2: getRectDesc(r1), h: h2 })
               })) changed = true;
             }
           }
@@ -126,15 +122,15 @@ export class AreaMazeSolver {
             const w2 = getVal(`${r2.id}_w`);
             if (w1 !== undefined && w2 === undefined) {
               if (setVal(`${r2.id}_w`, w1, {
-                rule: '幅を揃える',
+                rule: t('ruleSameWidth'),
                 rectId: r2.id,
-                explanation: `${getRectDesc(r1)} と幅が共通しているため、光っている${getRectDesc(r2)} の幅 = ${w1} cm`
+                explanation: t('expSameWidth', { desc1: getRectDesc(r1), desc2: getRectDesc(r2), w: w1 })
               })) changed = true;
             } else if (w2 !== undefined && w1 === undefined) {
               if (setVal(`${r1.id}_w`, w2, {
-                rule: '幅を揃える',
+                rule: t('ruleSameWidth'),
                 rectId: r1.id,
-                explanation: `${getRectDesc(r2)} と幅が共通しているため、光っている${getRectDesc(r1)} の幅 = ${w2} cm`
+                explanation: t('expSameWidth', { desc1: getRectDesc(r2), desc2: getRectDesc(r1), w: w2 })
               })) changed = true;
             }
           }
@@ -167,9 +163,9 @@ export class AreaMazeSolver {
                 const knownSum2 = row2Vals.filter(v => v !== undefined).reduce((sum, v) => sum + v, 0);
                 const missingW = totalW - knownSum2;
                 if (setVal(`${targetR.id}_w`, missingW, {
-                  rule: '全体の幅の引き算',
+                  rule: t('ruleSpanWidth'),
                   rectId: targetR.id,
-                  explanation: `全体の横幅 (${totalW} cm) から並んだ幅を引いて、光っている${getRectDesc(targetR)} の幅 = ${missingW} cm`
+                  explanation: t('expSpanWidth', { totalW, desc: getRectDesc(targetR), w: missingW })
                 })) changed = true;
               }
             }
@@ -202,9 +198,9 @@ export class AreaMazeSolver {
                 const knownSum2 = col2Vals.filter(v => v !== undefined).reduce((sum, v) => sum + v, 0);
                 const missingH = totalH - knownSum2;
                 if (setVal(`${targetR.id}_h`, missingH, {
-                  rule: '全体の高さの引き算',
+                  rule: t('ruleSpanHeight'),
                   rectId: targetR.id,
-                  explanation: `全体の縦の高さ (${totalH} cm) から並んだ高さを引いて、光っている${getRectDesc(targetR)} の高さ = ${missingH} cm`
+                  explanation: t('expSpanHeight', { totalH, desc: getRectDesc(targetR), h: missingH })
                 })) changed = true;
               }
             }
@@ -228,18 +224,18 @@ export class AreaMazeSolver {
               if ((w1 * a2) % a1 === 0) {
                 const targetW = (w1 * a2) / a1;
                 if (setVal(`${r2.id}_w`, targetW, {
-                  rule: '面積比の計算',
+                  rule: t('ruleAreaRatio'),
                   rectId: r2.id,
-                  explanation: `同高の${getRectDesc(r1)} との面積比 (${a1}:${a2}) から、光っている${getRectDesc(r2)} の幅 = ${targetW} cm`
+                  explanation: t('expAreaRatioW', { desc1: getRectDesc(r1), a1, a2, desc2: getRectDesc(r2), w: targetW })
                 })) changed = true;
               }
             } else if (a1 !== undefined && a2 !== undefined && w2 !== undefined && w1 === undefined) {
               if ((w2 * a1) % a2 === 0) {
                 const targetW = (w2 * a1) / a2;
                 if (setVal(`${r1.id}_w`, targetW, {
-                  rule: '面積比の計算',
+                  rule: t('ruleAreaRatio'),
                   rectId: r1.id,
-                  explanation: `同高の${getRectDesc(r2)} との面積比 (${a2}:${a1}) から、光っている${getRectDesc(r1)} の幅 = ${targetW} cm`
+                  explanation: t('expAreaRatioW', { desc1: getRectDesc(r2), a1: a2, a2: a1, desc2: getRectDesc(r1), w: targetW })
                 })) changed = true;
               }
             }
@@ -255,18 +251,18 @@ export class AreaMazeSolver {
               if ((h1 * a2) % a1 === 0) {
                 const targetH = (h1 * a2) / a1;
                 if (setVal(`${r2.id}_h`, targetH, {
-                  rule: '面積比の計算',
+                  rule: t('ruleAreaRatio'),
                   rectId: r2.id,
-                  explanation: `同幅の${getRectDesc(r1)} との面積比 (${a1}:${a2}) から、光っている${getRectDesc(r2)} の高さ = ${targetH} cm`
+                  explanation: t('expAreaRatioH', { desc1: getRectDesc(r1), a1, a2, desc2: getRectDesc(r2), h: targetH })
                 })) changed = true;
               }
             } else if (a1 !== undefined && a2 !== undefined && h2 !== undefined && h1 === undefined) {
               if ((h2 * a1) % a2 === 0) {
                 const targetH = (h2 * a1) / a2;
                 if (setVal(`${r1.id}_h`, targetH, {
-                  rule: '面積比の計算',
+                  rule: t('ruleAreaRatio'),
                   rectId: r1.id,
-                  explanation: `同幅の${getRectDesc(r2)} との面積比 (${a2}:${a1}) から、光っている${getRectDesc(r1)} の高さ = ${targetH} cm`
+                  explanation: t('expAreaRatioH', { desc1: getRectDesc(r2), a1: a2, a2: a1, desc2: getRectDesc(r1), h: targetH })
                 })) changed = true;
               }
             }

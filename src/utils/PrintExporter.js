@@ -1,10 +1,16 @@
+import { t, translateTitle, getLanguage } from './i18n.js';
+
 export class PrintExporter {
   static printPuzzle(model, svgElement) {
     const printWindow = window.open('', '_blank');
     if (!printWindow) {
-      alert('ポップアップがブロックされました。印刷するにはポップアップを許可してください。');
+      alert(t('printPopupBlocked'));
       return;
     }
+
+    const lang = getLanguage();
+    const localizedTitle = translateTitle(model.title);
+    const dateFormatted = new Date().toLocaleDateString(lang === 'ja' ? 'ja-JP' : 'en-US');
 
     let svgHtml = '';
     if (svgElement) {
@@ -16,10 +22,10 @@ export class PrintExporter {
 
     printWindow.document.write(`
       <!DOCTYPE html>
-      <html lang="ja">
+      <html lang="${lang}">
         <head>
           <meta charset="UTF-8">
-          <title>${model.title} - 面積迷路 (Area Maze)</title>
+          <title>${t('printPageTitle', { title: localizedTitle })}</title>
           <style>
             @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@600;700;800&family=JetBrains+Mono:wght@600;700&display=swap');
 
@@ -139,8 +145,8 @@ export class PrintExporter {
         </head>
         <body>
           <div class="header">
-            <h1>${model.title}</h1>
-            <div class="meta">難易度: ${model.difficulty} | 面積迷路 (Area Maze)</div>
+            <h1>${localizedTitle}</h1>
+            <div class="meta">${t('printMeta', { difficulty: model.difficulty })}</div>
           </div>
 
           <div class="diagram-container">
@@ -148,12 +154,12 @@ export class PrintExporter {
           </div>
 
           <div class="answer-section">
-            <div class="answer-title">解答記入欄</div>
-            <div class="answer-line">答え「 ? 」 =  ________________ cm</div>
+            <div class="answer-title">${t('printAnswerSection')}</div>
+            <div class="answer-line">${t('printAnswerLine')}</div>
           </div>
 
           <div class="footer-info">
-            Area Mazes (面積迷路) | Printed on ${new Date().toLocaleDateString('ja-JP')}
+            ${t('printFooter', { date: dateFormatted })}
           </div>
         </body>
       </html>

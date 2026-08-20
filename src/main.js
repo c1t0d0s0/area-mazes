@@ -9,6 +9,7 @@ import { getPresetModel, PRESET_PUZZLES } from './engine/PresetPuzzles.js';
 import { AreaMazeGenerator } from './engine/AreaMazeGenerator.js';
 import { AreaMazeModel } from './engine/AreaMazeModel.js';
 import { Storage } from './utils/Storage.js';
+import { updateDocumentMeta, getLanguage } from './utils/i18n.js';
 
 class App {
   constructor() {
@@ -20,6 +21,7 @@ class App {
     this.gameView = null;
     this.editorView = null;
 
+    updateDocumentMeta(getLanguage());
     this.init();
   }
 

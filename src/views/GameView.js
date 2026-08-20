@@ -6,6 +6,7 @@ import { AreaMazeSolver } from '../engine/AreaMazeSolver.js';
 import { Storage } from '../utils/Storage.js';
 import { PrintExporter } from '../utils/PrintExporter.js';
 import { sounds } from '../utils/SoundManager.js';
+import { t, translateTitle, toggleLanguage } from '../utils/i18n.js';
 
 export class GameView {
   constructor(containerEl, { onNavigate }) {
@@ -155,19 +156,20 @@ export class GameView {
     this.container.innerHTML = `
       <div class="game-view">
         <header class="game-header">
-          <button class="btn-back" title="ステージ選択に戻る">
-            ← 一覧
+          <button class="btn-back" title="${t('btnBackTitle')}">
+            ${t('btnBack')}
           </button>
           <div class="game-title-box">
-            <h2>${this.model.title}</h2>
+            <h2>${translateTitle(this.model.title)}</h2>
             <span class="badge badge-${this.model.difficulty.toLowerCase()}">${this.model.difficulty}</span>
           </div>
           <div class="game-actions">
             <div class="timer-box">
               ⏱️ <span class="timer-value">${this.formatTime(this.secondsElapsed)}</span>
             </div>
-            <button class="btn-icon btn-sound" title="音切替">🔊</button>
-            <button class="btn-icon btn-print" title="印刷">🖨️</button>
+            <button class="btn-icon btn-lang" title="${t('btnLangTitle')}">🌐</button>
+            <button class="btn-icon btn-sound" title="${t('btnSoundTitle')}">🔊</button>
+            <button class="btn-icon btn-print" title="${t('btnPrintTitle')}">🖨️</button>
           </div>
         </header>
 
@@ -245,6 +247,15 @@ export class GameView {
       if (this.onNavigate) this.onNavigate('level_select');
     });
 
+    const langBtn = this.container.querySelector('.btn-lang');
+    if (langBtn) {
+      langBtn.addEventListener('click', () => {
+        sounds.playClick();
+        toggleLanguage();
+        this.render();
+      });
+    }
+
     this.container.querySelector('.btn-sound').addEventListener('click', (e) => {
       const isMuted = sounds.toggleMute();
       e.target.textContent = isMuted ? '🔇' : '🔊';
@@ -262,7 +273,7 @@ export class GameView {
 
     if (userVal === undefined) {
       sounds.playError();
-      alert('「 ? 」に入る数値を入力してください。');
+      alert(t('alertEnterValue'));
       return;
     }
 
@@ -287,7 +298,7 @@ export class GameView {
       });
     } else {
       sounds.playError();
-      alert('残念！数値が違います。もう一度考えてみましょう。');
+      alert(t('alertWrongValue'));
     }
   }
 
