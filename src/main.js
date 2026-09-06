@@ -10,6 +10,7 @@ import { AreaMazeGenerator } from './engine/AreaMazeGenerator.js';
 import { AreaMazeModel } from './engine/AreaMazeModel.js';
 import { Storage } from './utils/Storage.js';
 import { updateDocumentMeta, getLanguage } from './utils/i18n.js';
+import { initGoogleAnalytics } from './utils/analytics.js';
 
 class App {
   constructor() {
@@ -21,6 +22,7 @@ class App {
     this.gameView = null;
     this.editorView = null;
 
+    initGoogleAnalytics();
     updateDocumentMeta(getLanguage());
     this.init();
   }
