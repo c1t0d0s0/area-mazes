@@ -52,21 +52,21 @@ export class EditorView {
 
     this.container.innerHTML = `
       <div class="editor-view">
-        <header class="editor-header">
-          <button class="btn-back">${t('btnEditorBack')}</button>
-          <h2>${t('editorHeader')}</h2>
+        <header class="editor-header bar">
+          <button type="button" class="btn-back home-btn">${t('btnEditorBack')}</button>
+          <h1>${t('editorHeader')}</h1>
           <div class="header-status">
-            <button class="btn-action-hero btn-lang-toggle" title="${t('btnLangTitle')}" style="padding: 6px 12px; font-size: 12px; margin-right: 8px;">
-              🌐 ${t('langToggle')}
-            </button>
-            ${result.isSolved 
-              ? `<span class="badge badge-success">${t('solvable', { solution: result.solution })}</span>` 
-              : `<span class="badge badge-warning">${t('unsolvable')}</span>`}
+            <button type="button" class="btn btn-quiet btn-lang-toggle" title="${t('btnLangTitle')}">${t('langToggle')}</button>
           </div>
         </header>
 
         <div class="editor-layout">
           <div class="editor-sidebar">
+            <p class="editor-status">
+              ${result.isSolved 
+                ? `<span class="badge badge-success">${t('solvable', { solution: result.solution })}</span>` 
+                : `<span class="badge badge-warning">${t('unsolvable')}</span>`}
+            </p>
             <div class="form-group">
               <label>${t('labelTitle')}</label>
               <input type="text" class="input-title" value="${this.title}">
@@ -87,15 +87,15 @@ export class EditorView {
                 ${this.rects.map((r, i) => `
                   <div class="rect-editor-item" data-id="${r.id}">
                     <strong>${r.id}</strong> (w:${r.w}, h:${r.h}, area:${r.w * r.h})
-                    <button class="btn-sm btn-del-rect" data-idx="${i}">${t('btnDelete')}</button>
+                    <button type="button" class="btn btn-sm btn-del-rect" data-idx="${i}">${t('btnDelete')}</button>
                   </div>
                 `).join('')}
               </div>
-              <button class="btn-secondary btn-add-rect">${t('btnAddRect')}</button>
+              <button type="button" class="btn btn-add-rect">${t('btnAddRect')}</button>
             </div>
 
             <div class="editor-actions">
-              <button class="btn-primary btn-save-custom" ${result.isSolved ? '' : 'disabled'}>
+              <button type="button" class="btn btn-primary btn-save-custom" ${result.isSolved ? '' : 'disabled'}>
                 ${t('btnSaveCustom')}
               </button>
             </div>

@@ -1,94 +1,245 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap');
-
+/* Paper-and-red-pen look shared with Math Challenge (math-quiz) and Wordlynx.
+   On dark screens it turns into a blackboard with chalk. */
 :root {
-  --bg-primary: #0b0f19;
-  --bg-secondary: #131c2e;
-  --bg-card: rgba(26, 38, 64, 0.7);
-  --bg-card-hover: rgba(35, 52, 88, 0.85);
+  --bg: #eef3ee;
+  --paper: #fdfdfa;
+  --rule: #6aa893;
+  --rule-soft: #c5ddd3;
+  --ink: #1c2a4a;
+  --muted: #566475;
+  --mark: #ffe36e;
+  --mark-soft: #fff5c2;
+  --red: #d63c2c;
+  --red-soft: #fde3df;
+  --on-ink: #fdfdfa;
+  --shade: rgba(28, 42, 74, 0.45);
 
-  --accent-primary: #6366f1;
-  --accent-primary-hover: #4f46e5;
-  --accent-gold: #f59e0b;
-  --accent-gold-glow: rgba(245, 158, 11, 0.4);
-  --accent-cyan: #06b6d4;
-  --accent-success: #10b981;
-  --accent-warning: #f97316;
+  /* Difficulty colours (left edge of level tiles and badges) */
+  --d-easy: #6aa893;
+  --d-medium: #6f9bd1;
+  --d-hard: #e0b83a;
+  --d-expert: #d63c2c;
+  --d-grandmaster: #1c2a4a;
+  --d-custom: #a58bd0;
 
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --text-dim: #64748b;
-
-  --border-color: rgba(255, 255, 255, 0.1);
-  --border-glow: rgba(99, 102, 241, 0.5);
-
-  --glass-bg: rgba(19, 28, 46, 0.65);
-  --glass-border: rgba(255, 255, 255, 0.12);
-  --glass-blur: blur(16px);
-
-  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-heading: 'Outfit', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
-
-  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
-  --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.35);
+  --ui: 'Zen Maru Gothic', 'Hiragino Maru Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif;
+  --hand: 'Klee One', 'UD Digi Kyokasho N-R', 'Hiragino Maru Gothic ProN', 'Yu Gothic', sans-serif;
+  color-scheme: light dark;
 }
 
-* {
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14211c;
+    --paper: #1d2f28;
+    --rule: #4f8a76;
+    --rule-soft: #2f4a40;
+    --ink: #eef1e4;
+    --muted: #a3b3a8;
+    --mark: #8a7417;
+    --mark-soft: #48431f;
+    --red: #ff8d7d;
+    --red-soft: #4d2721;
+    --on-ink: #14211c;
+    --shade: rgba(0, 0, 0, 0.6);
+
+    --d-easy: #4f8a76;
+    --d-medium: #5d85b8;
+    --d-hard: #b89a2a;
+    --d-expert: #ff8d7d;
+    --d-grandmaster: #eef1e4;
+    --d-custom: #8f79b8;
+  }
+}
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  font-family: var(--font-family);
-  background-color: var(--bg-primary);
-  background-image: 
-    radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
-    radial-gradient(circle at 85% 85%, rgba(6, 182, 212, 0.12) 0%, transparent 45%);
-  background-attachment: fixed;
-  color: var(--text-main);
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--ui);
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1.7;
   min-height: 100vh;
   overflow-x: hidden;
 }
 
-#app {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Typography */
-h1, h2, h3, h4 {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  letter-spacing: -0.02em;
+h1,
+h2,
+h3,
+p {
+  margin: 0;
 }
 
 button {
-  font-family: var(--font-family);
-  cursor: pointer;
-  border: none;
-  outline: none;
-  transition: all 0.2s ease;
+  font: inherit;
+  color: inherit;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
+:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 2px;
 }
-::-webkit-scrollbar-track {
-  background: var(--bg-primary);
+
+/* ---- Shared parts ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 2.5rem;
+  padding: 0 1.1rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: var(--paper);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  white-space: nowrap;
 }
-::-webkit-scrollbar-thumb {
-  background: var(--bg-card);
-  border-radius: 4px;
+
+.btn-primary {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--on-ink);
 }
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-primary);
+
+.btn-quiet {
+  border-color: transparent;
+  background: none;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.btn-sm {
+  min-height: 1.9rem;
+  padding: 0 0.75rem;
+  font-size: 0.8125rem;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* Difficulty badge: a small slip of paper with a coloured edge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  padding: 0 0.6rem 0 0.5rem;
+  border-left: 0.4rem solid var(--diff, var(--rule));
+  background: var(--paper);
+  box-shadow: 0 0 0 1px var(--rule);
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.7;
+  white-space: nowrap;
+}
+
+.badge-easy,
+.diff-easy {
+  --diff: var(--d-easy);
+}
+
+.badge-medium,
+.diff-medium {
+  --diff: var(--d-medium);
+}
+
+.badge-hard,
+.diff-hard {
+  --diff: var(--d-hard);
+}
+
+.badge-expert,
+.diff-expert {
+  --diff: var(--d-expert);
+}
+
+.badge-grandmaster,
+.diff-grandmaster {
+  --diff: var(--d-grandmaster);
+}
+
+.badge-custom,
+.diff-custom {
+  --diff: var(--d-custom);
+}
+
+.badge-success {
+  --diff: var(--rule);
+  color: var(--ink);
+}
+
+.badge-warning {
+  --diff: var(--red);
+  color: var(--red);
+}
+
+/* Stars are drawn with the red pen */
+.star {
+  color: var(--rule-soft);
+}
+
+.star.gold {
+  color: var(--red);
+}
+
+/* Squirrel monkey mascot */
+.monkey {
+  flex: none;
+  width: clamp(3.25rem, 16vw, 6.5rem);
+}
+
+.monkey svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Top bar of the game and editor screens */
+.bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 0;
+}
+
+.bar h1 {
+  font-size: clamp(1.125rem, 5vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.home-btn {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 2.5rem;
+  padding: 0 1rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--on-ink);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
 }

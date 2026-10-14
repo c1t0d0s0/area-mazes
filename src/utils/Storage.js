@@ -1,5 +1,8 @@
 const STORAGE_KEY_PROGRESS = 'area_mazes_progress_v1';
 const STORAGE_KEY_CUSTOM = 'area_mazes_custom_levels_v1';
+// Whether the user was signed in last time. Used right after page load, before the sign-in check
+// finishes, so that guest progress is not flashed to a signed-in user (holds no progress itself).
+const STORAGE_KEY_SIGNED_IN = 'area_mazes_signed_in';
 
 export class Storage {
   static getProgress() {
@@ -29,6 +32,32 @@ export class Storage {
     } catch (e) {
       console.warn('Failed to save progress to localStorage', e);
     }
+  }
+
+  // Remove the given levels from local progress (after they were moved to the signed-in account)
+  static clearLevelProgress(levelIds) {
+    const progress = this.getProgress();
+    levelIds.forEach(id => delete progress[id]);
+    try {
+      localStorage.setItem(STORAGE_KEY_PROGRESS, JSON.stringify(progress));
+    } catch (e) {
+      console.warn('Failed to clear progress in localStorage', e);
+    }
+  }
+
+  static wasSignedIn() {
+    try {
+      return localStorage.getItem(STORAGE_KEY_SIGNED_IN) === '1';
+    } catch (e) {
+      return false;
+    }
+  }
+
+  static rememberSignedIn(signedIn) {
+    try {
+      if (signedIn) localStorage.setItem(STORAGE_KEY_SIGNED_IN, '1');
+      else localStorage.removeItem(STORAGE_KEY_SIGNED_IN);
+    } catch (e) {}
   }
 
   static getCustomLevels() {

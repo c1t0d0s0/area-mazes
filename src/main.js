@@ -11,6 +11,7 @@ import { AreaMazeModel } from './engine/AreaMazeModel.js';
 import { Storage } from './utils/Storage.js';
 import { updateDocumentMeta, getLanguage } from './utils/i18n.js';
 import { initGoogleAnalytics } from './utils/analytics.js';
+import { onProgressChange, startProgressSync } from './cloud/store.js';
 
 class App {
   constructor() {
@@ -29,6 +30,13 @@ class App {
 
   init() {
     this.renderView('level_select');
+
+    // Progress or the account state changed (sign-in, sign-out, progress loaded from the account)
+    onProgressChange(() => {
+      if (this.currentView === 'level_select' && this.levelSelectView) this.levelSelectView.render();
+    });
+    // Loaded after the first screen is shown; does nothing in builds without a Firebase config
+    void startProgressSync();
   }
 
   renderView(viewName, param = null) {

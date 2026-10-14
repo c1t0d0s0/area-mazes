@@ -1,5 +1,6 @@
 import confetti from 'canvas-confetti';
 import { sounds } from '../utils/SoundManager.js';
+import { monkeySvg } from '../utils/monkey.js';
 import { t, translateTitle } from '../utils/i18n.js';
 
 export class VictoryModal {
@@ -16,6 +17,7 @@ export class VictoryModal {
     this.container.innerHTML = `
       <div class="modal-backdrop">
         <div class="modal-card victory-card">
+          <div class="monkey victory-monkey">${monkeySvg(t('monkeyLabel'), { eyes: 'happy', mouth: 'open' })}</div>
           <div class="victory-header">
             <h2>${t('stageClear')}</h2>
             <p class="level-subtitle">${translateTitle(levelTitle)}</p>
@@ -36,8 +38,8 @@ export class VictoryModal {
             </div>
           </div>
           <div class="modal-footer">
-            <button class="btn-secondary btn-select">${t('btnLevelSelect')}</button>
-            <button class="btn-primary btn-next-stage">${t('btnNextStage')}</button>
+            <button type="button" class="btn btn-select">${t('btnLevelSelect')}</button>
+            <button type="button" class="btn btn-primary btn-next-stage">${t('btnNextStage')}</button>
           </div>
         </div>
       </div>

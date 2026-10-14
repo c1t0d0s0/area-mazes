@@ -27,11 +27,11 @@ export class PrintExporter {
           <meta charset="UTF-8">
           <title>${t('printPageTitle', { title: localizedTitle })}</title>
           <style>
-            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@600;700;800&family=JetBrains+Mono:wght@600;700&display=swap');
+            @import url('https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&family=Zen+Maru+Gothic:wght@500;700&display=swap');
 
             * { box-sizing: border-box; margin: 0; padding: 0; }
             body {
-              font-family: 'Inter', sans-serif;
+              font-family: 'Zen Maru Gothic', 'Hiragino Maru Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif;
               background-color: #ffffff;
               color: #111827;
               padding: 40px;
@@ -46,7 +46,7 @@ export class PrintExporter {
               margin-bottom: 30px;
             }
             .header h1 {
-              font-family: 'Outfit', sans-serif;
+              font-family: 'Klee One', 'Hiragino Maru Gothic ProN', 'Yu Gothic', sans-serif;
               font-size: 28px;
               color: #111827;
               margin-bottom: 6px;
@@ -80,7 +80,7 @@ export class PrintExporter {
               stroke-dasharray: 6 3 !important;
             }
             .area-label {
-              font-family: 'Outfit', sans-serif !important;
+              font-family: 'Klee One', 'Hiragino Maru Gothic ProN', 'Yu Gothic', sans-serif !important;
               font-size: 22px !important;
               font-weight: 700 !important;
               fill: #111827 !important;
@@ -98,7 +98,7 @@ export class PrintExporter {
               stroke-width: 1.5px !important;
             }
             .edge-label {
-              font-family: 'JetBrains Mono', monospace !important;
+              font-family: 'Zen Maru Gothic', 'Hiragino Maru Gothic ProN', 'Yu Gothic', sans-serif !important;
               font-size: 13px !important;
               font-weight: 700 !important;
               fill: #111827 !important;
@@ -124,7 +124,7 @@ export class PrintExporter {
               margin-bottom: 8px;
             }
             .answer-line {
-              font-family: 'JetBrains Mono', monospace;
+              font-family: 'Zen Maru Gothic', 'Hiragino Maru Gothic ProN', 'Yu Gothic', sans-serif;
               font-size: 24px;
               font-weight: 700;
               color: #111827;

@@ -48,11 +48,11 @@ export class HintModal {
           <div class="modal-card hint-card">
             <div class="modal-header">
               <h3>${t('hintTitle')}</h3>
-              <button class="btn-close-icon" title="${t('btnCloseLabel')}" aria-label="${t('btnCloseLabel')}">${t('btnClose')}</button>
+              <button type="button" class="btn btn-quiet btn-close-icon" title="${t('btnCloseLabel')}">${t('btnClose')}</button>
             </div>
-            <p style="margin: 16px 0; color: var(--text-muted);">${t('noHints')}</p>
+            <p class="hint-empty">${t('noHints')}</p>
             <div class="modal-footer">
-              <button class="btn-modal-close btn-primary" style="width: 100%;">${t('btnCloseLabel')}</button>
+              <button type="button" class="btn btn-primary btn-modal-close">${t('btnCloseLabel')}</button>
             </div>
           </div>
         </div>
@@ -64,16 +64,16 @@ export class HintModal {
           <div class="modal-card hint-card">
             <div class="modal-header">
               <h3>${t('hintStepTitle', { current: this.currentStepIdx + 1, total: this.steps.length })}</h3>
-              <button class="btn-close-icon" title="${t('btnCloseLabel')}" aria-label="${t('btnCloseLabel')}">${t('btnClose')}</button>
+              <button type="button" class="btn btn-quiet btn-close-icon" title="${t('btnCloseLabel')}">${t('btnClose')}</button>
             </div>
             <div class="hint-body">
               <div class="hint-badge">${step.rule || t('defaultRule')}</div>
               <p class="hint-explanation">${step.explanation}</p>
             </div>
             <div class="modal-footer hint-nav">
-              <button class="btn-secondary btn-prev" ${this.currentStepIdx === 0 ? 'disabled' : ''}>${t('btnPrev')}</button>
-              <button class="btn-secondary btn-modal-close">${t('btnCloseLabel')}</button>
-              <button class="btn-primary btn-next" ${this.currentStepIdx === this.steps.length - 1 ? 'disabled' : ''}>${t('btnNext')}</button>
+              <button type="button" class="btn btn-prev" ${this.currentStepIdx === 0 ? 'disabled' : ''}>${t('btnPrev')}</button>
+              <button type="button" class="btn btn-quiet btn-modal-close">${t('btnCloseLabel')}</button>
+              <button type="button" class="btn btn-primary btn-next" ${this.currentStepIdx === this.steps.length - 1 ? 'disabled' : ''}>${t('btnNext')}</button>
             </div>
           </div>
         </div>

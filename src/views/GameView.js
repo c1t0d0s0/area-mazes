@@ -3,10 +3,13 @@ import { Numpad } from '../components/Numpad.js';
 import { HintModal } from '../components/HintModal.js';
 import { VictoryModal } from '../components/VictoryModal.js';
 import { AreaMazeSolver } from '../engine/AreaMazeSolver.js';
-import { Storage } from '../utils/Storage.js';
+import { saveLevelProgress } from '../cloud/store.js';
 import { PrintExporter } from '../utils/PrintExporter.js';
 import { sounds } from '../utils/SoundManager.js';
 import { t, translateTitle, toggleLanguage } from '../utils/i18n.js';
+import { createElement, Languages, Printer, Volume2, VolumeX } from 'lucide';
+
+const ICON_ATTRS = { width: 18, height: 18, 'aria-hidden': 'true' };
 
 export class GameView {
   constructor(containerEl, { onNavigate }) {
@@ -155,21 +158,21 @@ export class GameView {
   render() {
     this.container.innerHTML = `
       <div class="game-view">
-        <header class="game-header">
-          <button class="btn-back" title="${t('btnBackTitle')}">
+        <header class="game-header bar">
+          <button type="button" class="btn-back home-btn" title="${t('btnBackTitle')}">
             ${t('btnBack')}
           </button>
           <div class="game-title-box">
-            <h2>${translateTitle(this.model.title)}</h2>
+            <h1>${translateTitle(this.model.title)}</h1>
             <span class="badge badge-${this.model.difficulty.toLowerCase()}">${this.model.difficulty}</span>
           </div>
           <div class="game-actions">
-            <div class="timer-box">
-              ⏱️ <span class="timer-value">${this.formatTime(this.secondsElapsed)}</span>
+            <div class="timer-box" title="${t('timerLabel')}">
+              <span class="timer-value">${this.formatTime(this.secondsElapsed)}</span>
             </div>
-            <button class="btn-icon btn-lang" title="${t('btnLangTitle')}">🌐</button>
-            <button class="btn-icon btn-sound" title="${t('btnSoundTitle')}">🔊</button>
-            <button class="btn-icon btn-print" title="${t('btnPrintTitle')}">🖨️</button>
+            <button type="button" class="btn-icon btn-lang" title="${t('btnLangTitle')}" aria-label="${t('btnLangTitle')}"></button>
+            <button type="button" class="btn-icon btn-sound" title="${t('btnSoundTitle')}" aria-label="${t('btnSoundTitle')}"></button>
+            <button type="button" class="btn-icon btn-print" title="${t('btnPrintTitle')}" aria-label="${t('btnPrintTitle')}"></button>
           </div>
         </header>
 
@@ -249,6 +252,7 @@ export class GameView {
 
     const langBtn = this.container.querySelector('.btn-lang');
     if (langBtn) {
+      langBtn.appendChild(createElement(Languages, ICON_ATTRS));
       langBtn.addEventListener('click', () => {
         sounds.playClick();
         toggleLanguage();
@@ -256,12 +260,17 @@ export class GameView {
       });
     }
 
-    this.container.querySelector('.btn-sound').addEventListener('click', (e) => {
-      const isMuted = sounds.toggleMute();
-      e.target.textContent = isMuted ? '🔇' : '🔊';
+    const soundBtn = this.container.querySelector('.btn-sound');
+    const showSoundIcon = () => soundBtn.replaceChildren(createElement(sounds.muted ? VolumeX : Volume2, ICON_ATTRS));
+    showSoundIcon();
+    soundBtn.addEventListener('click', () => {
+      sounds.toggleMute();
+      showSoundIcon();
     });
 
-    this.container.querySelector('.btn-print').addEventListener('click', () => {
+    const printBtn = this.container.querySelector('.btn-print');
+    printBtn.appendChild(createElement(Printer, ICON_ATTRS));
+    printBtn.addEventListener('click', () => {
       const svg = svgBox.querySelector('svg');
       PrintExporter.printPuzzle(this.model, svg);
     });
@@ -284,7 +293,7 @@ export class GameView {
       if (this.hintsUsed > 3) stars = 1;
       else if (this.hintsUsed > 1) stars = 2;
 
-      Storage.saveLevelProgress(this.model.id, {
+      saveLevelProgress(this.model.id, {
         stars,
         timeSeconds: this.secondsElapsed,
         hintsUsed: this.hintsUsed

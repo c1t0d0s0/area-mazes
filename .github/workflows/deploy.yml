@@ -43,6 +43,11 @@ jobs:
       - name: Build production bundle
         env:
           GTM_ID: ${{ vars.GTM_ID }}
+          # With all four set, Google sign-in and saving progress to Firestore are enabled (otherwise the sign-in entry is hidden)
+          FIREBASE_API_KEY: ${{ vars.FIREBASE_API_KEY }}
+          FIREBASE_AUTH_DOMAIN: ${{ vars.FIREBASE_AUTH_DOMAIN }}
+          FIREBASE_PROJECT_ID: ${{ vars.FIREBASE_PROJECT_ID }}
+          FIREBASE_APP_ID: ${{ vars.FIREBASE_APP_ID }}
         run: npm run build
 
       - name: Setup Pages

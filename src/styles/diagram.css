@@ -1,45 +1,44 @@
-/* SVG Diagram Specific Styles */
+/* SVG Diagram Specific Styles: ink lines on paper, with red-pen and marker highlights */
 
 .maze-svg {
+  display: block;
   width: 100%;
   height: auto;
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .rect-group {
   cursor: pointer;
-  transition: transform 0.15s ease;
 }
 
 .maze-rect {
-  fill: #1e293b;
-  stroke: #475569;
+  fill: var(--paper);
+  stroke: var(--ink);
   stroke-width: 2.5;
-  transition: all 0.2s ease;
+  transition: fill 0.2s ease;
 }
 
 .rect-group:hover .maze-rect {
-  fill: #2d3748;
-  stroke: #64748b;
+  fill: var(--mark-soft);
 }
 
 .maze-rect.active-rect {
-  fill: rgba(99, 102, 241, 0.25) !important;
-  stroke: var(--accent-primary) !important;
-  stroke-width: 3.5 !important;
-  filter: url(#glow);
+  fill: var(--mark-soft) !important;
+  stroke: var(--ink) !important;
+  stroke-width: 4.5 !important;
 }
 
 .maze-rect.highlighted-rect {
-  fill: rgba(6, 182, 212, 0.25) !important;
-  stroke: var(--accent-cyan) !important;
-  stroke-width: 3.5 !important;
-  animation: pulseHighlight 1.5s infinite alternate;
+  fill: var(--red-soft) !important;
+  stroke: var(--red) !important;
+  stroke-width: 4.5 !important;
+  animation: pulseHighlight 0.9s infinite alternate;
 }
 
 .maze-rect.question-rect {
-  fill: url(#questionGrad) !important;
-  stroke: var(--accent-gold) !important;
+  fill: var(--mark-soft) !important;
+  stroke: var(--red) !important;
   stroke-width: 3.5 !important;
   stroke-dasharray: 6 3;
   animation: strokeDash 20s linear infinite;
@@ -50,97 +49,105 @@
 }
 
 @keyframes pulseHighlight {
-  0% { stroke-opacity: 0.6; }
-  100% { stroke-opacity: 1; }
+  0% { fill-opacity: 0.35; }
+  100% { fill-opacity: 1; }
 }
 
 /* Labels inside SVG */
 .area-label {
-  font-family: var(--font-heading);
+  font-family: var(--hand);
   font-size: 20px;
-  font-weight: 700;
-  fill: #f8fafc;
+  font-weight: 600;
+  fill: var(--ink);
   pointer-events: none;
 }
 
 .edge-label {
-  font-family: var(--font-mono);
+  font-family: var(--ui);
   font-size: 13px;
-  font-weight: 600;
-  fill: #cbd5e1;
+  font-weight: 700;
+  fill: var(--ink);
   pointer-events: none;
 }
 
 .question-label {
+  font-family: var(--hand);
   font-size: 28px !important;
-  font-weight: 800 !important;
-  fill: var(--accent-gold) !important;
-  text-shadow: 0 0 10px var(--accent-gold-glow);
+  font-weight: 600 !important;
+  fill: var(--red) !important;
 }
 
+/* Notes are pencil marks: lighter than the printed clues */
 .note-label {
-  font-family: var(--font-mono);
-  font-size: 14px;
-  font-weight: 700;
-  fill: var(--accent-gold);
+  font-family: var(--hand);
+  font-size: 15px;
+  font-weight: 600;
+  fill: var(--muted);
   pointer-events: none;
 }
 
 .edge-bg {
-  fill: #0f172a;
-  stroke: #334155;
+  fill: var(--bg);
+  stroke: var(--rule);
   stroke-width: 1;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: fill 0.2s ease;
 }
 
 .edge-group:hover .edge-bg {
-  stroke: var(--accent-cyan);
+  stroke: var(--ink);
 }
 
 .edge-bg.active-edge-bg {
-  fill: rgba(99, 102, 241, 0.3) !important;
-  stroke: var(--accent-primary) !important;
+  fill: var(--mark) !important;
+  stroke: var(--ink) !important;
   stroke-width: 2px !important;
-  filter: url(#glow);
 }
 
 .edge-bg.note-edge-bg {
-  fill: rgba(245, 158, 11, 0.25) !important;
-  stroke: var(--accent-gold) !important;
+  fill: var(--mark-soft) !important;
+  stroke: var(--rule) !important;
   stroke-width: 1.5px !important;
 }
 
 .note-edge-label {
-  fill: var(--accent-gold) !important;
+  fill: var(--muted) !important;
   font-weight: 700 !important;
 }
 
+.edge-bg.active-edge-bg + .note-edge-label {
+  fill: var(--ink) !important;
+}
+
 .placeholder-edge-bg {
-  opacity: 0.35;
+  opacity: 0.6;
   stroke-dasharray: 3 3;
 }
 
 .edge-group:hover .placeholder-edge-bg {
-  opacity: 0.9;
-  stroke: var(--accent-cyan) !important;
+  opacity: 1;
 }
 
 .placeholder-label {
   font-size: 11px !important;
-  fill: #94a3b8 !important;
+  fill: var(--muted) !important;
 }
 
 .hint-focus-bg {
-  fill: rgba(6, 182, 212, 0.95);
-  stroke: #0891b2;
-  stroke-width: 1;
+  fill: var(--red);
 }
 
 .hint-focus-label {
-  font-family: var(--font-family);
+  font-family: var(--ui);
   font-size: 10px !important;
   font-weight: 700 !important;
-  fill: #ffffff !important;
+  fill: var(--on-ink) !important;
   pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .maze-rect.highlighted-rect,
+  .maze-rect.question-rect {
+    animation: none;
+  }
 }

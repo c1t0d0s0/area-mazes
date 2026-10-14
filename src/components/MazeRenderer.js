@@ -76,16 +76,6 @@ export class MazeRenderer {
 
     let svgHtml = `
       <svg id="area-maze-svg" viewBox="0 0 ${svgWidth} ${svgHeight}" xmlns="http://www.w3.org/2000/svg" class="maze-svg">
-        <defs>
-          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="4" result="blur" />
-            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-          </filter>
-          <linearGradient id="questionGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="rgba(255, 215, 0, 0.25)"/>
-            <stop offset="100%" stop-color="rgba(255, 165, 0, 0.1)"/>
-          </linearGradient>
-        </defs>
         <g class="grid-background">
     `;
 
@@ -146,7 +136,7 @@ export class MazeRenderer {
       
       // Render pencil note inside area if present
       if (noteArea) {
-        const noteY = areaText !== '' ? (sy + sh / 2 + 18) : (sy + sh / 2);
+        const noteY = areaText !== '' ? (sy + sh / 2 + (isQuestion ? 26 : 18)) : (sy + sh / 2);
         svgHtml += `
           <text 
             x="${sx + sw / 2}" y="${noteY}" 
