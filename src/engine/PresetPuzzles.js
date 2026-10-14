@@ -4561,6 +4561,7 @@ export const PRESET_PUZZLES = [
       "F_area": 30,
       "G_area": 30,
       "I_area": 30,
+      "I_w": 6,
       "J_area": 20
     },
     "question": {
@@ -4681,6 +4682,7 @@ export const PRESET_PUZZLES = [
       "G_area": 24,
       "H_area": 36,
       "J_area": 32,
+      "J_w": 8,
       "K_area": 16
     },
     "question": {
@@ -4793,6 +4795,7 @@ export const PRESET_PUZZLES = [
       "F_area": 24,
       "G_area": 48,
       "I_area": 24,
+      "I_w": 6,
       "J_area": 24
     },
     "question": {
@@ -4905,6 +4908,7 @@ export const PRESET_PUZZLES = [
       "F_area": 20,
       "G_area": 20,
       "I_area": 36,
+      "I_w": 6,
       "J_area": 24
     },
     "question": {
@@ -5017,6 +5021,7 @@ export const PRESET_PUZZLES = [
       "F_area": 30,
       "G_area": 30,
       "I_area": 30,
+      "I_w": 6,
       "J_area": 20
     },
     "question": {
@@ -5137,6 +5142,7 @@ export const PRESET_PUZZLES = [
       "G_area": 24,
       "H_area": 36,
       "J_area": 32,
+      "J_w": 8,
       "K_area": 16
     },
     "question": {
@@ -5249,6 +5255,7 @@ export const PRESET_PUZZLES = [
       "F_area": 24,
       "G_area": 48,
       "I_area": 24,
+      "I_w": 6,
       "J_area": 24
     },
     "question": {
@@ -5361,6 +5368,7 @@ export const PRESET_PUZZLES = [
       "F_area": 20,
       "G_area": 20,
       "I_area": 36,
+      "I_w": 6,
       "J_area": 24
     },
     "question": {
@@ -5473,6 +5481,7 @@ export const PRESET_PUZZLES = [
       "F_area": 30,
       "G_area": 30,
       "I_area": 30,
+      "I_w": 6,
       "J_area": 20
     },
     "question": {
@@ -5593,6 +5602,7 @@ export const PRESET_PUZZLES = [
       "G_area": 24,
       "H_area": 36,
       "J_area": 32,
+      "J_w": 8,
       "K_area": 16
     },
     "question": {
@@ -5705,6 +5715,7 @@ export const PRESET_PUZZLES = [
       "F_area": 24,
       "G_area": 48,
       "I_area": 24,
+      "I_w": 6,
       "J_area": 24
     },
     "question": {
@@ -5817,6 +5828,7 @@ export const PRESET_PUZZLES = [
       "F_area": 20,
       "G_area": 20,
       "I_area": 36,
+      "I_w": 6,
       "J_area": 24
     },
     "question": {
@@ -5929,6 +5941,7 @@ export const PRESET_PUZZLES = [
       "F_area": 30,
       "G_area": 30,
       "I_area": 30,
+      "I_w": 6,
       "J_area": 20
     },
     "question": {
@@ -6049,6 +6062,7 @@ export const PRESET_PUZZLES = [
       "G_area": 24,
       "H_area": 36,
       "J_area": 32,
+      "J_w": 8,
       "K_area": 16
     },
     "question": {
@@ -6161,6 +6175,7 @@ export const PRESET_PUZZLES = [
       "F_area": 24,
       "G_area": 48,
       "I_area": 24,
+      "I_w": 6,
       "J_area": 24
     },
     "question": {
@@ -6273,6 +6288,7 @@ export const PRESET_PUZZLES = [
       "F_area": 20,
       "G_area": 20,
       "I_area": 36,
+      "I_w": 6,
       "J_area": 24
     },
     "question": {
@@ -6385,6 +6401,7 @@ export const PRESET_PUZZLES = [
       "F_area": 30,
       "G_area": 30,
       "I_area": 30,
+      "I_w": 6,
       "J_area": 20
     },
     "question": {
@@ -6505,6 +6522,7 @@ export const PRESET_PUZZLES = [
       "G_area": 24,
       "H_area": 36,
       "J_area": 32,
+      "J_w": 8,
       "K_area": 16
     },
     "question": {
@@ -6617,6 +6635,7 @@ export const PRESET_PUZZLES = [
       "F_area": 24,
       "G_area": 48,
       "I_area": 24,
+      "I_w": 6,
       "J_area": 24
     },
     "question": {
@@ -6729,6 +6748,7 @@ export const PRESET_PUZZLES = [
       "F_area": 20,
       "G_area": 20,
       "I_area": 36,
+      "I_w": 6,
       "J_area": 24
     },
     "question": {

@@ -44,9 +44,26 @@ export class AreaMazeSolver {
       return t('rectHighlighted');
     };
 
-    // Group rects by y-level and x-level
-    const yLevels = [...new Set(rects.map(r => r.y))];
-    const xLevels = [...new Set(rects.map(r => r.x))];
+    // Only what is drawn may be used: two edges are "the same line" only when they lie on one
+    // continuous line segment of the diagram. Lengths that merely look equal are never assumed equal.
+    const lines = {
+      w: new LineAxis(rects, 'x', 'w', 'y', 'h'),
+      h: new LineAxis(rects, 'y', 'h', 'x', 'w')
+    };
+    const DIM_RULES = {
+      w: { same: 'ruleSameWidth', span: 'ruleSpanWidth', sameExp: 'expSameWidth', chainExp: 'expChainWidth' },
+      h: { same: 'ruleSameHeight', span: 'ruleSpanHeight', sameExp: 'expSameHeight', chainExp: 'expChainHeight' }
+    };
+
+    // A known side length fixes the distance between the rectangle's two lines
+    const linkKnownSides = () => {
+      for (const r of rects) {
+        for (const dim of ['w', 'h']) {
+          const v = getVal(`${r.id}_${dim}`);
+          if (v !== undefined) lines[dim].link(r, v, r.id);
+        }
+      }
+    };
 
     let changed = true;
     let maxIterations = 100;
@@ -91,130 +108,51 @@ export class AreaMazeSolver {
         }
       }
 
-      // Rule 2: Shared Edges / Alignments
+      // Rule 2: Lengths along connected lines.
+      // If the two lines bounding a rectangle are linked by sides of known length, its side is
+      // their sum/difference. A rectangle sharing both lines is the simplest case (same width/height).
+      linkKnownSides();
+      for (const r of rects) {
+        for (const dim of ['w', 'h']) {
+          const key = `${r.id}_${dim}`;
+          if (getVal(key) !== undefined) continue;
+          const axis = lines[dim];
+          const value = axis.distance(r);
+          if (value === undefined) continue;
+
+          const path = axis.path(r);
+          const names = DIM_RULES[dim];
+          let stepInfo;
+          if (path.length === 1) {
+            const other = rects.find(o => o.id === path[0].id);
+            stepInfo = {
+              rule: t(names.same),
+              rectId: r.id,
+              explanation: t(names.sameExp, { desc1: getRectDesc(other), desc2: getRectDesc(r), [dim]: value })
+            };
+          } else {
+            const plus = path.filter(e => e.sign > 0).map(e => `${getVal(`${e.id}_${dim}`)} cm`);
+            const minus = path.filter(e => e.sign < 0).map(e => `${getVal(`${e.id}_${dim}`)} cm`);
+            stepInfo = {
+              rule: t(names.span),
+              rectId: r.id,
+              explanation: t(names.chainExp, { expr: [plus.join(' + '), ...minus].join(' − '), desc: getRectDesc(r), [dim]: value })
+            };
+          }
+          if (setVal(key, value, stepInfo)) {
+            axis.link(r, value, r.id);
+            changed = true;
+          }
+        }
+      }
+
+      // Rule 3: Area & Side Ratios (only for rectangles whose heights/widths are equal by the drawing)
       for (let i = 0; i < rects.length; i++) {
         for (let j = i + 1; j < rects.length; j++) {
           const r1 = rects[i];
           const r2 = rects[j];
 
-          // Same height rectangle alignment
-          if (r1.h === r2.h) {
-            const h1 = getVal(`${r1.id}_h`);
-            const h2 = getVal(`${r2.id}_h`);
-            if (h1 !== undefined && h2 === undefined) {
-              if (setVal(`${r2.id}_h`, h1, {
-                rule: t('ruleSameHeight'),
-                rectId: r2.id,
-                explanation: t('expSameHeight', { desc1: getRectDesc(r1), desc2: getRectDesc(r2), h: h1 })
-              })) changed = true;
-            } else if (h2 !== undefined && h1 === undefined) {
-              if (setVal(`${r1.id}_h`, h2, {
-                rule: t('ruleSameHeight'),
-                rectId: r1.id,
-                explanation: t('expSameHeight', { desc1: getRectDesc(r2), desc2: getRectDesc(r1), h: h2 })
-              })) changed = true;
-            }
-          }
-
-          // Same width rectangle alignment
-          if (r1.w === r2.w) {
-            const w1 = getVal(`${r1.id}_w`);
-            const w2 = getVal(`${r2.id}_w`);
-            if (w1 !== undefined && w2 === undefined) {
-              if (setVal(`${r2.id}_w`, w1, {
-                rule: t('ruleSameWidth'),
-                rectId: r2.id,
-                explanation: t('expSameWidth', { desc1: getRectDesc(r1), desc2: getRectDesc(r2), w: w1 })
-              })) changed = true;
-            } else if (w2 !== undefined && w1 === undefined) {
-              if (setVal(`${r1.id}_w`, w2, {
-                rule: t('ruleSameWidth'),
-                rectId: r1.id,
-                explanation: t('expSameWidth', { desc1: getRectDesc(r2), desc2: getRectDesc(r1), w: w2 })
-              })) changed = true;
-            }
-          }
-        }
-      }
-
-      // Rule 3: Row & Column Total Span Addition / Subtraction
-      for (const y of yLevels) {
-        const rowRects = rects.filter(r => r.y === y);
-        for (const otherY of yLevels) {
-          if (otherY === y) continue;
-          const otherRowRects = rects.filter(r => r.y === otherY);
-
-          const minX1 = Math.min(...rowRects.map(r => r.x));
-          const maxX1 = Math.max(...rowRects.map(r => r.x + r.w));
-          const minX2 = Math.min(...otherRowRects.map(r => r.x));
-          const maxX2 = Math.max(...otherRowRects.map(r => r.x + r.w));
-
-          if (minX1 === minX2 && maxX1 === maxX2) {
-            const row1Vals = rowRects.map(r => getVal(`${r.id}_w`));
-            const row2Vals = otherRowRects.map(r => getVal(`${r.id}_w`));
-
-            const row1Known = row1Vals.every(v => v !== undefined);
-            if (row1Known) {
-              const totalW = row1Vals.reduce((sum, v) => sum + v, 0);
-              const unknownInRow2 = otherRowRects.filter((r, idx) => row2Vals[idx] === undefined);
-
-              if (unknownInRow2.length === 1) {
-                const targetR = unknownInRow2[0];
-                const knownSum2 = row2Vals.filter(v => v !== undefined).reduce((sum, v) => sum + v, 0);
-                const missingW = totalW - knownSum2;
-                if (setVal(`${targetR.id}_w`, missingW, {
-                  rule: t('ruleSpanWidth'),
-                  rectId: targetR.id,
-                  explanation: t('expSpanWidth', { totalW, desc: getRectDesc(targetR), w: missingW })
-                })) changed = true;
-              }
-            }
-          }
-        }
-      }
-
-      for (const x of xLevels) {
-        const colRects = rects.filter(r => r.x === x);
-        for (const otherX of xLevels) {
-          if (otherX === x) continue;
-          const otherColRects = rects.filter(r => r.x === otherX);
-
-          const minY1 = Math.min(...colRects.map(r => r.y));
-          const maxY1 = Math.max(...colRects.map(r => r.y + r.h));
-          const minY2 = Math.min(...otherColRects.map(r => r.y));
-          const maxY2 = Math.max(...otherColRects.map(r => r.y + r.h));
-
-          if (minY1 === minY2 && maxY1 === maxY2) {
-            const col1Vals = colRects.map(r => getVal(`${r.id}_h`));
-            const col2Vals = otherColRects.map(r => getVal(`${r.id}_h`));
-
-            const col1Known = col1Vals.every(v => v !== undefined);
-            if (col1Known) {
-              const totalH = col1Vals.reduce((sum, v) => sum + v, 0);
-              const unknownInCol2 = otherColRects.filter((r, idx) => col2Vals[idx] === undefined);
-
-              if (unknownInCol2.length === 1) {
-                const targetR = unknownInCol2[0];
-                const knownSum2 = col2Vals.filter(v => v !== undefined).reduce((sum, v) => sum + v, 0);
-                const missingH = totalH - knownSum2;
-                if (setVal(`${targetR.id}_h`, missingH, {
-                  rule: t('ruleSpanHeight'),
-                  rectId: targetR.id,
-                  explanation: t('expSpanHeight', { totalH, desc: getRectDesc(targetR), h: missingH })
-                })) changed = true;
-              }
-            }
-          }
-        }
-      }
-
-      // Rule 4: Area & Side Ratios
-      for (let i = 0; i < rects.length; i++) {
-        for (let j = i + 1; j < rects.length; j++) {
-          const r1 = rects[i];
-          const r2 = rects[j];
-
-          if (r1.h === r2.h) {
+          if (lines.h.sameLength(r1, r2)) {
             const a1 = getVal(`${r1.id}_area`);
             const a2 = getVal(`${r2.id}_area`);
             const w1 = getVal(`${r1.id}_w`);
@@ -241,7 +179,7 @@ export class AreaMazeSolver {
             }
           }
 
-          if (r1.w === r2.w) {
+          if (lines.w.sameLength(r1, r2)) {
             const a1 = getVal(`${r1.id}_area`);
             const a2 = getVal(`${r2.id}_area`);
             const h1 = getVal(`${r1.id}_h`);
@@ -282,5 +220,110 @@ export class AreaMazeSolver {
       steps,
       difficultyRating: steps.length
     };
+  }
+}
+
+/**
+ * LineAxis
+ * The lines of the diagram along one axis (vertical lines for widths, horizontal lines for heights).
+ * Edges at the same coordinate form one line only where they touch or overlap; a gap splits them.
+ * Known side lengths are recorded as distances between lines (weighted union-find), so a side is known
+ * exactly when its two lines are connected through sides of known length.
+ */
+class LineAxis {
+  constructor(rects, pos, len, crossPos, crossLen) {
+    const edges = {};
+    for (const r of rects) {
+      for (const at of [r[pos], r[pos] + r[len]]) {
+        (edges[at] = edges[at] || []).push([r[crossPos], r[crossPos] + r[crossLen]]);
+      }
+    }
+
+    const segments = [];
+    for (const [at, spans] of Object.entries(edges)) {
+      spans.sort((a, b) => a[0] - b[0]);
+      let current = null;
+      for (const [from, to] of spans) {
+        if (current && from <= current.to) {
+          current.to = Math.max(current.to, to);
+        } else {
+          current = { at: Number(at), from, to };
+          segments.push(current);
+        }
+      }
+    }
+
+    const lineOf = (at, from, to) => segments.findIndex(s => s.at === at && s.from <= from && to <= s.to);
+    // Each rectangle's two lines: [start (left/top), end (right/bottom)]
+    this.ends = new Map(rects.map(r => [r.id, [
+      lineOf(r[pos], r[crossPos], r[crossPos] + r[crossLen]),
+      lineOf(r[pos] + r[len], r[crossPos], r[crossPos] + r[crossLen])
+    ]]));
+
+    this.parent = segments.map((_, i) => i);
+    this.offset = segments.map(() => 0); // position relative to parent
+    this.links = []; // { a, b, length, id }: line b lies `length` after line a, by side `id`
+  }
+
+  root(i) {
+    if (this.parent[i] === i) return i;
+    const r = this.root(this.parent[i]);
+    this.offset[i] += this.offset[this.parent[i]];
+    this.parent[i] = r;
+    return r;
+  }
+
+  // Distance from line a to line b, or undefined if it cannot be read from the known sides
+  between(a, b) {
+    if (this.root(a) !== this.root(b)) return undefined;
+    return this.offset[b] - this.offset[a];
+  }
+
+  link(rect, length, id) {
+    const [a, b] = this.ends.get(rect.id);
+    const ra = this.root(a);
+    const rb = this.root(b);
+    if (ra === rb) return;
+    this.parent[rb] = ra;
+    this.offset[rb] = this.offset[a] + length - this.offset[b];
+    this.links.push({ a, b, id });
+  }
+
+  distance(rect) {
+    const [a, b] = this.ends.get(rect.id);
+    const d = this.between(a, b);
+    return d !== undefined && d > 0 ? d : undefined;
+  }
+
+  // Whether the drawing makes the two rectangles' sides equal (their lines are pairwise aligned)
+  sameLength(r1, r2) {
+    const [a1, b1] = this.ends.get(r1.id);
+    const [a2, b2] = this.ends.get(r2.id);
+    return this.between(a1, a2) === 0 && this.between(b1, b2) === 0;
+  }
+
+  // Shortest chain of known sides from the rectangle's start line to its end line: [{ id, sign }]
+  path(rect) {
+    const [start, goal] = this.ends.get(rect.id);
+    const prev = new Map([[start, null]]);
+    const queue = [start];
+    while (queue.length > 0 && !prev.has(goal)) {
+      const line = queue.shift();
+      for (const l of this.links) {
+        if (l.id === rect.id) continue;
+        for (const [from, to, sign] of [[l.a, l.b, 1], [l.b, l.a, -1]]) {
+          if (from === line && !prev.has(to)) {
+            prev.set(to, { line, id: l.id, sign });
+            queue.push(to);
+          }
+        }
+      }
+    }
+    const steps = [];
+    for (let at = goal; prev.get(at); at = prev.get(at).line) {
+      const { id, sign } = prev.get(at);
+      steps.unshift({ id, sign });
+    }
+    return steps;
   }
 }

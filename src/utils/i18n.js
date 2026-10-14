@@ -154,6 +154,8 @@ export const translations = {
     expSameWidth: '{desc1} と幅が共通しているため、光っている{desc2} の幅 = {w} cm',
     expSpanWidth: '全体の横幅 ({totalW} cm) から並んだ幅を引いて、光っている{desc} の幅 = {w} cm',
     expSpanHeight: '全体の縦の高さ ({totalH} cm) から並んだ高さを引いて、光っている{desc} の高さ = {h} cm',
+    expChainWidth: 'つながった線をたどると、左右の線の間は {expr} なので、光っている{desc} の幅 = {w} cm',
+    expChainHeight: 'つながった線をたどると、上下の線の間は {expr} なので、光っている{desc} の高さ = {h} cm',
     expAreaRatioW: '同高の{desc1} との面積比 ({a1}:{a2}) から、光っている{desc2} の幅 = {w} cm',
     expAreaRatioH: '同幅の{desc1} との面積比 ({a1}:{a2}) から、光っている{desc2} の高さ = {h} cm',
   },
@@ -306,6 +308,8 @@ export const translations = {
     expSameWidth: 'Sharing width with {desc1}, the width of highlighted {desc2} = {w} cm',
     expSpanWidth: 'Subtracting adjacent widths from total width ({totalW} cm), width of highlighted {desc} = {w} cm',
     expSpanHeight: 'Subtracting adjacent heights from total height ({totalH} cm), height of highlighted {desc} = {h} cm',
+    expChainWidth: 'Along the connected lines, the gap between its left and right lines is {expr}, so the width of highlighted {desc} = {w} cm',
+    expChainHeight: 'Along the connected lines, the gap between its top and bottom lines is {expr}, so the height of highlighted {desc} = {h} cm',
     expAreaRatioW: 'From the area ratio ({a1}:{a2}) with same-height {desc1}, width of highlighted {desc2} = {w} cm',
     expAreaRatioH: 'From the area ratio ({a1}:{a2}) with same-width {desc1}, height of highlighted {desc2} = {h} cm',
   }

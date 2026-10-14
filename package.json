@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "check:puzzles": "node scripts/check-puzzles.mjs"
   },
   "devDependencies": {
     "vite": "^8.1.1"

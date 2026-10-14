@@ -36,6 +36,9 @@ jobs:
       - name: Install dependencies
         run: npm ci || npm install
 
+      - name: Check that every puzzle is solvable by logic alone
+        run: npm run check:puzzles
+
       - name: Create config.js if vars.GTM_ID is set
         if: ${{ vars.GTM_ID != '' }}
         run: echo "window.GTM_ID = '${{ vars.GTM_ID }}';" > config.js
