@@ -1,5 +1,17 @@
 import { t } from '../utils/i18n.js';
 
+/**
+ * Whether the puzzle is a real area maze: the answer must not be given as a clue, and must not follow
+ * from the clues written on the question's own rectangle alone (that is just an area calculation).
+ */
+export function needsReasoning(model) {
+  const { targetId, type } = model.question;
+  if (model.clues[`${targetId}_${type}`] !== undefined) return false;
+  const ownClues = Object.fromEntries(Object.entries(model.clues).filter(([key]) => key.startsWith(`${targetId}_`)));
+  const ownOnly = new AreaMazeSolver({ ...model, clues: ownClues }).solve();
+  return !ownOnly.isSolved;
+}
+
 export class AreaMazeSolver {
   constructor(model) {
     this.model = model;

@@ -1,12 +1,13 @@
 // Checks that every puzzle can be solved by logic alone, without guessing lengths from how the diagram looks.
 // - every preset level is solved by AreaMazeSolver and the answer matches its solution
 // - every value the solver deduces matches the real geometry (no wrong reasoning)
+// - the answer is not given, and cannot be found from the question's own rectangle alone (needsReasoning)
 // - the random generator only produces puzzles that pass the same checks
 // Run: npm run check:puzzles
 import { PRESET_PUZZLES } from '../src/engine/PresetPuzzles.js';
 import { AreaMazeGenerator } from '../src/engine/AreaMazeGenerator.js';
 import { AreaMazeModel } from '../src/engine/AreaMazeModel.js';
-import { AreaMazeSolver } from '../src/engine/AreaMazeSolver.js';
+import { AreaMazeSolver, needsReasoning } from '../src/engine/AreaMazeSolver.js';
 
 const GENERATED_PER_DIFFICULTY = 30;
 const problems = [];
@@ -15,6 +16,9 @@ function check(model, label) {
   const result = new AreaMazeSolver(model).solve();
   if (!result.isSolved || result.solution !== model.solution) {
     problems.push(`${label}: not solvable by logic (expected ${model.solution}, got ${result.solution})`);
+  }
+  if (!needsReasoning(model)) {
+    problems.push(`${label}: just an area calculation on the question's own rectangle`);
   }
   for (const [key, value] of Object.entries(result.knowns)) {
     const [, id, type] = key.match(/^(.*)_(area|w|h)$/);

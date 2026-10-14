@@ -1,5 +1,5 @@
 import { AreaMazeModel } from './AreaMazeModel.js';
-import { AreaMazeSolver } from './AreaMazeSolver.js';
+import { AreaMazeSolver, needsReasoning } from './AreaMazeSolver.js';
 
 export class AreaMazeGenerator {
   /**
@@ -39,8 +39,10 @@ export class AreaMazeGenerator {
       // Remove target question clue
       delete allClues[`${targetRect.id}_${qType}`];
 
-      // Randomly prune non-essential clues while maintaining 100% unique solvability
-      const clueKeys = Object.keys(allClues).sort(() => Math.random() - 0.5);
+      // Randomly prune non-essential clues while maintaining 100% unique solvability.
+      // Clues on the question's own rectangle go first, so the answer has to come from the others.
+      const isOwn = key => key.startsWith(`${targetRect.id}_`);
+      const clueKeys = Object.keys(allClues).sort(() => Math.random() - 0.5).sort((a, b) => isOwn(b) - isOwn(a));
       const activeClues = { ...allClues };
 
       for (const key of clueKeys) {
@@ -78,7 +80,8 @@ export class AreaMazeGenerator {
       const finalSolver = new AreaMazeSolver(finalModel);
       const finalResult = finalSolver.solve();
 
-      if (finalResult.isSolved && finalResult.solution === solution) {
+      // Reject puzzles that are just an area calculation on one rectangle
+      if (finalResult.isSolved && finalResult.solution === solution && needsReasoning(finalModel)) {
         bestModel = finalModel;
         break;
       }
@@ -148,7 +151,6 @@ export class AreaMazeGenerator {
         'A1_area': 12,
         'A1_h': 3,
         'A2_area': 18,
-        'A3_w': 10,
         'A3_area': 40
       },
       question: { targetId: 'A3', type: 'h' },

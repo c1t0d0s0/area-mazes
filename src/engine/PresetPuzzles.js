@@ -198,9 +198,9 @@ export const PRESET_PUZZLES = [
     },
     "question": {
       "targetId": "C",
-      "type": "h"
+      "type": "area"
     },
-    "solution": 5
+    "solution": 35
   },
   {
     "id": "level_6",
@@ -324,9 +324,9 @@ export const PRESET_PUZZLES = [
     },
     "question": {
       "targetId": "C",
-      "type": "h"
+      "type": "area"
     },
-    "solution": 4
+    "solution": 40
   },
   {
     "id": "level_9",
@@ -450,9 +450,9 @@ export const PRESET_PUZZLES = [
     },
     "question": {
       "targetId": "C",
-      "type": "h"
+      "type": "area"
     },
-    "solution": 5
+    "solution": 40
   },
   {
     "id": "level_12",
@@ -576,9 +576,9 @@ export const PRESET_PUZZLES = [
     },
     "question": {
       "targetId": "C",
-      "type": "h"
+      "type": "area"
     },
-    "solution": 5
+    "solution": 55
   },
   {
     "id": "level_15",
