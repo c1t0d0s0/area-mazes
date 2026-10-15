@@ -16,5 +16,8 @@
     "canvas-confetti": "^1.9.4",
     "firebase": "^13.0.0",
     "lucide": "^1.26.0"
+  },
+  "overrides": {
+    "@grpc/grpc-js": "^1.14.6"
   }
 }
