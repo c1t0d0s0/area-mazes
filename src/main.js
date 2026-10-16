@@ -2,7 +2,7 @@ import './styles/main.css';
 import './styles/components.css';
 import './styles/diagram.css';
 
-import { LevelSelectView } from './views/LevelSelectView.js';
+import { LevelSelectView, getFilterFromSearch } from './views/LevelSelectView.js';
 import { GameView } from './views/GameView.js';
 import { EditorView } from './views/EditorView.js';
 import { getPresetModel, PRESET_PUZZLES } from './engine/PresetPuzzles.js';
@@ -18,6 +18,7 @@ class App {
     this.appEl = document.querySelector('#app');
     this.currentView = 'level_select';
     this.currentLevelId = null;
+    this.activeFilter = getFilterFromSearch();
 
     this.levelSelectView = null;
     this.gameView = null;
@@ -48,6 +49,10 @@ class App {
       this.appEl.appendChild(container);
 
       this.levelSelectView = new LevelSelectView(container, {
+        initialFilter: this.activeFilter,
+        onFilterChange: (filter) => {
+          this.activeFilter = filter;
+        },
         onSelectLevel: (levelId) => {
           this.renderView('game', { type: 'preset', id: levelId });
         },

@@ -21,13 +21,27 @@ function formatTime(secs) {
   return `${m}:${s}`;
 }
 
+export function getFilterFromSearch(search = typeof window !== 'undefined' ? window.location.search : '') {
+  const params = new URLSearchParams(search);
+  const rawGrade = params.get('grade');
+  if (rawGrade === null || rawGrade.trim() === '') return 'All';
+  const grade = Number(rawGrade);
+  if (!Number.isInteger(grade) || grade < 1) return 'All';
+  if (grade <= 2) return 'Easy';
+  if (grade === 3) return 'Medium';
+  if (grade === 4) return 'Hard';
+  if (grade === 5) return 'Expert';
+  return 'Grandmaster';
+}
+
 export class LevelSelectView {
-  constructor(containerEl, { onSelectLevel, onQuickPlay, onOpenEditor }) {
+  constructor(containerEl, { initialFilter, onFilterChange, onSelectLevel, onQuickPlay, onOpenEditor } = {}) {
     this.container = containerEl;
+    this.onFilterChange = onFilterChange;
     this.onSelectLevel = onSelectLevel;
     this.onQuickPlay = onQuickPlay;
     this.onOpenEditor = onOpenEditor;
-    this.activeFilter = 'All';
+    this.activeFilter = initialFilter || getFilterFromSearch();
     this.accountBox = new AccountBox();
   }
 
@@ -145,6 +159,7 @@ export class LevelSelectView {
       tab.addEventListener('click', () => {
         sounds.playClick();
         this.activeFilter = tab.getAttribute('data-diff');
+        if (this.onFilterChange) this.onFilterChange(this.activeFilter);
         this.render();
       });
     });
