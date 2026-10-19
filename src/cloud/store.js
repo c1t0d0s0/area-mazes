@@ -2,7 +2,7 @@ import { PRESET_PUZZLES } from '../engine/PresetPuzzles.js';
 import { Storage } from '../utils/Storage.js';
 import { t } from '../utils/i18n.js';
 import { cloudAvailable, startCloud } from './index.js';
-import { clean, mergeRecord } from './records.js';
+import { clean, cleanSettings, mergeRecord } from './records.js';
 
 // Reading and writing level progress.
 // Signed out: progress is kept in this browser's localStorage (src/utils/Storage.js).
@@ -44,7 +44,7 @@ function readGuest() {
     const record = PRESET_IDS.has(id) ? toRecord(entry) : null;
     if (record) records[id] = record;
   }
-  return records;
+  return { records, settings: cleanSettings(Storage.getOutfit()) };
 }
 
 /** Progress to show on screen: { [level id]: { completed, stars, bestTime } } */
@@ -60,6 +60,20 @@ export function getProgress() {
 
 /** Still checking the sign-in state (the player was signed in last time) */
 const undecided = () => account.status === 'loading' && account.loading;
+
+/** What the monkey wears (item ids, unchecked: callers keep only the items that were won) */
+export function getOutfit() {
+  if (account.loading) return [];
+  const settings = sync?.uid ? sync.settings : cleanSettings(Storage.getOutfit());
+  return settings.outfit || [];
+}
+
+export function setOutfit(outfit) {
+  const settings = cleanSettings({ outfit, at: Date.now() });
+  if (sync?.uid) sync.submitSettings(settings);
+  else if (!undecided()) Storage.saveOutfit(settings);
+  emit();
+}
 
 export function saveLevelProgress(levelId, result) {
   const record = clean({ stars: result.stars, seconds: result.timeSeconds });
@@ -107,7 +121,10 @@ export async function startProgressSync() {
     },
     askMigrate: () => window.confirm(t('askMigrate')),
     readGuest,
-    clearGuest: () => Storage.clearLevelProgress([...PRESET_IDS]),
+    clearGuest: () => {
+      Storage.clearLevelProgress([...PRESET_IDS]);
+      Storage.saveOutfit(null);
+    },
   });
 }
 

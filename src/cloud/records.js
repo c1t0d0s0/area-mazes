@@ -54,10 +54,36 @@ export function hasRecords(records) {
   return Object.keys(records).length > 0;
 }
 
-/** Per-app summary. Carries the shared fields (this app does not use their contents) */
-export function toAppDoc(now) {
-  return { schema: SCHEMA, updatedAt: now, activeDays: [], completed: [], inventory: {}, spent: {}, settings: {} };
+// ---- Settings: what the squirrel monkey wears ----
+// { outfit: [item ids] | null, at: time it was chosen (0 if never) }. Kept in the app summary's `settings`.
+
+export const emptySettings = () => ({ outfit: null, at: 0 });
+
+/** Data read from storage or Firestore may be malformed, so validate it */
+export function cleanSettings(raw) {
+  const s = raw || {};
+  return {
+    outfit: Array.isArray(s.outfit) ? [...new Set(s.outfit.filter(id => typeof id === 'string' && /^[a-z]{1,20}$/.test(id)))].slice(0, 8) : null,
+    at: typeof s.at === 'number' && s.at > 0 ? s.at : 0
+  };
 }
+
+/** The newer choice wins (the same result whichever order they are merged in) */
+export function mergeSettings(a, b) {
+  const x = cleanSettings(a);
+  const y = cleanSettings(b);
+  if (x.at !== y.at) return x.at > y.at ? x : y;
+  return JSON.stringify(x) <= JSON.stringify(y) ? x : y;
+}
+
+export const sameSettings = (a, b) => JSON.stringify(cleanSettings(a)) === JSON.stringify(cleanSettings(b));
+
+/** Per-app summary. Carries the shared fields; this app only uses `settings` */
+export function toAppDoc(now, settings) {
+  return { schema: SCHEMA, updatedAt: now, activeDays: [], completed: [], inventory: {}, spent: {}, settings: cleanSettings(settings) };
+}
+
+export const fromAppDoc = doc => cleanSettings(doc && doc.settings);
 
 export function toProgressDoc(record, now) {
   return { schema: SCHEMA, updatedAt: now, status: 'done', data: clean(record) };

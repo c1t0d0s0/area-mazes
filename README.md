@@ -28,6 +28,7 @@ This web application offers a complete digital experience featuring a built-in c
 - 🖨️ **Print & PDF Export**: Export any puzzle diagram into a clean printable paper worksheet with an answer box.
 - 🔊 **Synthesized Audio Effects**: Zero-dependency Web Audio API sound generator for tactile feedback, pencil scratches, hint chimes, and victory fanfares.
 - 🎨 **Paper-and-Ink Design**: Shares its look with the sister app Math Challenge (manuscript paper and a red pen; a blackboard with chalk on dark screens). Follows the device's light/dark setting, with Google Fonts (Klee One, Zen Maru Gothic), a squirrel monkey mascot, and celebratory particle effects.
+- 🐒 **Dress Up the Monkey**: Clearing levels wins accessories for the squirrel monkey (12 in all). Tap the monkey on the home screen or "Dress Up the Monkey" to put them on and take them off. They are won by "clear your first level", "clear all Easy levels", "all Easy levels with ★3 (at most 1 hint)" … "clear 50 levels" … "all Grandmaster levels with ★3" (`src/utils/rewards.js`).
 - 🔑 **Google Sign-In (optional)**: Sign in to save cleared levels to Firestore and keep the same progress on other browsers and devices. Playing without signing in works exactly as before.
 
 ---
@@ -100,6 +101,7 @@ Signing in is optional; without it, progress is kept in the browser's localStora
   so playing on two devices never loses the better record (`src/cloud/records.js`)
 - On sign-in, if the device has guest progress, the player is asked whether to move it to the account.
   Moved progress is removed from the device; progress left behind is available again after signing out
+- Won accessories are not stored; they are worked out from the progress every time. Only what the monkey wears is saved: in the account while signed in, otherwise in localStorage (`area_mazes_outfit_v1`)
 - Records that could not be sent are remembered while the page is open and sent once the connection is back
 - **Custom puzzles, and progress on custom and random puzzles, are not saved to the account** (they stay in that device's localStorage)
 
@@ -111,7 +113,8 @@ The same Firebase project can be shared with Math Challenge and Wordlynx (this a
 users/{uid}                                    User document (shared by all apps)
   schema: 1, createdAt, updatedAt              * no name, email address or photo is stored
 
-users/{uid}/apps/area-mazes                    Per-app summary (contents unused by this app)
+users/{uid}/apps/area-mazes                    Per-app summary
+  settings: { outfit: ids of the accessories worn, at: when they were chosen }   * the newer choice wins
 
 users/{uid}/apps/area-mazes/progress/{level_N} One record per cleared level
   schema: 1, updatedAt, status: "done"

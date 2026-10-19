@@ -1,4 +1,4 @@
-import { hasRecords, mergeRecord, mergeRecords, sameRecord } from './records.js';
+import { emptySettings, hasRecords, mergeRecord, mergeRecords, mergeSettings, sameRecord, sameSettings } from './records.js';
 
 /**
   * Saves the signed-in player's records to Firestore (same mechanism as src/cloud/sync.js in Math Challenge).
@@ -9,9 +9,10 @@ import { hasRecords, mergeRecord, mergeRecords, sameRecord } from './records.js'
   * - If sending fails, it is retried later
  *
   * remote: talks to Firestore. Replaced by an in-memory stand-in for testing
-  *   loadAll(uid)            → { exists: whether the app summary exists, records }
+  *   loadAll(uid)            → { exists: whether the app summary exists, records, settings }
   *   loadRecord(uid, id)     → record | null
-  *   saveApp(uid)            create the user document and the per-app summary
+  *   loadSettings(uid)       → settings | null
+ *   saveApp(uid, settings)  write the user document and the per-app summary (with the settings)
  *   saveRecord(uid, id, record)
   * auth: sign-in plumbing
   *   onUser(cb)  calls cb(uid | null) when the sign-in state becomes known or changes
@@ -20,7 +21,7 @@ import { hasRecords, mergeRecord, mergeRecords, sameRecord } from './records.js'
   *   onStatus(sync)           the displayed state (signed in? saved?) changed
   *   onRecords(records, sync) the records to show changed. null after sign-out (show the guest records)
   *   askMigrate()             on sign-in there were guest records on this device: move them to the account?
-  *   readGuest() → records / clearGuest()  the guest records on this device
+  *   readGuest() → { records, settings } / clearGuest()  the guest records on this device
  *
  * status:
   *   loading: checking whether the player is signed in
@@ -40,6 +41,9 @@ export class RecordSync {
     this.status = 'loading';
     /** Records of the signed-in player */
     this.records = {};
+    /** Settings of the signed-in player (what the monkey wears) */
+    this.settings = emptySettings();
+    this.dirtySettings = false;
     /** Whether the Firestore records have been loaded since sign-in */
     this.loaded = false;
 
@@ -79,9 +83,18 @@ export class RecordSync {
     void this.enqueue(() => this.push());
   }
 
+  /** The settings changed while signed in: remember them and send them to Firestore */
+  submitSettings(settings) {
+    if (this.uid === null) return;
+    this.settings = mergeSettings(this.settings, settings);
+    this.dirtySettings = true;
+    this.setStatus('syncing');
+    void this.enqueue(() => this.push());
+  }
+
   /** Whether some records have not reached Firestore yet */
   hasPending() {
-    return this.uid !== null && (this.dirty.size > 0 || this.needsFull);
+    return this.uid !== null && (this.dirty.size > 0 || this.dirtySettings || this.needsFull);
   }
 
   /** Send pending records right now */
@@ -138,6 +151,8 @@ export class RecordSync {
       this.migrate = false;
       this.uid = null;
       this.records = {};
+      this.settings = emptySettings();
+      this.dirtySettings = false;
       this.loaded = false;
       this.hooks.onRecords(null, this);
       this.setStatus('signed-out');
@@ -147,13 +162,15 @@ export class RecordSync {
 
     // If this device has guest records, ask whether to move them (only for sign-ins from the button)
     const guest = this.hooks.readGuest();
-    this.migrate = this.interactive && hasRecords(guest) && (await this.hooks.askMigrate());
+    this.migrate = this.interactive && hasRecords(guest.records) && (await this.hooks.askMigrate());
     this.interactive = false;
 
     this.uid = uid;
-    this.records = this.migrate ? mergeRecords(guest, {}) : {};
+    this.records = this.migrate ? mergeRecords(guest.records, {}) : {};
+    this.settings = this.migrate ? mergeSettings(guest.settings, emptySettings()) : emptySettings();
     this.loaded = false;
     this.dirty.clear();
+    this.dirtySettings = false;
     this.needsFull = true;
     this.hooks.onRecords(this.records, this);
     await this.push();
@@ -164,16 +181,19 @@ export class RecordSync {
     if (uid === null || !this.hasPending()) return;
     this.setStatus('syncing');
     const ids = [...this.dirty];
+    const settings = this.dirtySettings;
     this.dirty.clear();
+    this.dirtySettings = false;
     try {
       if (this.needsFull) await this.fullSync(uid);
-      else await this.sendChanges(uid, ids);
+      else await this.sendChanges(uid, ids, settings);
       if (this.uid !== uid) return; // signed out while sending
       this.setStatus(this.hasPending() ? 'syncing' : 'synced');
     } catch {
       if (this.uid !== uid) return;
       // Remember what could not be sent so that it is sent again
       for (const id of ids) this.dirty.add(id);
+      this.dirtySettings ||= settings;
       this.setStatus('offline');
       this.schedule(this.retryMs);
     }
@@ -186,7 +206,8 @@ export class RecordSync {
 
     // Records made while loading are already in this.records, so they are merged too
     const merged = mergeRecords(remote.records, this.records);
-    if (!remote.exists) await this.remote.saveApp(uid);
+    const settings = mergeSettings(remote.settings, this.settings);
+    if (!remote.exists || !sameSettings(settings, remote.settings)) await this.remote.saveApp(uid, settings);
     for (const [id, record] of Object.entries(merged)) {
       if (!sameRecord(remote.records[id], record)) await this.remote.saveRecord(uid, id, record);
     }
@@ -198,6 +219,7 @@ export class RecordSync {
       this.migrate = false;
     }
     this.records = mergeRecords(merged, this.records);
+    this.settings = mergeSettings(settings, this.settings);
     this.needsFull = false;
     this.loaded = true;
     this.hooks.onStatus(this);
@@ -205,8 +227,18 @@ export class RecordSync {
   }
 
   /** Send only the changed records, merged with what other devices saved */
-  async sendChanges(uid, ids) {
+  async sendChanges(uid, ids, settings) {
     let changed = false;
+    if (settings) {
+      // Merge with what other devices chose, so the newer choice wins everywhere
+      const theirs = await this.remote.loadSettings(uid);
+      if (this.uid !== uid) return;
+      const merged = mergeSettings(theirs, this.settings);
+      if (!sameSettings(merged, this.settings)) changed = true;
+      this.settings = merged;
+      if (!theirs || !sameSettings(merged, theirs)) await this.remote.saveApp(uid, merged);
+      if (this.uid !== uid) return;
+    }
     for (const id of ids) {
       const theirs = await this.remote.loadRecord(uid, id);
       if (this.uid !== uid) return;

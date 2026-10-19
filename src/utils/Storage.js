@@ -3,6 +3,8 @@ const STORAGE_KEY_CUSTOM = 'area_mazes_custom_levels_v1';
 // Whether the user was signed in last time. Used right after page load, before the sign-in check
 // finishes, so that guest progress is not flashed to a signed-in user (holds no progress itself).
 const STORAGE_KEY_SIGNED_IN = 'area_mazes_signed_in';
+// What the monkey wears while signed out: { outfit: [item ids], at: time it was chosen }
+const STORAGE_KEY_OUTFIT = 'area_mazes_outfit_v1';
 
 export class Storage {
   static getProgress() {
@@ -42,6 +44,24 @@ export class Storage {
       localStorage.setItem(STORAGE_KEY_PROGRESS, JSON.stringify(progress));
     } catch (e) {
       console.warn('Failed to clear progress in localStorage', e);
+    }
+  }
+
+  static getOutfit() {
+    try {
+      const data = localStorage.getItem(STORAGE_KEY_OUTFIT);
+      return data ? JSON.parse(data) : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  static saveOutfit(settings) {
+    try {
+      if (settings) localStorage.setItem(STORAGE_KEY_OUTFIT, JSON.stringify(settings));
+      else localStorage.removeItem(STORAGE_KEY_OUTFIT);
+    } catch (e) {
+      console.warn('Failed to save outfit to localStorage', e);
     }
   }
 

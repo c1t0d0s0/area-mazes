@@ -3,7 +3,9 @@ import { Numpad } from '../components/Numpad.js';
 import { HintModal } from '../components/HintModal.js';
 import { VictoryModal } from '../components/VictoryModal.js';
 import { AreaMazeSolver } from '../engine/AreaMazeSolver.js';
-import { saveLevelProgress } from '../cloud/store.js';
+import { getProgress, saveLevelProgress, setOutfit } from '../cloud/store.js';
+import { REWARDS, currentOutfit, earnedRewards } from '../utils/rewards.js';
+import { wear } from '../utils/monkey.js';
 import { PrintExporter } from '../utils/PrintExporter.js';
 import { sounds } from '../utils/SoundManager.js';
 import { t, translateTitle, toggleLanguage } from '../utils/i18n.js';
@@ -293,17 +295,24 @@ export class GameView {
       if (this.hintsUsed > 3) stars = 1;
       else if (this.hintsUsed > 1) stars = 2;
 
+      const rewardsBefore = earnedRewards(getProgress());
       saveLevelProgress(this.model.id, {
         stars,
         timeSeconds: this.secondsElapsed,
         hintsUsed: this.hintsUsed
       });
 
+      // Accessories won with this clear are put on the monkey straight away
+      const rewardsAfter = earnedRewards(getProgress());
+      const newItems = REWARDS.map(r => r.item).filter(id => rewardsAfter.has(id) && !rewardsBefore.has(id));
+      if (newItems.length > 0) setOutfit(newItems.reduce(wear, currentOutfit(rewardsAfter)));
+
       this.victoryModal.show({
         stars,
         timeFormatted: this.formatTime(this.secondsElapsed),
         hintsUsed: this.hintsUsed,
-        levelTitle: this.model.title
+        levelTitle: this.model.title,
+        newItems
       });
     } else {
       sounds.playError();

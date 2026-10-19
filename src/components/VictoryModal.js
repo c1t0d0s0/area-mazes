@@ -1,6 +1,8 @@
 import confetti from 'canvas-confetti';
 import { sounds } from '../utils/SoundManager.js';
 import { monkeySvg } from '../utils/monkey.js';
+import { openKisekae } from './KisekaeModal.js';
+import { currentOutfit, itemName } from '../utils/rewards.js';
 import { t, translateTitle } from '../utils/i18n.js';
 
 export class VictoryModal {
@@ -10,14 +12,14 @@ export class VictoryModal {
     this.onLevelSelect = onLevelSelect;
   }
 
-  show({ stars = 3, timeFormatted = '00:45', hintsUsed = 0, levelTitle = 'Level 1' }) {
+  show({ stars = 3, timeFormatted = '00:45', hintsUsed = 0, levelTitle = 'Level 1', newItems = [] }) {
     sounds.playSuccess();
     this.triggerConfetti();
 
     this.container.innerHTML = `
       <div class="modal-backdrop">
         <div class="modal-card victory-card">
-          <div class="monkey victory-monkey">${monkeySvg(t('monkeyLabel'), { eyes: 'happy', mouth: 'open' })}</div>
+          <div class="monkey victory-monkey">${this.monkeyHtml()}</div>
           <div class="victory-header">
             <h2>${t('stageClear')}</h2>
             <p class="level-subtitle">${translateTitle(levelTitle)}</p>
@@ -37,6 +39,15 @@ export class VictoryModal {
               <span class="stat-value">${t('hintsCount', { count: hintsUsed })}</span>
             </div>
           </div>
+          ${newItems.length > 0 ? `
+            <section class="reward">
+              <h3>${t('rewardTitle')}</h3>
+              <ul class="reward-list">
+                ${newItems.map(id => `<li>${t('rewardWorn', { name: itemName(id) })}</li>`).join('')}
+              </ul>
+              <button type="button" class="btn btn-reward-kisekae">${t('btnKisekae')}</button>
+            </section>
+          ` : ''}
           <div class="modal-footer">
             <button type="button" class="btn btn-select">${t('btnLevelSelect')}</button>
             <button type="button" class="btn btn-primary btn-next-stage">${t('btnNextStage')}</button>
@@ -56,6 +67,18 @@ export class VictoryModal {
       });
     }
 
+    const kisekaeBtn = this.container.querySelector('.btn-reward-kisekae');
+    if (kisekaeBtn) {
+      kisekaeBtn.addEventListener('click', () => {
+        sounds.playClick();
+        // The monkey on this card follows what is put on in the wardrobe
+        openKisekae(() => {
+          const monkey = this.container.querySelector('.victory-monkey');
+          if (monkey) monkey.innerHTML = this.monkeyHtml();
+        });
+      });
+    }
+
     const nextBtn = this.container.querySelector('.btn-next-stage');
     if (nextBtn) {
       nextBtn.addEventListener('click', () => {
@@ -64,6 +87,10 @@ export class VictoryModal {
         if (this.onNextLevel) this.onNextLevel();
       });
     }
+  }
+
+  monkeyHtml() {
+    return monkeySvg(t('monkeyLabel'), { eyes: 'happy', mouth: 'open', items: currentOutfit() });
   }
 
   hide() {

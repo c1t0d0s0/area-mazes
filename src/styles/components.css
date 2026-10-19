@@ -500,6 +500,8 @@
 .modal-card {
   width: 100%;
   max-width: 27.5rem;
+  max-height: calc(100dvh - 2.5rem);
+  overflow-y: auto;
   padding: 1.5rem 1.25rem 0;
   background: var(--paper);
   box-shadow: 0 0 0 1px var(--rule), 0 0.75rem 2rem var(--shade);
@@ -808,6 +810,212 @@
 
 @media (prefers-reduced-motion: reduce) {
   .hint-card {
+    animation: none;
+  }
+}
+
+/* ---- Dress-up: the monkey's wardrobe and rewards ---- */
+.monkey-btn {
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.kisekae-open {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 0.3rem 0.75rem;
+  padding: 0.65rem 1rem 0.75rem;
+  border: 0;
+  background: var(--paper);
+  box-shadow: 0 0 0 1px var(--rule);
+  text-align: left;
+  cursor: pointer;
+}
+
+.kisekae-open:hover {
+  background: var(--mark-soft);
+}
+
+.kisekae-open-label {
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.kisekae-open-count {
+  font-family: var(--hand);
+  font-weight: 600;
+  font-size: 1.375rem;
+  line-height: 1.1;
+}
+
+.kisekae-meter {
+  grid-column: 1 / -1;
+  height: 0.4rem;
+  background: var(--rule-soft);
+}
+
+.kisekae-meter span {
+  display: block;
+  height: 100%;
+  background: var(--red);
+}
+
+dialog.kisekae {
+  width: min(34rem, calc(100% - 2rem));
+  max-height: calc(100dvh - 2rem);
+  padding: 0;
+  border: 0;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 0 0 1px var(--rule), 0 0.75rem 2rem var(--shade);
+}
+
+dialog.kisekae[open] {
+  display: grid;
+  grid-template-rows: auto auto auto minmax(0, 1fr);
+}
+
+dialog.kisekae::backdrop {
+  background: var(--shade);
+}
+
+.kisekae-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.25rem 0;
+}
+
+.kisekae-head h2 {
+  font-family: var(--hand);
+  font-weight: 600;
+  font-size: clamp(1.125rem, 5vw, 1.5rem);
+  line-height: 1.3;
+}
+
+.kisekae-summary {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.kisekae-monkey {
+  width: clamp(6rem, 30vw, 8.5rem);
+  margin: 0.25rem auto 0;
+}
+
+.kisekae-detail {
+  margin: 0.25rem 1.25rem 0;
+  min-height: 3.2em;
+  color: var(--muted);
+  font-size: 0.9375rem;
+  text-align: center;
+}
+
+.kisekae-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(5.25rem, 1fr));
+  gap: 0.6rem;
+  padding: 0.75rem 1.25rem 1.5rem;
+  overflow-y: auto;
+}
+
+.kisekae-item {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 0.2rem;
+  padding: 0.4rem 0.25rem 0.35rem;
+  border: 0;
+  background: var(--paper);
+  box-shadow: 0 0 0 1px var(--rule-soft);
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.kisekae-item svg {
+  display: block;
+  width: 3.75rem;
+  height: auto;
+}
+
+.kisekae-item.is-earned {
+  box-shadow: 0 0 0 1px var(--rule);
+  color: var(--ink);
+}
+
+/* Being worn now */
+.kisekae-item.is-worn {
+  background: var(--mark-soft);
+  box-shadow: 0 0 0 2px var(--ink);
+}
+
+.kisekae-item:focus-visible {
+  outline-offset: -4px;
+  outline-color: var(--red);
+}
+
+.kisekae-lock {
+  display: grid;
+  place-items: center;
+  width: 3.75rem;
+  aspect-ratio: 128 / 150;
+  color: var(--rule);
+  font-family: var(--hand);
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+.kisekae-name {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.reward {
+  display: grid;
+  justify-items: center;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: var(--mark-soft);
+  box-shadow: 0 0 0 1px var(--rule);
+  animation: rewardPop 0.45s ease-out 0.3s both;
+}
+
+.reward h3 {
+  color: var(--red);
+  font-family: var(--hand);
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.3;
+}
+
+.reward-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+@keyframes rewardPop {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reward {
     animation: none;
   }
 }

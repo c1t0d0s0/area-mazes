@@ -19,7 +19,7 @@ import {
   getFirestore,
   setDoc,
 } from 'firebase/firestore/lite';
-import { APP_ID, SCHEMA, fromProgressDoc, toAppDoc, toProgressDoc } from './records.js';
+import { APP_ID, SCHEMA, fromAppDoc, fromProgressDoc, toAppDoc, toProgressDoc } from './records.js';
 
 export function createFirebase(config, emulator) {
   const app = initializeApp(config);
@@ -44,19 +44,23 @@ export function createFirebase(config, emulator) {
         const record = fromProgressDoc(d.data());
         if (record) records[d.id] = record;
       });
-      return { exists: summary.exists(), records };
+      return { exists: summary.exists(), records, settings: fromAppDoc(summary.exists() ? summary.data() : null) };
     },
     async loadRecord(uid, id) {
       const snap = await getDoc(progressRef(uid, id));
       return snap.exists() ? fromProgressDoc(snap.data()) : null;
     },
-    /** Create the user document and the per-app summary (once, on the first sign-in) */
-    async saveApp(uid) {
+    /** Write the user document and the per-app summary (with the settings) */
+    async saveApp(uid, settings) {
       const now = Date.now();
       // User document (shared by all apps). No name or email address is stored
       const user = await getDoc(userRef(uid));
       await setDoc(userRef(uid), { schema: SCHEMA, updatedAt: now, ...(user.exists() ? {} : { createdAt: now }) }, { merge: true });
-      await setDoc(appRef(uid), toAppDoc(now));
+      await setDoc(appRef(uid), toAppDoc(now, settings));
+    },
+    async loadSettings(uid) {
+      const snap = await getDoc(appRef(uid));
+      return snap.exists() ? fromAppDoc(snap.data()) : null;
     },
     async saveRecord(uid, id, record) {
       await setDoc(progressRef(uid, id), toProgressDoc(record, Date.now()));

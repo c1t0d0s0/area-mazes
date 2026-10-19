@@ -1,9 +1,11 @@
 import { PRESET_PUZZLES } from '../engine/PresetPuzzles.js';
 import { AccountBox } from '../components/AccountBox.js';
+import { openKisekae } from '../components/KisekaeModal.js';
 import { account, getProgress } from '../cloud/store.js';
 import { Storage } from '../utils/Storage.js';
 import { sounds } from '../utils/SoundManager.js';
 import { monkeySvg } from '../utils/monkey.js';
+import { REWARDS, currentOutfit, earnedRewards } from '../utils/rewards.js';
 import { t, translateTitle, toggleLanguage } from '../utils/i18n.js';
 
 const FILTERS = [
@@ -63,6 +65,8 @@ export class LevelSelectView {
       ? PRESET_PUZZLES 
       : PRESET_PUZZLES.filter(p => p.difficulty === this.activeFilter);
     const clearedCount = PRESET_PUZZLES.filter(p => (progress[p.id] || {}).completed).length;
+    const earned = earnedRewards(progress);
+    const kisekaeLabel = t('kisekaeOpenLabel', { total: REWARDS.length, earned: earned.size });
 
     let html = `
       <main class="level-select-view home">
@@ -78,7 +82,7 @@ export class LevelSelectView {
               <h1 class="brand">${t('title')}</h1>
               <p class="lead">${t('subtitle')}</p>
             </div>
-            <div class="monkey">${monkeySvg(t('monkeyLabel'))}</div>
+            <button type="button" class="monkey monkey-btn btn-kisekae" aria-label="${kisekaeLabel}">${monkeySvg(t('monkeyLabel'), { items: currentOutfit(earned) })}</button>
           </header>
 
           <div class="mode filter-nav" role="group" aria-label="${t('filterLabel')}">
@@ -88,6 +92,12 @@ export class LevelSelectView {
               </button>
             `).join('')}
           </div>
+
+          <button type="button" class="kisekae-open btn-kisekae" aria-label="${kisekaeLabel}">
+            <span class="kisekae-open-label">${t('kisekaeTitle')}</span>
+            <b class="kisekae-open-count">${account.loading ? '…' : `${earned.size} / ${REWARDS.length}`}</b>
+            <span class="kisekae-meter" aria-hidden="true"><span style="width: ${(earned.size / REWARDS.length) * 100}%"></span></span>
+          </button>
 
           <nav class="home-actions">
             <button type="button" class="btn btn-primary btn-random">${t('btnRandom')}</button>
@@ -153,6 +163,14 @@ export class LevelSelectView {
         this.render();
       });
     }
+
+    // Dress-up: the monkey itself and the button under the filter
+    this.container.querySelectorAll('.btn-kisekae').forEach(btn => {
+      btn.addEventListener('click', () => {
+        sounds.playClick();
+        openKisekae();
+      });
+    });
 
     // Attach Filter Tab listeners
     this.container.querySelectorAll('.filter-tab').forEach(tab => {
