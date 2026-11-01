@@ -3099,211 +3099,227 @@ export const PRESET_PUZZLES = [
   },
   {
     "id": "level_61",
-    "title": "上級 1: 幾何学の要塞",
+    "title": "上級 1: 風車スパイラル [第1型]",
     "difficulty": "Expert",
     "rects": [
       {
         "id": "A",
         "x": 0,
         "y": 0,
-        "w": 5,
-        "h": 4,
-        "area": 20
+        "w": 6,
+        "h": 3,
+        "area": 18
       },
       {
         "id": "B",
-        "x": 5,
+        "x": 6,
         "y": 0,
-        "w": 5,
-        "h": 4,
-        "area": 20
+        "w": 4,
+        "h": 6,
+        "area": 24
       },
       {
         "id": "C",
-        "x": 10,
-        "y": 0,
-        "w": 5,
+        "x": 3,
+        "y": 6,
+        "w": 7,
         "h": 4,
-        "area": 20
+        "area": 28
       },
       {
         "id": "D",
         "x": 0,
-        "y": 4,
-        "w": 5,
-        "h": 5,
-        "area": 25
+        "y": 3,
+        "w": 3,
+        "h": 7,
+        "area": 21
       },
       {
         "id": "E",
-        "x": 5,
-        "y": 4,
-        "w": 5,
-        "h": 5,
-        "area": 25
-      },
-      {
-        "id": "F",
-        "x": 10,
-        "y": 4,
-        "w": 5,
-        "h": 5,
-        "area": 25
+        "x": 3,
+        "y": 3,
+        "w": 3,
+        "h": 3,
+        "area": 9
       }
     ],
     "clues": {
-      "A_area": 20,
-      "A_h": 4,
-      "B_area": 20,
-      "C_area": 20,
-      "D_area": 25,
-      "E_area": 25
+      "A_h": 3,
+      "A_area": 18,
+      "B_w": 4,
+      "B_area": 24,
+      "C_h": 4,
+      "C_area": 28,
+      "D_area": 21
     },
     "question": {
-      "targetId": "F",
+      "targetId": "E",
       "type": "area"
     },
-    "solution": 25
+    "solution": 9
   },
   {
     "id": "level_62",
-    "title": "上級 2: 幾何学の要塞",
+    "title": "上級 2: 煉瓦連鎖の壁 [第1型]",
     "difficulty": "Expert",
     "rects": [
       {
         "id": "A",
         "x": 0,
         "y": 0,
-        "w": 6,
-        "h": 4,
-        "area": 24
+        "w": 7,
+        "h": 3,
+        "area": 21
       },
       {
         "id": "B",
-        "x": 6,
+        "x": 7,
         "y": 0,
-        "w": 6,
-        "h": 4,
+        "w": 3,
+        "h": 8,
         "area": 24
       },
       {
         "id": "C",
-        "x": 12,
-        "y": 0,
-        "w": 4,
-        "h": 4,
-        "area": 16
+        "x": 0,
+        "y": 3,
+        "w": 3,
+        "h": 9,
+        "area": 27
       },
       {
         "id": "D",
-        "x": 0,
-        "y": 4,
-        "w": 6,
-        "h": 5,
-        "area": 30
-      },
-      {
-        "id": "E",
-        "x": 6,
-        "y": 4,
-        "w": 6,
-        "h": 5,
-        "area": 30
-      },
-      {
-        "id": "F",
-        "x": 12,
-        "y": 4,
+        "x": 3,
+        "y": 3,
         "w": 4,
         "h": 5,
         "area": 20
+      },
+      {
+        "id": "E",
+        "x": 3,
+        "y": 8,
+        "w": 7,
+        "h": 4,
+        "area": 28
+      },
+      {
+        "id": "F",
+        "x": 0,
+        "y": 12,
+        "w": 7,
+        "h": 5,
+        "area": 35
+      },
+      {
+        "id": "G",
+        "x": 7,
+        "y": 12,
+        "w": 3,
+        "h": 5,
+        "area": 15
       }
     ],
     "clues": {
-      "A_area": 24,
-      "A_h": 4,
+      "A_h": 3,
+      "A_area": 21,
+      "B_w": 3,
       "B_area": 24,
-      "C_area": 16,
-      "D_area": 30,
-      "E_area": 30
+      "C_w": 3,
+      "C_area": 27,
+      "E_h": 4,
+      "E_area": 28,
+      "F_area": 35,
+      "G_area": 15
     },
     "question": {
-      "targetId": "F",
+      "targetId": "D",
       "type": "area"
     },
     "solution": 20
   },
   {
     "id": "level_63",
-    "title": "上級 3: 幾何学の要塞",
+    "title": "上級 3: 三連交差の要塞 [第1型]",
     "difficulty": "Expert",
     "rects": [
       {
         "id": "A",
         "x": 0,
         "y": 0,
-        "w": 4,
-        "h": 4,
-        "area": 16
+        "w": 3,
+        "h": 5,
+        "area": 15
       },
       {
         "id": "B",
-        "x": 4,
+        "x": 0,
+        "y": 5,
+        "w": 3,
+        "h": 6,
+        "area": 18
+      },
+      {
+        "id": "C",
+        "x": 3,
         "y": 0,
+        "w": 4,
+        "h": 2,
+        "area": 8
+      },
+      {
+        "id": "D",
+        "x": 3,
+        "y": 2,
         "w": 4,
         "h": 4,
         "area": 16
       },
       {
-        "id": "C",
-        "x": 8,
-        "y": 0,
-        "w": 5,
-        "h": 4,
-        "area": 20
-      },
-      {
-        "id": "D",
-        "x": 0,
-        "y": 4,
-        "w": 4,
-        "h": 5,
-        "area": 20
-      },
-      {
         "id": "E",
-        "x": 4,
-        "y": 4,
+        "x": 3,
+        "y": 6,
         "w": 4,
         "h": 5,
         "area": 20
       },
       {
         "id": "F",
-        "x": 8,
+        "x": 7,
+        "y": 0,
+        "w": 3,
+        "h": 4,
+        "area": 12
+      },
+      {
+        "id": "G",
+        "x": 7,
         "y": 4,
-        "w": 5,
-        "h": 5,
-        "area": 25
+        "w": 3,
+        "h": 7,
+        "area": 21
       }
     ],
     "clues": {
-      "A_area": 16,
-      "A_h": 4,
-      "B_area": 16,
-      "C_area": 20,
-      "D_area": 20,
-      "E_area": 20
+      "A_w": 3,
+      "A_area": 15,
+      "B_area": 18,
+      "C_h": 2,
+      "C_area": 8,
+      "E_area": 20,
+      "F_w": 3,
+      "F_area": 12,
+      "G_area": 21
     },
     "question": {
-      "targetId": "F",
+      "targetId": "D",
       "type": "area"
     },
-    "solution": 25
+    "solution": 16
   },
   {
     "id": "level_64",
-    "title": "上級 4: 幾何学の要塞",
+    "title": "上級 4: 幾何学コア回廊 [第1型]",
     "difficulty": "Expert",
     "rects": [
       {
@@ -3311,67 +3327,78 @@ export const PRESET_PUZZLES = [
         "x": 0,
         "y": 0,
         "w": 5,
-        "h": 4,
-        "area": 20
+        "h": 3,
+        "area": 15
       },
       {
         "id": "B",
         "x": 5,
         "y": 0,
-        "w": 5,
-        "h": 4,
-        "area": 20
+        "w": 7,
+        "h": 3,
+        "area": 21
       },
       {
         "id": "C",
-        "x": 10,
-        "y": 0,
+        "x": 5,
+        "y": 3,
         "w": 4,
         "h": 4,
         "area": 16
       },
       {
         "id": "D",
-        "x": 0,
-        "y": 4,
-        "w": 5,
-        "h": 5,
-        "area": 25
+        "x": 9,
+        "y": 3,
+        "w": 3,
+        "h": 10,
+        "area": 30
       },
       {
         "id": "E",
-        "x": 5,
-        "y": 4,
+        "x": 0,
+        "y": 3,
         "w": 5,
-        "h": 5,
-        "area": 25
+        "h": 4,
+        "area": 20
       },
       {
         "id": "F",
-        "x": 10,
-        "y": 4,
-        "w": 4,
-        "h": 5,
-        "area": 20
+        "x": 0,
+        "y": 7,
+        "w": 3,
+        "h": 6,
+        "area": 18
+      },
+      {
+        "id": "G",
+        "x": 3,
+        "y": 7,
+        "w": 6,
+        "h": 6,
+        "area": 36
       }
     ],
     "clues": {
-      "A_area": 20,
-      "A_h": 4,
-      "B_area": 20,
-      "C_area": 16,
-      "D_area": 25,
-      "E_area": 25
+      "A_h": 3,
+      "A_area": 15,
+      "B_h": 3,
+      "B_area": 21,
+      "D_w": 3,
+      "D_area": 30,
+      "F_w": 3,
+      "F_area": 18,
+      "G_area": 36
     },
     "question": {
-      "targetId": "F",
+      "targetId": "C",
       "type": "area"
     },
-    "solution": 20
+    "solution": 16
   },
   {
     "id": "level_65",
-    "title": "上級 5: 幾何学の要塞",
+    "title": "上級 5: 風車スパイラル [第2型]",
     "difficulty": "Expert",
     "rects": [
       {
@@ -3379,747 +3406,817 @@ export const PRESET_PUZZLES = [
         "x": 0,
         "y": 0,
         "w": 6,
-        "h": 4,
-        "area": 24
+        "h": 3,
+        "area": 18
       },
       {
         "id": "B",
         "x": 6,
         "y": 0,
-        "w": 6,
-        "h": 4,
-        "area": 24
+        "w": 4,
+        "h": 7,
+        "area": 28
       },
       {
         "id": "C",
-        "x": 12,
-        "y": 0,
-        "w": 5,
-        "h": 4,
-        "area": 20
+        "x": 3,
+        "y": 7,
+        "w": 7,
+        "h": 5,
+        "area": 35
       },
       {
         "id": "D",
         "x": 0,
-        "y": 4,
-        "w": 6,
-        "h": 5,
-        "area": 30
+        "y": 3,
+        "w": 3,
+        "h": 9,
+        "area": 27
       },
       {
         "id": "E",
-        "x": 6,
-        "y": 4,
-        "w": 6,
-        "h": 5,
-        "area": 30
-      },
-      {
-        "id": "F",
-        "x": 12,
-        "y": 4,
-        "w": 5,
-        "h": 5,
-        "area": 25
+        "x": 3,
+        "y": 3,
+        "w": 3,
+        "h": 4,
+        "area": 12
       }
     ],
     "clues": {
-      "A_area": 24,
-      "A_h": 4,
-      "B_area": 24,
-      "C_area": 20,
-      "D_area": 30,
-      "E_area": 30
+      "A_h": 3,
+      "A_area": 18,
+      "B_w": 4,
+      "B_area": 28,
+      "C_h": 5,
+      "C_area": 35,
+      "D_area": 27
     },
     "question": {
-      "targetId": "F",
+      "targetId": "E",
       "type": "area"
     },
-    "solution": 25
+    "solution": 12
   },
   {
     "id": "level_66",
-    "title": "上級 6: 幾何学の要塞",
+    "title": "上級 6: 煉瓦連鎖の壁 [第2型]",
     "difficulty": "Expert",
     "rects": [
       {
         "id": "A",
         "x": 0,
         "y": 0,
-        "w": 4,
-        "h": 4,
-        "area": 16
+        "w": 7,
+        "h": 3,
+        "area": 21
       },
       {
         "id": "B",
-        "x": 4,
+        "x": 7,
         "y": 0,
-        "w": 4,
-        "h": 4,
-        "area": 16
+        "w": 3,
+        "h": 8,
+        "area": 24
       },
       {
         "id": "C",
-        "x": 8,
-        "y": 0,
-        "w": 4,
-        "h": 4,
-        "area": 16
+        "x": 0,
+        "y": 3,
+        "w": 3,
+        "h": 9,
+        "area": 27
       },
       {
         "id": "D",
-        "x": 0,
-        "y": 4,
+        "x": 3,
+        "y": 3,
         "w": 4,
         "h": 5,
         "area": 20
       },
       {
         "id": "E",
-        "x": 4,
-        "y": 4,
-        "w": 4,
-        "h": 5,
-        "area": 20
+        "x": 3,
+        "y": 8,
+        "w": 7,
+        "h": 4,
+        "area": 28
       },
       {
         "id": "F",
-        "x": 8,
-        "y": 4,
-        "w": 4,
+        "x": 0,
+        "y": 12,
+        "w": 7,
         "h": 5,
-        "area": 20
+        "area": 35
+      },
+      {
+        "id": "G",
+        "x": 7,
+        "y": 12,
+        "w": 3,
+        "h": 5,
+        "area": 15
       }
     ],
     "clues": {
-      "A_area": 16,
-      "A_h": 4,
-      "B_area": 16,
-      "C_area": 16,
-      "D_area": 20,
-      "E_area": 20
+      "A_h": 3,
+      "A_area": 21,
+      "B_w": 3,
+      "B_area": 24,
+      "C_w": 3,
+      "C_area": 27,
+      "E_h": 4,
+      "E_area": 28,
+      "F_area": 35,
+      "G_area": 15
     },
     "question": {
-      "targetId": "F",
-      "type": "area"
+      "targetId": "D",
+      "type": "w"
     },
-    "solution": 20
+    "solution": 4
   },
   {
     "id": "level_67",
-    "title": "上級 7: 幾何学の要塞",
+    "title": "上級 7: 三連交差の要塞 [第2型]",
     "difficulty": "Expert",
     "rects": [
       {
         "id": "A",
         "x": 0,
         "y": 0,
-        "w": 5,
-        "h": 4,
-        "area": 20
+        "w": 3,
+        "h": 5,
+        "area": 15
       },
       {
         "id": "B",
-        "x": 5,
-        "y": 0,
-        "w": 5,
-        "h": 4,
-        "area": 20
+        "x": 0,
+        "y": 5,
+        "w": 3,
+        "h": 6,
+        "area": 18
       },
       {
         "id": "C",
-        "x": 10,
+        "x": 3,
         "y": 0,
-        "w": 5,
-        "h": 4,
-        "area": 20
+        "w": 4,
+        "h": 2,
+        "area": 8
       },
       {
         "id": "D",
-        "x": 0,
-        "y": 4,
-        "w": 5,
-        "h": 5,
-        "area": 25
+        "x": 3,
+        "y": 2,
+        "w": 4,
+        "h": 4,
+        "area": 16
       },
       {
         "id": "E",
-        "x": 5,
-        "y": 4,
-        "w": 5,
+        "x": 3,
+        "y": 6,
+        "w": 4,
         "h": 5,
-        "area": 25
+        "area": 20
       },
       {
         "id": "F",
-        "x": 10,
-        "y": 4,
-        "w": 5,
-        "h": 5,
-        "area": 25
+        "x": 7,
+        "y": 0,
+        "w": 3,
+        "h": 7,
+        "area": 21
+      },
+      {
+        "id": "G",
+        "x": 7,
+        "y": 7,
+        "w": 3,
+        "h": 4,
+        "area": 12
       }
     ],
     "clues": {
-      "A_area": 20,
-      "A_h": 4,
-      "B_area": 20,
-      "C_area": 20,
-      "D_area": 25,
-      "E_area": 25
+      "A_w": 3,
+      "A_area": 15,
+      "B_area": 18,
+      "C_h": 2,
+      "C_area": 8,
+      "E_area": 20,
+      "F_w": 3,
+      "F_area": 21,
+      "G_area": 12
     },
     "question": {
-      "targetId": "F",
-      "type": "area"
+      "targetId": "D",
+      "type": "h"
     },
-    "solution": 25
+    "solution": 4
   },
   {
     "id": "level_68",
-    "title": "上級 8: 幾何学の要塞",
+    "title": "上級 8: 幾何学コア回廊 [第2型]",
     "difficulty": "Expert",
     "rects": [
       {
         "id": "A",
         "x": 0,
         "y": 0,
-        "w": 6,
-        "h": 4,
-        "area": 24
+        "w": 5,
+        "h": 3,
+        "area": 15
       },
       {
         "id": "B",
-        "x": 6,
+        "x": 5,
         "y": 0,
-        "w": 6,
-        "h": 4,
-        "area": 24
+        "w": 7,
+        "h": 3,
+        "area": 21
       },
       {
         "id": "C",
-        "x": 12,
-        "y": 0,
+        "x": 5,
+        "y": 3,
         "w": 4,
         "h": 4,
         "area": 16
       },
       {
         "id": "D",
-        "x": 0,
-        "y": 4,
-        "w": 6,
-        "h": 5,
+        "x": 9,
+        "y": 3,
+        "w": 3,
+        "h": 10,
         "area": 30
       },
       {
         "id": "E",
-        "x": 6,
-        "y": 4,
-        "w": 6,
-        "h": 5,
-        "area": 30
+        "x": 0,
+        "y": 3,
+        "w": 5,
+        "h": 4,
+        "area": 20
       },
       {
         "id": "F",
-        "x": 12,
-        "y": 4,
-        "w": 4,
-        "h": 5,
-        "area": 20
+        "x": 0,
+        "y": 7,
+        "w": 3,
+        "h": 6,
+        "area": 18
+      },
+      {
+        "id": "G",
+        "x": 3,
+        "y": 7,
+        "w": 6,
+        "h": 6,
+        "area": 36
       }
     ],
     "clues": {
-      "A_area": 24,
-      "A_h": 4,
-      "B_area": 24,
-      "C_area": 16,
+      "A_h": 3,
+      "A_area": 15,
+      "B_h": 3,
+      "B_area": 21,
+      "D_w": 3,
       "D_area": 30,
-      "E_area": 30
+      "F_w": 3,
+      "F_area": 18,
+      "G_area": 36
     },
     "question": {
-      "targetId": "F",
-      "type": "area"
+      "targetId": "C",
+      "type": "w"
     },
-    "solution": 20
+    "solution": 4
   },
   {
     "id": "level_69",
-    "title": "上級 9: 幾何学の要塞",
+    "title": "上級 9: 風車スパイラル [第3型]",
     "difficulty": "Expert",
     "rects": [
       {
         "id": "A",
         "x": 0,
         "y": 0,
-        "w": 4,
-        "h": 4,
-        "area": 16
+        "w": 6,
+        "h": 3,
+        "area": 18
       },
       {
         "id": "B",
-        "x": 4,
+        "x": 6,
         "y": 0,
         "w": 4,
-        "h": 4,
-        "area": 16
+        "h": 7,
+        "area": 28
       },
       {
         "id": "C",
-        "x": 8,
-        "y": 0,
-        "w": 5,
-        "h": 4,
-        "area": 20
+        "x": 3,
+        "y": 7,
+        "w": 7,
+        "h": 5,
+        "area": 35
       },
       {
         "id": "D",
         "x": 0,
-        "y": 4,
-        "w": 4,
-        "h": 5,
-        "area": 20
+        "y": 3,
+        "w": 3,
+        "h": 9,
+        "area": 27
       },
       {
         "id": "E",
-        "x": 4,
-        "y": 4,
-        "w": 4,
-        "h": 5,
-        "area": 20
-      },
-      {
-        "id": "F",
-        "x": 8,
-        "y": 4,
-        "w": 5,
-        "h": 5,
-        "area": 25
+        "x": 3,
+        "y": 3,
+        "w": 3,
+        "h": 4,
+        "area": 12
       }
     ],
     "clues": {
-      "A_area": 16,
-      "A_h": 4,
-      "B_area": 16,
-      "C_area": 20,
-      "D_area": 20,
-      "E_area": 20
+      "A_h": 3,
+      "A_area": 18,
+      "B_w": 4,
+      "B_area": 28,
+      "C_h": 5,
+      "C_area": 35,
+      "D_area": 27
     },
     "question": {
-      "targetId": "F",
-      "type": "area"
+      "targetId": "E",
+      "type": "h"
     },
-    "solution": 25
+    "solution": 4
   },
   {
     "id": "level_70",
-    "title": "上級 10: 幾何学の要塞",
+    "title": "上級 10: 煉瓦連鎖の壁 [第3型]",
     "difficulty": "Expert",
     "rects": [
       {
         "id": "A",
         "x": 0,
         "y": 0,
-        "w": 5,
-        "h": 4,
-        "area": 20
+        "w": 7,
+        "h": 3,
+        "area": 21
       },
       {
         "id": "B",
-        "x": 5,
+        "x": 7,
         "y": 0,
-        "w": 5,
-        "h": 4,
-        "area": 20
+        "w": 3,
+        "h": 9,
+        "area": 27
       },
       {
         "id": "C",
-        "x": 10,
+        "x": 0,
+        "y": 3,
+        "w": 3,
+        "h": 10,
+        "area": 30
+      },
+      {
+        "id": "D",
+        "x": 3,
+        "y": 3,
+        "w": 4,
+        "h": 6,
+        "area": 24
+      },
+      {
+        "id": "E",
+        "x": 3,
+        "y": 9,
+        "w": 7,
+        "h": 4,
+        "area": 28
+      },
+      {
+        "id": "F",
+        "x": 0,
+        "y": 13,
+        "w": 7,
+        "h": 5,
+        "area": 35
+      },
+      {
+        "id": "G",
+        "x": 7,
+        "y": 13,
+        "w": 3,
+        "h": 5,
+        "area": 15
+      }
+    ],
+    "clues": {
+      "A_h": 3,
+      "A_area": 21,
+      "B_w": 3,
+      "B_area": 27,
+      "C_w": 3,
+      "C_area": 30,
+      "E_h": 4,
+      "E_area": 28,
+      "F_area": 35,
+      "G_area": 15
+    },
+    "question": {
+      "targetId": "D",
+      "type": "area"
+    },
+    "solution": 24
+  },
+  {
+    "id": "level_71",
+    "title": "上級 11: 三連交差の要塞 [第3型]",
+    "difficulty": "Expert",
+    "rects": [
+      {
+        "id": "A",
+        "x": 0,
         "y": 0,
+        "w": 3,
+        "h": 5,
+        "area": 15
+      },
+      {
+        "id": "B",
+        "x": 0,
+        "y": 5,
+        "w": 3,
+        "h": 6,
+        "area": 18
+      },
+      {
+        "id": "C",
+        "x": 3,
+        "y": 0,
+        "w": 4,
+        "h": 2,
+        "area": 8
+      },
+      {
+        "id": "D",
+        "x": 3,
+        "y": 2,
+        "w": 4,
+        "h": 5,
+        "area": 20
+      },
+      {
+        "id": "E",
+        "x": 3,
+        "y": 7,
         "w": 4,
         "h": 4,
         "area": 16
       },
       {
-        "id": "D",
-        "x": 0,
-        "y": 4,
-        "w": 5,
-        "h": 5,
-        "area": 25
-      },
-      {
-        "id": "E",
-        "x": 5,
-        "y": 4,
-        "w": 5,
-        "h": 5,
-        "area": 25
-      },
-      {
         "id": "F",
-        "x": 10,
+        "x": 7,
+        "y": 0,
+        "w": 3,
+        "h": 4,
+        "area": 12
+      },
+      {
+        "id": "G",
+        "x": 7,
         "y": 4,
-        "w": 4,
-        "h": 5,
-        "area": 20
+        "w": 3,
+        "h": 7,
+        "area": 21
       }
     ],
     "clues": {
-      "A_area": 20,
-      "A_h": 4,
-      "B_area": 20,
-      "C_area": 16,
-      "D_area": 25,
-      "E_area": 25
+      "A_w": 3,
+      "A_area": 15,
+      "B_area": 18,
+      "C_h": 2,
+      "C_area": 8,
+      "E_area": 16,
+      "F_w": 3,
+      "F_area": 12,
+      "G_area": 21
     },
     "question": {
-      "targetId": "F",
+      "targetId": "D",
       "type": "area"
     },
     "solution": 20
   },
   {
-    "id": "level_71",
-    "title": "上級 11: 幾何学の要塞",
+    "id": "level_72",
+    "title": "上級 12: 幾何学コア回廊 [第3型]",
     "difficulty": "Expert",
     "rects": [
       {
         "id": "A",
         "x": 0,
         "y": 0,
-        "w": 6,
-        "h": 4,
-        "area": 24
+        "w": 5,
+        "h": 3,
+        "area": 15
       },
       {
         "id": "B",
-        "x": 6,
+        "x": 5,
         "y": 0,
-        "w": 6,
-        "h": 4,
-        "area": 24
+        "w": 7,
+        "h": 3,
+        "area": 21
       },
       {
         "id": "C",
-        "x": 12,
-        "y": 0,
-        "w": 5,
-        "h": 4,
+        "x": 5,
+        "y": 3,
+        "w": 4,
+        "h": 5,
         "area": 20
       },
       {
         "id": "D",
-        "x": 0,
-        "y": 4,
-        "w": 6,
-        "h": 5,
-        "area": 30
+        "x": 9,
+        "y": 3,
+        "w": 3,
+        "h": 8,
+        "area": 24
       },
       {
         "id": "E",
-        "x": 6,
-        "y": 4,
-        "w": 6,
-        "h": 5,
-        "area": 30
-      },
-      {
-        "id": "F",
-        "x": 12,
-        "y": 4,
+        "x": 0,
+        "y": 3,
         "w": 5,
         "h": 5,
         "area": 25
-      }
-    ],
-    "clues": {
-      "A_area": 24,
-      "A_h": 4,
-      "B_area": 24,
-      "C_area": 20,
-      "D_area": 30,
-      "E_area": 30
-    },
-    "question": {
-      "targetId": "F",
-      "type": "area"
-    },
-    "solution": 25
-  },
-  {
-    "id": "level_72",
-    "title": "上級 12: 幾何学の要塞",
-    "difficulty": "Expert",
-    "rects": [
-      {
-        "id": "A",
-        "x": 0,
-        "y": 0,
-        "w": 4,
-        "h": 4,
-        "area": 16
-      },
-      {
-        "id": "B",
-        "x": 4,
-        "y": 0,
-        "w": 4,
-        "h": 4,
-        "area": 16
-      },
-      {
-        "id": "C",
-        "x": 8,
-        "y": 0,
-        "w": 4,
-        "h": 4,
-        "area": 16
-      },
-      {
-        "id": "D",
-        "x": 0,
-        "y": 4,
-        "w": 4,
-        "h": 5,
-        "area": 20
-      },
-      {
-        "id": "E",
-        "x": 4,
-        "y": 4,
-        "w": 4,
-        "h": 5,
-        "area": 20
       },
       {
         "id": "F",
-        "x": 8,
-        "y": 4,
-        "w": 4,
-        "h": 5,
-        "area": 20
+        "x": 0,
+        "y": 8,
+        "w": 3,
+        "h": 3,
+        "area": 9
+      },
+      {
+        "id": "G",
+        "x": 3,
+        "y": 8,
+        "w": 6,
+        "h": 3,
+        "area": 18
       }
     ],
     "clues": {
-      "A_area": 16,
-      "A_h": 4,
-      "B_area": 16,
-      "C_area": 16,
-      "D_area": 20,
-      "E_area": 20
+      "A_h": 3,
+      "A_area": 15,
+      "B_h": 3,
+      "B_area": 21,
+      "D_w": 3,
+      "D_area": 24,
+      "F_w": 3,
+      "F_area": 9,
+      "G_area": 18
     },
     "question": {
-      "targetId": "F",
+      "targetId": "C",
       "type": "area"
     },
     "solution": 20
   },
   {
     "id": "level_73",
-    "title": "上級 13: 幾何学の要塞",
+    "title": "上級 13: 風車スパイラル [第4型]",
     "difficulty": "Expert",
     "rects": [
       {
         "id": "A",
         "x": 0,
         "y": 0,
-        "w": 5,
-        "h": 4,
-        "area": 20
+        "w": 6,
+        "h": 3,
+        "area": 18
       },
       {
         "id": "B",
-        "x": 5,
+        "x": 6,
         "y": 0,
-        "w": 5,
-        "h": 4,
-        "area": 20
+        "w": 4,
+        "h": 8,
+        "area": 32
       },
       {
         "id": "C",
-        "x": 10,
-        "y": 0,
-        "w": 5,
+        "x": 3,
+        "y": 8,
+        "w": 7,
         "h": 4,
-        "area": 20
+        "area": 28
       },
       {
         "id": "D",
         "x": 0,
-        "y": 4,
-        "w": 5,
-        "h": 5,
-        "area": 25
+        "y": 3,
+        "w": 3,
+        "h": 9,
+        "area": 27
       },
       {
         "id": "E",
-        "x": 5,
-        "y": 4,
-        "w": 5,
+        "x": 3,
+        "y": 3,
+        "w": 3,
         "h": 5,
-        "area": 25
-      },
-      {
-        "id": "F",
-        "x": 10,
-        "y": 4,
-        "w": 5,
-        "h": 5,
-        "area": 25
+        "area": 15
       }
     ],
     "clues": {
-      "A_area": 20,
-      "A_h": 4,
-      "B_area": 20,
-      "C_area": 20,
-      "D_area": 25,
-      "E_area": 25
+      "A_h": 3,
+      "A_area": 18,
+      "B_w": 4,
+      "B_area": 32,
+      "C_h": 4,
+      "C_area": 28,
+      "D_area": 27
     },
     "question": {
-      "targetId": "F",
+      "targetId": "E",
       "type": "area"
     },
-    "solution": 25
+    "solution": 15
   },
   {
     "id": "level_74",
-    "title": "上級 14: 幾何学の要塞",
+    "title": "上級 14: 煉瓦連鎖の壁 [第4型]",
     "difficulty": "Expert",
     "rects": [
       {
         "id": "A",
         "x": 0,
         "y": 0,
-        "w": 6,
+        "w": 7,
         "h": 4,
-        "area": 24
+        "area": 28
       },
       {
         "id": "B",
-        "x": 6,
+        "x": 7,
         "y": 0,
-        "w": 6,
-        "h": 4,
+        "w": 3,
+        "h": 8,
         "area": 24
       },
       {
         "id": "C",
-        "x": 12,
-        "y": 0,
+        "x": 0,
+        "y": 4,
+        "w": 3,
+        "h": 9,
+        "area": 27
+      },
+      {
+        "id": "D",
+        "x": 3,
+        "y": 4,
         "w": 4,
         "h": 4,
         "area": 16
       },
       {
-        "id": "D",
-        "x": 0,
-        "y": 4,
-        "w": 6,
-        "h": 5,
-        "area": 30
-      },
-      {
         "id": "E",
-        "x": 6,
-        "y": 4,
-        "w": 6,
+        "x": 3,
+        "y": 8,
+        "w": 7,
         "h": 5,
-        "area": 30
+        "area": 35
       },
       {
         "id": "F",
-        "x": 12,
-        "y": 4,
-        "w": 4,
-        "h": 5,
-        "area": 20
+        "x": 0,
+        "y": 13,
+        "w": 7,
+        "h": 3,
+        "area": 21
+      },
+      {
+        "id": "G",
+        "x": 7,
+        "y": 13,
+        "w": 3,
+        "h": 3,
+        "area": 9
       }
     ],
     "clues": {
-      "A_area": 24,
       "A_h": 4,
+      "A_area": 28,
+      "B_w": 3,
       "B_area": 24,
-      "C_area": 16,
-      "D_area": 30,
-      "E_area": 30
+      "C_w": 3,
+      "C_area": 27,
+      "E_h": 5,
+      "E_area": 35,
+      "F_area": 21,
+      "G_area": 9
     },
     "question": {
-      "targetId": "F",
+      "targetId": "D",
       "type": "area"
     },
-    "solution": 20
+    "solution": 16
   },
   {
     "id": "level_75",
-    "title": "上級 15: 幾何学の要塞",
+    "title": "上級 15: 三連交差の要塞 [第4型]",
     "difficulty": "Expert",
     "rects": [
       {
         "id": "A",
         "x": 0,
         "y": 0,
-        "w": 4,
-        "h": 4,
-        "area": 16
+        "w": 3,
+        "h": 5,
+        "area": 15
       },
       {
         "id": "B",
-        "x": 4,
-        "y": 0,
-        "w": 4,
-        "h": 4,
-        "area": 16
+        "x": 0,
+        "y": 5,
+        "w": 3,
+        "h": 8,
+        "area": 24
       },
       {
         "id": "C",
-        "x": 8,
+        "x": 3,
         "y": 0,
-        "w": 5,
-        "h": 4,
-        "area": 20
+        "w": 4,
+        "h": 2,
+        "area": 8
       },
       {
         "id": "D",
-        "x": 0,
-        "y": 4,
+        "x": 3,
+        "y": 2,
         "w": 4,
-        "h": 5,
-        "area": 20
+        "h": 3,
+        "area": 12
       },
       {
         "id": "E",
-        "x": 4,
-        "y": 4,
+        "x": 3,
+        "y": 5,
         "w": 4,
-        "h": 5,
-        "area": 20
+        "h": 8,
+        "area": 32
       },
       {
         "id": "F",
-        "x": 8,
-        "y": 4,
-        "w": 5,
-        "h": 5,
-        "area": 25
+        "x": 7,
+        "y": 0,
+        "w": 3,
+        "h": 6,
+        "area": 18
+      },
+      {
+        "id": "G",
+        "x": 7,
+        "y": 6,
+        "w": 3,
+        "h": 7,
+        "area": 21
       }
     ],
     "clues": {
-      "A_area": 16,
-      "A_h": 4,
-      "B_area": 16,
-      "C_area": 20,
-      "D_area": 20,
-      "E_area": 20
+      "A_w": 3,
+      "A_area": 15,
+      "B_area": 24,
+      "C_h": 2,
+      "C_area": 8,
+      "E_area": 32,
+      "F_w": 3,
+      "F_area": 18,
+      "G_area": 21
     },
     "question": {
-      "targetId": "F",
+      "targetId": "D",
       "type": "area"
     },
-    "solution": 25
+    "solution": 12
   },
   {
     "id": "level_76",
-    "title": "上級 16: 幾何学の要塞",
+    "title": "上級 16: 幾何学コア回廊 [第4型]",
     "difficulty": "Expert",
     "rects": [
       {
@@ -4127,67 +4224,78 @@ export const PRESET_PUZZLES = [
         "x": 0,
         "y": 0,
         "w": 5,
-        "h": 4,
-        "area": 20
+        "h": 3,
+        "area": 15
       },
       {
         "id": "B",
         "x": 5,
         "y": 0,
-        "w": 5,
-        "h": 4,
-        "area": 20
+        "w": 7,
+        "h": 3,
+        "area": 21
       },
       {
         "id": "C",
-        "x": 10,
-        "y": 0,
+        "x": 5,
+        "y": 3,
         "w": 4,
-        "h": 4,
-        "area": 16
+        "h": 6,
+        "area": 24
       },
       {
         "id": "D",
-        "x": 0,
-        "y": 4,
-        "w": 5,
-        "h": 5,
-        "area": 25
+        "x": 9,
+        "y": 3,
+        "w": 3,
+        "h": 9,
+        "area": 27
       },
       {
         "id": "E",
-        "x": 5,
-        "y": 4,
+        "x": 0,
+        "y": 3,
         "w": 5,
-        "h": 5,
-        "area": 25
+        "h": 6,
+        "area": 30
       },
       {
         "id": "F",
-        "x": 10,
-        "y": 4,
-        "w": 4,
-        "h": 5,
-        "area": 20
+        "x": 0,
+        "y": 9,
+        "w": 3,
+        "h": 3,
+        "area": 9
+      },
+      {
+        "id": "G",
+        "x": 3,
+        "y": 9,
+        "w": 6,
+        "h": 3,
+        "area": 18
       }
     ],
     "clues": {
-      "A_area": 20,
-      "A_h": 4,
-      "B_area": 20,
-      "C_area": 16,
-      "D_area": 25,
-      "E_area": 25
+      "A_h": 3,
+      "A_area": 15,
+      "B_h": 3,
+      "B_area": 21,
+      "D_w": 3,
+      "D_area": 27,
+      "F_w": 3,
+      "F_area": 9,
+      "G_area": 18
     },
     "question": {
-      "targetId": "F",
+      "targetId": "C",
       "type": "area"
     },
-    "solution": 20
+    "solution": 24
   },
   {
     "id": "level_77",
-    "title": "上級 17: 幾何学の要塞",
+    "title": "上級 17: 風車スパイラル [第5型]",
     "difficulty": "Expert",
     "rects": [
       {
@@ -4195,267 +4303,294 @@ export const PRESET_PUZZLES = [
         "x": 0,
         "y": 0,
         "w": 6,
-        "h": 4,
-        "area": 24
+        "h": 3,
+        "area": 18
       },
       {
         "id": "B",
         "x": 6,
         "y": 0,
-        "w": 6,
-        "h": 4,
-        "area": 24
+        "w": 4,
+        "h": 8,
+        "area": 32
       },
       {
         "id": "C",
-        "x": 12,
-        "y": 0,
-        "w": 5,
+        "x": 3,
+        "y": 8,
+        "w": 7,
         "h": 4,
-        "area": 20
+        "area": 28
       },
       {
         "id": "D",
         "x": 0,
-        "y": 4,
-        "w": 6,
-        "h": 5,
-        "area": 30
+        "y": 3,
+        "w": 3,
+        "h": 9,
+        "area": 27
       },
       {
         "id": "E",
-        "x": 6,
-        "y": 4,
-        "w": 6,
+        "x": 3,
+        "y": 3,
+        "w": 3,
         "h": 5,
-        "area": 30
-      },
-      {
-        "id": "F",
-        "x": 12,
-        "y": 4,
-        "w": 5,
-        "h": 5,
-        "area": 25
+        "area": 15
       }
     ],
     "clues": {
-      "A_area": 24,
-      "A_h": 4,
-      "B_area": 24,
-      "C_area": 20,
-      "D_area": 30,
-      "E_area": 30
+      "A_h": 3,
+      "A_area": 18,
+      "B_w": 4,
+      "B_area": 32,
+      "C_h": 4,
+      "C_area": 28,
+      "D_area": 27
     },
     "question": {
-      "targetId": "F",
-      "type": "area"
+      "targetId": "E",
+      "type": "h"
     },
-    "solution": 25
+    "solution": 5
   },
   {
     "id": "level_78",
-    "title": "上級 18: 幾何学の要塞",
+    "title": "上級 18: 煉瓦連鎖の壁 [第5型]",
     "difficulty": "Expert",
     "rects": [
       {
         "id": "A",
         "x": 0,
         "y": 0,
-        "w": 4,
-        "h": 4,
-        "area": 16
+        "w": 8,
+        "h": 3,
+        "area": 24
       },
       {
         "id": "B",
-        "x": 4,
+        "x": 8,
         "y": 0,
-        "w": 4,
-        "h": 4,
-        "area": 16
+        "w": 3,
+        "h": 7,
+        "area": 21
       },
       {
         "id": "C",
-        "x": 8,
-        "y": 0,
-        "w": 4,
-        "h": 4,
-        "area": 16
+        "x": 0,
+        "y": 3,
+        "w": 3,
+        "h": 9,
+        "area": 27
       },
       {
         "id": "D",
-        "x": 0,
-        "y": 4,
-        "w": 4,
-        "h": 5,
+        "x": 3,
+        "y": 3,
+        "w": 5,
+        "h": 4,
         "area": 20
       },
       {
         "id": "E",
-        "x": 4,
-        "y": 4,
-        "w": 4,
+        "x": 3,
+        "y": 7,
+        "w": 8,
         "h": 5,
-        "area": 20
+        "area": 40
       },
       {
         "id": "F",
+        "x": 0,
+        "y": 12,
+        "w": 8,
+        "h": 4,
+        "area": 32
+      },
+      {
+        "id": "G",
         "x": 8,
-        "y": 4,
-        "w": 4,
-        "h": 5,
-        "area": 20
+        "y": 12,
+        "w": 3,
+        "h": 4,
+        "area": 12
       }
     ],
     "clues": {
-      "A_area": 16,
-      "A_h": 4,
-      "B_area": 16,
-      "C_area": 16,
-      "D_area": 20,
-      "E_area": 20
+      "A_h": 3,
+      "A_area": 24,
+      "B_w": 3,
+      "B_area": 21,
+      "C_w": 3,
+      "C_area": 27,
+      "E_h": 5,
+      "E_area": 40,
+      "F_area": 32,
+      "G_area": 12
     },
     "question": {
-      "targetId": "F",
-      "type": "area"
+      "targetId": "D",
+      "type": "w"
     },
-    "solution": 20
+    "solution": 5
   },
   {
     "id": "level_79",
-    "title": "上級 19: 幾何学の要塞",
+    "title": "上級 19: 三連交差の要塞 [第5型]",
     "difficulty": "Expert",
     "rects": [
       {
         "id": "A",
         "x": 0,
         "y": 0,
-        "w": 5,
-        "h": 4,
-        "area": 20
+        "w": 3,
+        "h": 5,
+        "area": 15
       },
       {
         "id": "B",
-        "x": 5,
-        "y": 0,
-        "w": 5,
-        "h": 4,
-        "area": 20
+        "x": 0,
+        "y": 5,
+        "w": 3,
+        "h": 8,
+        "area": 24
       },
       {
         "id": "C",
-        "x": 10,
+        "x": 3,
         "y": 0,
-        "w": 5,
-        "h": 4,
-        "area": 20
+        "w": 4,
+        "h": 2,
+        "area": 8
       },
       {
         "id": "D",
-        "x": 0,
-        "y": 4,
-        "w": 5,
-        "h": 5,
-        "area": 25
+        "x": 3,
+        "y": 2,
+        "w": 4,
+        "h": 3,
+        "area": 12
       },
       {
         "id": "E",
-        "x": 5,
-        "y": 4,
-        "w": 5,
-        "h": 5,
-        "area": 25
+        "x": 3,
+        "y": 5,
+        "w": 4,
+        "h": 8,
+        "area": 32
       },
       {
         "id": "F",
-        "x": 10,
-        "y": 4,
-        "w": 5,
-        "h": 5,
-        "area": 25
+        "x": 7,
+        "y": 0,
+        "w": 3,
+        "h": 6,
+        "area": 18
+      },
+      {
+        "id": "G",
+        "x": 7,
+        "y": 6,
+        "w": 3,
+        "h": 7,
+        "area": 21
       }
     ],
     "clues": {
-      "A_area": 20,
-      "A_h": 4,
-      "B_area": 20,
-      "C_area": 20,
-      "D_area": 25,
-      "E_area": 25
+      "A_w": 3,
+      "A_area": 15,
+      "B_area": 24,
+      "C_h": 2,
+      "C_area": 8,
+      "E_area": 32,
+      "F_w": 3,
+      "F_area": 18,
+      "G_area": 21
     },
     "question": {
-      "targetId": "F",
-      "type": "area"
+      "targetId": "D",
+      "type": "h"
     },
-    "solution": 25
+    "solution": 3
   },
   {
     "id": "level_80",
-    "title": "上級 20: 幾何学の要塞",
+    "title": "上級 20: 幾何学コア回廊 [第5型]",
     "difficulty": "Expert",
     "rects": [
       {
         "id": "A",
         "x": 0,
         "y": 0,
-        "w": 6,
-        "h": 4,
-        "area": 24
+        "w": 5,
+        "h": 3,
+        "area": 15
       },
       {
         "id": "B",
-        "x": 6,
+        "x": 5,
         "y": 0,
-        "w": 6,
-        "h": 4,
-        "area": 24
+        "w": 7,
+        "h": 3,
+        "area": 21
       },
       {
         "id": "C",
-        "x": 12,
-        "y": 0,
+        "x": 5,
+        "y": 3,
         "w": 4,
-        "h": 4,
-        "area": 16
+        "h": 7,
+        "area": 28
       },
       {
         "id": "D",
-        "x": 0,
-        "y": 4,
-        "w": 6,
-        "h": 5,
+        "x": 9,
+        "y": 3,
+        "w": 3,
+        "h": 10,
         "area": 30
       },
       {
         "id": "E",
-        "x": 6,
-        "y": 4,
-        "w": 6,
-        "h": 5,
-        "area": 30
+        "x": 0,
+        "y": 3,
+        "w": 5,
+        "h": 7,
+        "area": 35
       },
       {
         "id": "F",
-        "x": 12,
-        "y": 4,
-        "w": 4,
-        "h": 5,
-        "area": 20
+        "x": 0,
+        "y": 10,
+        "w": 3,
+        "h": 3,
+        "area": 9
+      },
+      {
+        "id": "G",
+        "x": 3,
+        "y": 10,
+        "w": 6,
+        "h": 3,
+        "area": 18
       }
     ],
     "clues": {
-      "A_area": 24,
-      "A_h": 4,
-      "B_area": 24,
-      "C_area": 16,
+      "A_h": 3,
+      "A_area": 15,
+      "B_h": 3,
+      "B_area": 21,
+      "D_w": 3,
       "D_area": 30,
-      "E_area": 30
+      "F_w": 3,
+      "F_area": 9,
+      "G_area": 18
     },
     "question": {
-      "targetId": "F",
+      "targetId": "C",
       "type": "area"
     },
-    "solution": 20
+    "solution": 28
   },
   {
     "id": "level_81",

@@ -86,7 +86,7 @@ function check(model, label, options = {}) {
   if (model.difficulty === 'Grandmaster' && !isNonRectangular(model.rects)) {
     problems.push(`${label}: Grandmaster puzzle must have a non-rectangular outer boundary`);
   }
-  if (options.antiGuessing && model.difficulty === 'Grandmaster') {
+  if (options.antiGuessing && (model.difficulty === 'Grandmaster' || model.difficulty === 'Expert')) {
     checkAntiGuessing(model, label);
   }
   const result = new AreaMazeSolver(model).solve();
