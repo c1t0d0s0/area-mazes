@@ -12,7 +12,24 @@ import { AreaMazeSolver, needsReasoning } from '../src/engine/AreaMazeSolver.js'
 const GENERATED_PER_DIFFICULTY = 30;
 const problems = [];
 
+function isNonRectangular(rects) {
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  let unionArea = 0;
+  for (const r of rects) {
+    minX = Math.min(minX, r.x);
+    minY = Math.min(minY, r.y);
+    maxX = Math.max(maxX, r.x + r.w);
+    maxY = Math.max(maxY, r.y + r.h);
+    unionArea += r.w * r.h;
+  }
+  const bboxArea = (maxX - minX) * (maxY - minY);
+  return unionArea < bboxArea;
+}
+
 function check(model, label) {
+  if (model.difficulty === 'Grandmaster' && !isNonRectangular(model.rects)) {
+    problems.push(`${label}: Grandmaster puzzle must have a non-rectangular outer boundary`);
+  }
   const result = new AreaMazeSolver(model).solve();
   if (!result.isSolved || result.solution !== model.solution) {
     problems.push(`${label}: not solvable by logic (expected ${model.solution}, got ${result.solution})`);

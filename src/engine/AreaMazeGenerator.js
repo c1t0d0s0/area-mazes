@@ -119,6 +119,24 @@ export class AreaMazeGenerator {
       rects.push({ id: 'A2', x: w1, y: 0, w: w2, h: h1 });
       rects.push({ id: 'A3', x: 0, y: h1, w: w1, h: h2 });
       rects.push({ id: 'A4', x: w1, y: h1, w: w2, h: h2 });
+    } else if (difficulty === 'Grandmaster') {
+      // Non-rectangular stepped layout (outer frame is not a simple rectangle)
+      // Column 1: x=0..w1, y=0..h1+h2
+      // Column 2: x=w1..w1+w2, y=0..h1+h2+h3
+      // Column 3: x=w1+w2..w1+w2+w3, y=h1..h1+h2+h3
+      const w1 = [3, 4][Math.floor(Math.random() * 2)];
+      const w2 = [4, 5][Math.floor(Math.random() * 2)];
+      const w3 = [3, 4][Math.floor(Math.random() * 2)];
+      const h1 = [3, 4][Math.floor(Math.random() * 2)];
+      const h2 = [3, 4][Math.floor(Math.random() * 2)];
+      const h3 = [3, 4][Math.floor(Math.random() * 2)];
+
+      rects.push({ id: 'A1', x: 0, y: 0, w: w1, h: h1 });
+      rects.push({ id: 'A2', x: 0, y: h1, w: w1, h: h2 });
+      rects.push({ id: 'A3', x: w1, y: 0, w: w2, h: h1 + h2 });
+      rects.push({ id: 'A4', x: w1, y: h1 + h2, w: w2, h: h3 });
+      rects.push({ id: 'A5', x: w1 + w2, y: h1, w: w3, h: h2 });
+      rects.push({ id: 'A6', x: w1 + w2, y: h1 + h2, w: w3, h: h3 });
     } else {
       // 5-6 Rectangles layout
       const w1 = [3, 4][Math.floor(Math.random() * 2)];
@@ -138,6 +156,33 @@ export class AreaMazeGenerator {
   }
 
   static getFallbackModel(difficulty) {
+    if (difficulty === 'Grandmaster') {
+      return new AreaMazeModel({
+        id: 'fallback_grandmaster',
+        title: '達人 パズル',
+        difficulty,
+        rects: [
+          { id: 'A1', x: 0, y: 0, w: 3, h: 3 },
+          { id: 'A2', x: 0, y: 3, w: 3, h: 4 },
+          { id: 'A3', x: 3, y: 0, w: 4, h: 7 },
+          { id: 'A4', x: 3, y: 7, w: 4, h: 3 },
+          { id: 'A5', x: 7, y: 3, w: 4, h: 4 },
+          { id: 'A6', x: 7, y: 7, w: 4, h: 3 }
+        ],
+        clues: {
+          'A1_w': 3,
+          'A1_area': 9,
+          'A2_area': 12,
+          'A3_area': 28,
+          'A4_area': 12,
+          'A5_area': 16,
+          'A6_area': 12
+        },
+        question: { targetId: 'A6', type: 'w' },
+        solution: 4
+      });
+    }
+
     return new AreaMazeModel({
       id: `fallback_${difficulty.toLowerCase()}`,
       title: `${difficulty} パズル`,
