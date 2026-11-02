@@ -78,6 +78,7 @@ export class EditorView {
                 <option value="Medium" ${this.difficulty === 'Medium' ? 'selected' : ''}>${t('diffMedium')}</option>
                 <option value="Hard" ${this.difficulty === 'Hard' ? 'selected' : ''}>${t('diffHard')}</option>
                 <option value="Expert" ${this.difficulty === 'Expert' ? 'selected' : ''}>${t('diffExpert')}</option>
+                <option value="Grandmaster" ${this.difficulty === 'Grandmaster' ? 'selected' : ''}>${t('diffGrandmaster')}</option>
               </select>
             </div>
 
